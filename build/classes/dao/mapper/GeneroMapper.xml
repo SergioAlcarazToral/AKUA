@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='dao.mapper.GeneroMapper'>
+	<select id='getGeneros'>
+		SELECT * FROM genero
+	</select>
+
+	<insert id='insertGenero' parameterType='Genero'
+		useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO genero(nombre) values('#{nombre}')
+	</insert>
+
+	<update id='updateGenero' parameterType='Genero'>
+		UPDATE genero
+		SET
+		nombre = #{nombre}
+		WHERE id = #{id}
+	</update>
+
+	<delete id='deleteGenero' parameterType='Genero'>
+		DELETE FROM genero WHERE id = #{id}
+	</delete>
+</mapper>

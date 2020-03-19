@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='dao.mapper.ArtistaMapper'>
+	<select id='getArtista'>
+		SELECT * FROM genero
+	</select>
+	<insert id='insertArtista' parameterType='Artista'
+		useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO artista(nombre,foto) values('#{nombre}','#{foto}')
+	</insert>
+	<update id='updateArtista' parameterType='Artista'>
+		UPDATE artista
+		SET
+		nombre = #{nombre},
+		foto = #{foto}
+		WHERE id = #{id}
+	</update>
+	<delete id='deleteArtista' parameterType='Artista'>
+		DELETE FROM artista WHERE id = #{id}
+	</delete>
+</mapper>
