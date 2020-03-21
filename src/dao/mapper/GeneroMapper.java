@@ -2,7 +2,6 @@ package dao.mapper;
 
 import java.util.ArrayList;
 
-import pojo.Cancion;
 import pojo.Genero;
 
 public interface GeneroMapper {
@@ -12,7 +11,7 @@ public interface GeneroMapper {
 	 * 
 	 * @return las canciones
 	 */
-	public ArrayList<Cancion> getGeneros();
+	public ArrayList<Genero> getGeneros();
 
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos

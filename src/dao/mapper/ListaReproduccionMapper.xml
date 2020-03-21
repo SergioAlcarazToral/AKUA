@@ -22,6 +22,6 @@
 	</update>
 
 	<delete id='deleteGenero' parameterType='Genero'>
-		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario}
+		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre}
 	</delete>
 </mapper>

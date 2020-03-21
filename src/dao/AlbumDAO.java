@@ -50,6 +50,12 @@ public class AlbumDAO {
 	}
 	
 	public void deleteAlbum(Album album) {
-		
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
+			albumMapper.deleteAlbum(album);
+		} finally {
+			sqlSession.close();
+		}
 	}
 }
