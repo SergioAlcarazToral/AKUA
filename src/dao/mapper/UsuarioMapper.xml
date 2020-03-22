@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='dao.mapper.CancionMapper'>
+
+	<select id='existeUsuario' resultType='pojo.Usuario'>
+		SELECT * FROM usuario
+		where correo = #{correo} and pass = #{pass}
+	</select>
+
+	<select id="getUsuarios" resultType='pojo.Usuario'>
+		SELECT * FROM usuario;
+	</select>
+
+	<insert id='insertUsuario' parameterType='Usuario'
+		useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO
+		usuario(nombre,correo,pass,administrador,foto)
+		values('#{nombre}','#{correo}','#{pass}',0,'#{foto}')
+	</insert>
+
+	<update id='updateUsuario' parameterType='Usuario'>
+		UPDATE usuario
+		SET
+		nombre = #{nombre},
+		correo = #{correo},
+		pass = #{pass},
+		foto = #{foto}
+		WHERE id = #{id}
+	</update>
+
+	<delete id='deleteUsuario' parameterType='Usuario'>
+		DELETE FROM usuario
+		WHERE id = #{id}
+	</delete>
+</mapper>
