@@ -10,7 +10,6 @@
 		<typeAlias type='pojo.Usuario' alias='Usuario'></typeAlias>
 		<typeAlias type='pojo.ListaReproduccion'
 			alias='ListaReproduccion'></typeAlias>
-		<typeAlias type='pojo.Cancion' alias='Cancion'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
 		<environment id='development'>

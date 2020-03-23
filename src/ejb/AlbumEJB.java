@@ -2,9 +2,14 @@ package ejb;
 
 import java.util.ArrayList;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import dao.AlbumDAO;
 import pojo.Album;
 
+@Stateless
+@LocalBean
 public class AlbumEJB {
 
 	public ArrayList<Album> getAlbumes(){

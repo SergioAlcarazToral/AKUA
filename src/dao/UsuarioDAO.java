@@ -34,6 +34,7 @@ public class UsuarioDAO {
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
 			usuarioMapper.insertUsuario(usuario);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -44,6 +45,7 @@ public class UsuarioDAO {
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
 			usuarioMapper.updateUsuario(usuario);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -54,6 +56,7 @@ public class UsuarioDAO {
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
 			usuarioMapper.deleteUsuario(id);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}

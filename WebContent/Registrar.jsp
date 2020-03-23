@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,8 @@
 		<p>Contraseña</p>
 		<input type="password" name="pass">
 		<p>Foto</p>
-		<input type="file" name="foto">
+		<input type="file" name="foto"> <input type="submit"
+			value="Registrar">
 	</form>
 </body>
 </html>

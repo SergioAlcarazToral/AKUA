@@ -2,14 +2,14 @@ package ejb;
 
 import java.util.ArrayList;
 
-import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dao.UsuarioDAO;
 import pojo.Usuario;
 
-@EJB
 @Stateless
+@LocalBean
 public class UsuarioEJB {
 
 	/**

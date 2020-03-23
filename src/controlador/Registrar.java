@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,8 @@ import pojo.Usuario;
  * Servlet implementation class Registrar
  */
 @WebServlet("/Registrar")
+@MultipartConfig(maxFileSize = 1920 * 1080 * 5)
+
 public class Registrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "Imatges";
@@ -31,7 +34,7 @@ public class Registrar extends HttpServlet {
 
 		response.setContentType("text/html; charset=UTF-8");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("Registrar.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Registrar.jsp");
 
 		rs.forward(request, response);
 	}
@@ -51,7 +54,7 @@ public class Registrar extends HttpServlet {
 			uploadDir.mkdir();
 		}
 
-		// Esta variable sera para guardar el nombre del archivo
+		// Lo utilizaremos para guardar el nombre del archivo
 		String foto = null;
 
 		// Los paramoetros necesarios para poder insertar un usuario
@@ -59,12 +62,13 @@ public class Registrar extends HttpServlet {
 		String correo = request.getParameter("correo");
 		String pass = request.getParameter("pass");
 
-		Part partFoto = request.getPart("foto");
 
 		// En el caso de que el usuario no ponga foto de perfil se le asignara una ya
 		// predefinida por el sistema
 
 		try {
+			Part partFoto = request.getPart("foto");
+
 			String strFoto = partFoto.getHeader("content-disposition");
 			strFoto = strFoto.substring(strFoto.lastIndexOf("filename"));
 			foto = strFoto.substring(strFoto.indexOf('=') + 2, strFoto.lastIndexOf("\""));
@@ -73,7 +77,7 @@ public class Registrar extends HttpServlet {
 			foto = "sinImagen.jpg";
 		}
 
-		// Los datos necesarios para poder añadir el usuario
+		// Los datos necesarios para poder aï¿½adir el usuario
 		Usuario usuario = new Usuario();
 		usuario.setNombre(nombre);
 		usuario.setCorreo(correo);
