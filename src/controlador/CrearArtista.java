@@ -11,39 +11,44 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import ejb.UsuarioEJB;
+import ejb.ArtistaEJB;
+import ejb.SesionesEJB;
+import pojo.Artista;
 import pojo.Usuario;
 
-/**
- * Servlet implementation class Registrar
- */
-@WebServlet("/Registrar")
-@MultipartConfig(maxFileSize = 1024 * 1024* 5)
+@WebServlet("/CrearArtista")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 
-public class Registrar extends HttpServlet {
+public class CrearArtista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY = "Imatges";
+	private static final String UPLOAD_DIRECTORY = "ImgArtistas";
 
 	@EJB
-	UsuarioEJB usuarioEJB;
+	SesionesEJB sesionesEJB;
+
+	@EJB
+	ArtistaEJB artistaEJB;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
 
 		response.setContentType("text/html; charset=UTF-8");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Registrar.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/CrearArtista.jsp");
 
+		Usuario usuario = sesionesEJB.usuarioLogeado(session);
+
+		request.setAttribute("usuario", usuario);
 		rs.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Obtenemos una ruta en el servidor para guardar el archivo, en este caso la
-		// foto del usuario
 		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
 
 		response.setContentType("text/html; charset=UTF-8");
@@ -57,16 +62,14 @@ public class Registrar extends HttpServlet {
 		// Lo utilizaremos para guardar el nombre del archivo
 		String foto = null;
 
-		// Los paramoetros necesarios para poder insertar un usuario
+		// Los parametros necesarios para poder insertar un artista en la base de datos
 		String nombre = request.getParameter("nombre");
-		String correo = request.getParameter("correo");
-		String pass = request.getParameter("pass");
 
 		// En el caso de que el usuario no ponga foto de perfil se le asignara una ya
 		// predefinida por el sistema
+		Part partFoto = request.getPart("foto");
 
 		try {
-			Part partFoto = request.getPart("foto");
 
 			String strFoto = partFoto.getHeader("content-disposition");
 			strFoto = strFoto.substring(strFoto.lastIndexOf("filename"));
@@ -76,17 +79,14 @@ public class Registrar extends HttpServlet {
 			foto = "sinImagen.jpg";
 		}
 
-		// Los datos necesarios para poder a�adir el usuario
-		Usuario usuario = new Usuario();
-		usuario.setNombre(nombre);
-		usuario.setCorreo(correo);
-		usuario.setPass(pass);
-		usuario.setFoto(foto);
-
-		// Registramos el usuario en la base de datos
-		usuarioEJB.insertUsuario(usuario);
-
+		//Los datos necesarios para poder añadir el artista
+		Artista artista = new Artista();
+		artista.setNombre(nombre);
+		artista.setFoto(foto);
+		
+		artistaEJB.insertArtista(artista);
 		response.sendRedirect("Principal");
+		
 	}
 
 }

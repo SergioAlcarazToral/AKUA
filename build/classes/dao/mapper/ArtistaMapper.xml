@@ -3,12 +3,19 @@
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
 <mapper namespace='dao.mapper.ArtistaMapper'>
+
 	<select id='getArtista'>
-		SELECT * FROM genero
+		SELECT * FROM artista
 	</select>
+
+	<select id='getArtistaBuscado' resultType='pojo.Artista'>
+		SELECT * FROM artista where nombre like '#{nombre}%'
+	</select>
+
 	<insert id='insertArtista' parameterType='Artista'
 		useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO artista(nombre,foto) values('#{nombre}','#{foto}')
+		INSERT INTO artista(nombre,foto)
+		values(#{nombre},#{foto})
 	</insert>
 	<update id='updateArtista' parameterType='Artista'>
 		UPDATE artista
@@ -18,6 +25,7 @@
 		WHERE id = #{id}
 	</update>
 	<delete id='deleteArtista' parameterType='Artista'>
-		DELETE FROM artista WHERE id = #{id}
+		DELETE FROM artista
+		WHERE id = #{id}
 	</delete>
 </mapper>

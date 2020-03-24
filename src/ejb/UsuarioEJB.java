@@ -18,9 +18,9 @@ public class UsuarioEJB {
 	 * @param usuario el usuarios que queremos comprobar
 	 * @return el usuario
 	 */
-	public Usuario existeUsuario(Usuario usuario) {
+	public Usuario existeUsuario(String correo, String pass) {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		return usuarioDAO.existeUsuario(usuario);
+		return usuarioDAO.existeUsuario(correo,pass);
 	}
 
 	public ArrayList<Usuario> getUsuarios() {

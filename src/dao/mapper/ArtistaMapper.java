@@ -2,6 +2,8 @@ package dao.mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import pojo.Artista;
 
 public interface ArtistaMapper {
@@ -13,6 +15,8 @@ public interface ArtistaMapper {
 	 */
 	public ArrayList<Artista> getArtista();
 
+	public ArrayList<Artista> getArtistaBuscado(@Param("nombre") String nombre);
+	
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos
 	 * 

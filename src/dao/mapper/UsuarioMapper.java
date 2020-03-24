@@ -8,7 +8,7 @@ import pojo.Usuario;
 
 public interface UsuarioMapper {
 
-	public Usuario existeUsuario(Usuario usuario);
+	public Usuario existeUsuario(@Param("correo") String correo, @Param("pass") String pass);
 
 	public ArrayList<Usuario> getUsuarios();
 

@@ -19,11 +19,22 @@ public class ArtistaDAO {
 		}
 	}
 
+	public ArrayList<Artista> getArtistaBuscado(String nombre) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
+			return artistaMapper.getArtistaBuscado(nombre);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 	public void insertArtista(Artista artista) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
 			artistaMapper.insertArtista(artista);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -34,20 +45,21 @@ public class ArtistaDAO {
 		try {
 			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
 			artistaMapper.updateArtista(artista);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
 	}
-	
+
 	public void deleteArtista(Artista artista) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
 			artistaMapper.deleteArtista(artista);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
 	}
-	
-}
 
+}

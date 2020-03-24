@@ -9,11 +9,11 @@ import pojo.Usuario;
 
 public class UsuarioDAO {
 
-	public Usuario existeUsuario(Usuario usuario) {
+	public Usuario existeUsuario(String correo, String pass) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
-			return usuarioMapper.existeUsuario(usuario);
+			return usuarioMapper.existeUsuario(correo, pass);
 		} finally {
 			sqlSession.close();
 		}

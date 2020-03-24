@@ -9,7 +9,7 @@
 <body>
 	<h1>Formulario de registro</h1>
 	<hr>
-	<form action="Registrar" method="post">
+	<form action="Registrar" method="post" enctype="multipart/form-data">
 		<p>Nombre</p>
 		<input type="text" name="nombre">
 		<p>Correo</p>
