@@ -13,12 +13,22 @@ public class ArtistaDAO {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
-			return artistaMapper.getArtista();
+			return artistaMapper.getArtistas();
 		} finally {
 			sqlSession.close();
 		}
 	}
 
+	public Artista getArtista(int id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
+			return artistaMapper.getArtista(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	public ArrayList<Artista> getArtistaBuscado(String nombre) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

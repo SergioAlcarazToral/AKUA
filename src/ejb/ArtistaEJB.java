@@ -17,6 +17,11 @@ public class ArtistaEJB {
 		return artistaDAO.getArtistas();
 	}
 	
+	public Artista getArtista(int id) {
+		ArtistaDAO artistaDAO = new ArtistaDAO();
+		return artistaDAO.getArtista(id);
+	}
+	
 	public ArrayList<Artista> getArtistaBuscado(String nombre){
 		ArtistaDAO artistaDAO = new ArtistaDAO();
 		return artistaDAO.getArtistaBuscado(nombre);

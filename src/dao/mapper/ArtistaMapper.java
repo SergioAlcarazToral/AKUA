@@ -13,9 +13,11 @@ public interface ArtistaMapper {
 	 * 
 	 * @return las canciones
 	 */
-	public ArrayList<Artista> getArtista();
+	public ArrayList<Artista> getArtistas();
 
-	public ArrayList<Artista> getArtistaBuscado(@Param("nombre") String nombre);
+	public Artista getArtista(@Param("id") int id);
+	
+	public ArrayList<Artista> getArtistaBuscado(@Param("nombreArtista") String nombre);
 	
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos

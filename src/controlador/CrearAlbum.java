@@ -1,7 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -14,45 +13,46 @@ import javax.servlet.http.HttpSession;
 
 import ejb.ArtistaEJB;
 import ejb.SesionesEJB;
-import ejb.UsuarioEJB;
-import pojo.Artista;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Buscar
+ * Servlet implementation class CrearAlbum
  */
-@WebServlet("/Buscar")
-public class Buscar extends HttpServlet {
+@WebServlet("/CrearAlbum")
+public class CrearAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	SesionesEJB sesionesEJB;
-	
-	@EJB
-	UsuarioEJB usuarioEJB;
-	
+
 	@EJB
 	ArtistaEJB artistaEJB;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
 
+		String idArtista = request.getParameter("id");
+
 		response.setContentType("text/html; charset=UTF-8");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Buscar.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/CrearArtista.jsp");
 
-		String artistas = request.getParameter("buscar");
-		
-		ArrayList<Artista> artistasBuscados = artistaEJB.getArtistaBuscado(artistas);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		request.setAttribute("artistas", artistasBuscados);
+		request.setAttribute("idArtista", idArtista);
 		request.setAttribute("usuario", usuario);
 		rs.forward(request, response);
-		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
