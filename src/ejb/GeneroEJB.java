@@ -2,9 +2,14 @@ package ejb;
 
 import java.util.ArrayList;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import dao.GeneroDAO;
 import pojo.Genero;
 
+@Stateless
+@LocalBean
 public class GeneroEJB {
 
 	public ArrayList<Genero> getGeneros() {

@@ -9,11 +9,11 @@ import pojo.Album;
 
 public class AlbumDAO {
 
-	public ArrayList<Album> getAlbum(String nombre) {
+	public ArrayList<Album> getAlbumesBuscados(String nombre) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
-			return albumMapper.getAlbum(nombre);
+			return albumMapper.getAlbumesBuscados(nombre);
 		} finally {
 			sqlSession.close();
 		}
@@ -29,11 +29,32 @@ public class AlbumDAO {
 		}
 	}
 	
+	public Album getAlbum(int id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
+			return albumMapper.getAlbum(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	public ArrayList<Album> getAlbumesArtista(int id){
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
+			return albumMapper.getAlbumesArtista(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	public void insertAlbum(Album album) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
-			albumMapper.insertALbum(album);
+			albumMapper.insertAlbum(album);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -44,6 +65,7 @@ public class AlbumDAO {
 		try {
 			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
 			albumMapper.updateAlbum(album);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -54,6 +76,7 @@ public class AlbumDAO {
 		try {
 			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
 			albumMapper.deleteAlbum(album);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}

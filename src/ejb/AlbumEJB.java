@@ -17,9 +17,19 @@ public class AlbumEJB {
 		return albumDAO.getAlbumes();
 	}
 	
-	public ArrayList<Album> getAlbum(String nombre){
+	public ArrayList<Album> getAlbumesBuscados(String nombre){
 		AlbumDAO albumDAO = new AlbumDAO();
-		return albumDAO.getAlbum(nombre);
+		return albumDAO.getAlbumesBuscados(nombre);
+	}
+	
+	public ArrayList<Album> getAlbumesArtista(int id){
+		AlbumDAO albumDAO = new AlbumDAO();
+		return albumDAO.getAlbumesArtista(id);
+	}
+	
+	public Album getAlbum(int id) {
+		AlbumDAO albumDAO = new AlbumDAO();
+		return albumDAO.getAlbum(id);
 	}
 	
 	public void insertAlbum(Album album) {

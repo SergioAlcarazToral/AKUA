@@ -13,13 +13,17 @@
 		SELECT * FROM cancion
 	</select>
 	
+	<select id="getCancionesAlbum" resultType="pojo.Cancion">
+		Select cancion.titulo as titulo, archivo from cancion, album where cancion.idAlbum = #{id}
+	</select>
+	
 	<select id="getCancionesRecom" resultType='pojo.Cancion'>
 		SELECT * FROM cancion ORDER BY RAND() limit 10
 	</select>
 
-	<insert id='insertCancion' parameterType='Cancion'
+	<insert id='insertCancion' parameterType='pojo.Cancion'
 		useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO cancion(titulo,idGenero,idAlbum,idArtista) values('#{titulo}','#{genero}','#{album}','#{artista}')
+		INSERT INTO cancion(titulo,idGenero,idAlbum,idArtista,archivo) values(#{titulo},#{genero},#{album},#{artista},#{archivo})
 	</insert>
 
 	<update id='updateCancion' parameterType='Cancion'>
@@ -28,13 +32,13 @@
 		titulo = #{titulo},
 		idGenero = #{genero},
 		idAlbum = #{album},
-		idArtista = #{artista}
+		idArtista = #{artista},
+		archivo = #{archivo}
 		WHERE id = #{id}
 	</update>
 
 	<delete id='deleteCancion' parameterType='Cancion'>
 		DELETE FROM cancion WHERE id = #{id}
 	</delete>
-
 
 </mapper>

@@ -19,13 +19,14 @@
 			String logout = "Logout";
 			String baja = "DarDeBaja";
 			String crearArtista = "CrearArtista";
+			String crearGenero = "CrearGenero";
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print(
-							"<a href='" + logout + "'>Logout</a> | <a href='" + crearArtista + "'>Añadir Artista</a>");
+							"<a href='" + logout + "'>Logout</a> | <a href='" + crearArtista + "'>Añadir Artista</a> | <a href='" + crearGenero + "'>Crear genero</a>");
 				} else {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");

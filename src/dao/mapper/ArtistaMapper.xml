@@ -14,8 +14,8 @@
 	</select>
 
 	<select id='getArtistaBuscado' resultType="pojo.Artista">
-		SELECT * FROM artista where nombre like '%' || #{ nombreArtista
-		} || '%'
+		SELECT * FROM artista
+		where nombre like concat(#{nombreArtista},'%')
 	</select>
 
 	<insert id='insertArtista' parameterType='Artista'
@@ -32,6 +32,6 @@
 	</update>
 	<delete id='deleteArtista' parameterType='Artista'>
 		DELETE FROM artista
-		WHERE id = #{id}
+		WHERE id = #{idArtista}
 	</delete>
 </mapper>

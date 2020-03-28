@@ -5,19 +5,19 @@ public class Album {
 	Integer id;
 	String nombre;
 	Integer anyo;
-	Integer idArtista;
+	String artista;
 	String foto;
 
 	public Album() {
 
 	}
 
-	public Album(Integer id, String nombre, Integer anyo, Integer idArtista, String foto) {
+	public Album(Integer id, String nombre, Integer anyo, String artista, String foto) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.anyo = anyo;
-		this.idArtista = idArtista;
+		this.artista = artista;
 		this.foto = foto;
 	}
 
@@ -45,12 +45,12 @@ public class Album {
 		this.anyo = anyo;
 	}
 
-	public Integer getIdArtista() {
-		return idArtista;
+	public String getIdArtista() {
+		return artista;
 	}
 
-	public void setIdArtista(Integer idArtista) {
-		this.idArtista = idArtista;
+	public void setIdArtista(String artista) {
+		this.artista = artista;
 	}
 
 	public String getFoto() {

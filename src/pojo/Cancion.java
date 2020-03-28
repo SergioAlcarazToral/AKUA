@@ -7,18 +7,20 @@ public class Cancion {
 	String genero;
 	String album;
 	String artista;
+	String archivo;
 
 	public Cancion() {
 
 	}
 
-	public Cancion(Integer id, String titulo, String genero, String album, String artista) {
+	public Cancion(Integer id, String titulo, String genero, String album, String artista, String archivo) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.genero = genero;
 		this.album = album;
 		this.artista = artista;
+		this.archivo = archivo;
 	}
 
 	public Integer getId() {
@@ -59,6 +61,14 @@ public class Cancion {
 
 	public void setArtista(String artista) {
 		this.artista = artista;
+	}
+
+	public String getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
 	}
 
 }

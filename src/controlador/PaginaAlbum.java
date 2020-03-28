@@ -13,28 +13,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ejb.AlbumEJB;
-import ejb.ArtistaEJB;
+import ejb.CancionEJB;
 import ejb.SesionesEJB;
 import pojo.Album;
-import pojo.Artista;
+import pojo.Cancion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class PaginaArtista
+ * Servlet implementation class PaginaAlbum
  */
-@WebServlet("/PaginaArtista")
-public class PaginaArtista extends HttpServlet {
+@WebServlet("/PaginaAlbum")
+public class PaginaAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	ArtistaEJB artistaEJB;
+	SesionesEJB sesionesEJB;
 
 	@EJB
 	AlbumEJB albumEJB;
 
 	@EJB
-	SesionesEJB sesionesEJB;
-	
+	CancionEJB cancionEJB;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -43,19 +43,19 @@ public class PaginaArtista extends HttpServlet {
 
 		String id = request.getParameter("id");
 		try {
-			int idArtista = Integer.parseInt(id);
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaArtista.jsp");
+			int idAlbum = Integer.parseInt(id);
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaAlbum.jsp");
 
-			Artista artista = artistaEJB.getArtista(idArtista);
-			
-			ArrayList<Album> albumes = albumEJB.getAlbumesArtista(artista.getId());
-			
+			Album album = albumEJB.getAlbum(idAlbum);
+
+			ArrayList<Cancion> canciones = cancionEJB.getCancionesAlbum(idAlbum);
+
 			request.setAttribute("usuario", usuario);
-			request.setAttribute("artista", artista);
-			request.setAttribute("albumes", albumes);
+			request.setAttribute("album", album);
+			request.setAttribute("canciones", canciones);
 			rs.forward(request, response);
 		} catch (Exception e) {
-			response.sendRedirect("Principal");
+			e.printStackTrace();
 		}
 
 	}

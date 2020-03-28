@@ -61,11 +61,11 @@ public class ArtistaDAO {
 		}
 	}
 
-	public void deleteArtista(Artista artista) {
+	public void deleteArtista(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
-			artistaMapper.deleteArtista(artista);
+			artistaMapper.deleteArtista(id);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();

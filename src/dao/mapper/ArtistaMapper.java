@@ -38,5 +38,5 @@ public interface ArtistaMapper {
 	 * 
 	 * @param id El identificador del usuario
 	 */
-	public void deleteArtista(Artista artista);
+	public void deleteArtista(@Param("idArtista") int id);
 }

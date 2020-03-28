@@ -31,6 +31,8 @@ public interface CancionMapper {
 	 */
 	public ArrayList<Cancion> getCancionesRecom();
 
+	
+	public ArrayList<Cancion> getCancionesAlbum(@Param("id") int id);
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos
 	 * 

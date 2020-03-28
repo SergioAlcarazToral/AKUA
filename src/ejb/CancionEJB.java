@@ -2,9 +2,14 @@ package ejb;
 
 import java.util.ArrayList;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import dao.CancionDAO;
 import pojo.Cancion;
 
+@Stateless
+@LocalBean
 public class CancionEJB {
 
 	public Cancion existeCandion(int id) {
@@ -22,6 +27,11 @@ public class CancionEJB {
 		return cancionDAO.getCancionesRecom();
 	}
 
+	public ArrayList<Cancion> getCancionesAlbum(int id){
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancionesAlbum(id);
+	}
+	
 	public void insertCancion(Cancion cancion) {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.insertCancion(cancion);

@@ -13,16 +13,20 @@ public interface AlbumMapper {
 	 * 
 	 * @return las canciones
 	 */
-	public ArrayList<Album> getAlbum(@Param("nombre") String nombre);
+	public ArrayList<Album> getAlbumesBuscados(@Param("nombre") String nombre);
+	
+	public Album getAlbum(@Param("id") int id);
 	
 	public ArrayList<Album> getAlbumes();
+	
+	public ArrayList<Album> getAlbumesArtista(@Param("id") int id);
 
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos
 	 * 
 	 * @param cancion la cancion que queremos insertar
 	 */
-	public void insertALbum(Album album);
+	public void insertAlbum(Album album);
 
 	/**
 	 * Para poder actualizar los datos de una cancion

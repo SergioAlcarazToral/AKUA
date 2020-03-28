@@ -11,36 +11,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ejb.GeneroEJB;
 import ejb.SesionesEJB;
-import ejb.UsuarioEJB;
+import pojo.Genero;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Principal
+ * Servlet implementation class CrearGenero
  */
-@WebServlet("/Principal")
-public class Principal extends HttpServlet {
+@WebServlet("/CrearGenero")
+public class CrearGenero extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	SesionesEJB sesionesEJB;
 
 	@EJB
-	UsuarioEJB usuarioEJB;
+	GeneroEJB generoEJB;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
 		response.setContentType("text/html; charset=UTF-8");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/CrearGenero.jsp");
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
 		request.setAttribute("usuario", usuario);
 		rs.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String nombre = request.getParameter("nombre");
+		
+		Genero genero = new Genero();
+		
+		genero.setNombre(nombre);
+		
+		generoEJB.insertGenero(genero);
+
 	}
 
 }

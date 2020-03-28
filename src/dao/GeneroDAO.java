@@ -24,6 +24,7 @@ public class GeneroDAO {
 		try {
 			GeneroMapper generoMapper = sqlSession.getMapper(GeneroMapper.class);
 			generoMapper.insertGenero(genero);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -34,6 +35,7 @@ public class GeneroDAO {
 		try {
 			GeneroMapper generoMapper = sqlSession.getMapper(GeneroMapper.class);
 			generoMapper.updateGenero(genero);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}
@@ -44,6 +46,7 @@ public class GeneroDAO {
 		try {
 			GeneroMapper generoMapper = sqlSession.getMapper(GeneroMapper.class);
 			generoMapper.deleteGenero(genero);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}

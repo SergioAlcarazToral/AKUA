@@ -33,6 +33,7 @@ public class Buscar extends HttpServlet {
 	
 	@EJB
 	ArtistaEJB artistaEJB;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);

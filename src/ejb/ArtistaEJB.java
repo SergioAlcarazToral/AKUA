@@ -37,9 +37,9 @@ public class ArtistaEJB {
 		artistaDAO.updateArtista(artista);
 	}
 	
-	public void deleteArtista(Artista artista) {
+	public void deleteArtista(int id) {
 		ArtistaDAO artistaDAO = new ArtistaDAO();
-		artistaDAO.deleteArtista(artista);
+		artistaDAO.deleteArtista(id);
 	}
 	
 }

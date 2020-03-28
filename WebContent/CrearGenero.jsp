@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@ page import="pojo.Usuario"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Crear artista</title>
+<title>Crear genero para canciones</title>
 </head>
 <body>
 	<div id="divLogo">
@@ -24,14 +24,10 @@
 			}
 		%>
 	</div>
-
-	<form method="post" action="CrearArtista" enctype="multipart/form-data">
-		<p>Nombre del artista o del grupo</p>
-		<input type="text" name="nombre"> <br>
-		<p>Foto del artista o del grupo</p>
-		<input type="file" name="foto"><br> <input type="submit"
-			value="Insertar">
+	<form method="post" action="CrearGenero">
+		<p>Nombre del genero que se quiere crear</p>
+		<input type="text" name="nombre" required>
+		<input type="submit" value="Crear genero">
 	</form>
-	<footer>Web creada por: Sergio Alcaraz Toral copyright:2020</footer>
 </body>
 </html>
