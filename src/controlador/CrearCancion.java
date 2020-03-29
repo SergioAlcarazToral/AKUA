@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -66,27 +67,36 @@ public class CrearCancion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+
 		response.setContentType("text/html; charset=UTF-8");
 
 		// Los parametros necesarios para poder insertar un artista en la base de datos
 
+		// Si la ruta no existe la creamos
+		File uploadDir = new File(uploadPath);
+		if (!uploadDir.exists()) {
+			uploadDir.mkdir();
+		}
+
 		String titulo = request.getParameter("titulo");
 		String genero = request.getParameter("genero");
-		
-		try {
+		String artista = request.getParameter("idArtista");
+		String album = request.getParameter("idAlbum");
+		String archivo = request.getParameter("archivo");
 
+
+
+		if (titulo != null) {
 			Cancion cancion = new Cancion();
 
 			cancion.setTitulo(titulo);
 			cancion.setGenero(genero);
-			cancion.setAlbum("1");
-			cancion.setArchivo("archivo.ogg");
-			cancion.setArtista("1");
+			cancion.setAlbum(album);
+			cancion.setArchivo(archivo);
+			cancion.setArtista(artista);
 
 			cancionEJB.insertCancion(cancion);
-
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 
 	}
