@@ -2,6 +2,10 @@ package controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
@@ -13,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import ejb.AlbumEJB;
 import ejb.CancionEJB;
@@ -25,6 +28,8 @@ import pojo.Genero;
 import pojo.Usuario;
 
 @WebServlet("/CrearCancion")
+@MultipartConfig(maxFileSize = 2048 * 2048 * 5)
+
 public class CrearCancion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "ArchivosMusica";
@@ -85,7 +90,10 @@ public class CrearCancion extends HttpServlet {
 		String album = request.getParameter("idAlbum");
 		String archivo = request.getParameter("archivo");
 
+		Path archivoRuta = Paths.get("D:\\" + archivo);
+		Path ruta = Paths.get(uploadPath + "\\" + archivo);
 
+		Files.move(archivoRuta, ruta, StandardCopyOption.ATOMIC_MOVE);
 
 		if (titulo != null) {
 			Cancion cancion = new Cancion();
