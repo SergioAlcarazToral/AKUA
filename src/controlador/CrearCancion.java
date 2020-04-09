@@ -2,6 +2,10 @@ package controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
@@ -13,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import ejb.AlbumEJB;
 import ejb.CancionEJB;
@@ -100,6 +103,7 @@ public class CrearCancion extends HttpServlet {
 		String genero = request.getParameter("genero");
 		String artista = request.getParameter("idArtista");
 		String album = request.getParameter("idAlbum");
+<<<<<<< HEAD
 		Part partArchivo = request.getPart("archivo");
 
 		try {
@@ -110,6 +114,14 @@ public class CrearCancion extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+=======
+		String archivo = request.getParameter("archivo");
+
+		Path archivoRuta = Paths.get("D:\\" + archivo);
+		Path ruta = Paths.get(uploadPath + "\\" + archivo);
+
+		Files.move(archivoRuta, ruta, StandardCopyOption.ATOMIC_MOVE);
+>>>>>>> master
 
 		if (titulo != null){
 			Cancion cancion = new Cancion();
