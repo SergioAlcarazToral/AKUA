@@ -15,7 +15,10 @@ import ejb.UsuarioEJB;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class DarDeBaja
+ * Servlet para poder dar de baja un usuario en la aplicacion
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/DarDeBaja")
 public class DarDeBaja extends HttpServlet {
@@ -23,23 +26,27 @@ public class DarDeBaja extends HttpServlet {
 
 	@EJB
 	SesionesEJB sesionesEJB;
-	
+
 	@EJB
 	UsuarioEJB usuarioEJB;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	/**
+	 * Borra el usuario de la base de datos
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession(false);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		try {
 			usuarioEJB.deleteUsuario(usuario.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			//Poner el logger aqui
+			// Poner el logger aqui
 		}
 		sesionesEJB.logoutUsuario(session);
 		response.sendRedirect("Principal");
-		
+
 	}
 
 }

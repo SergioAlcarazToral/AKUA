@@ -40,5 +40,5 @@ public interface AlbumMapper {
 	 * 
 	 * @param id El identificador del usuario
 	 */
-	public void deleteAlbum(Album album);
+	public void deleteAlbum(@Param("id") int id);
 }

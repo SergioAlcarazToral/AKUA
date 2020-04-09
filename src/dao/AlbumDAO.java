@@ -71,11 +71,11 @@ public class AlbumDAO {
 		}
 	}
 	
-	public void deleteAlbum(Album album) {
+	public void deleteAlbum(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			AlbumMapper albumMapper = sqlSession.getMapper(AlbumMapper.class);
-			albumMapper.deleteAlbum(album);
+			albumMapper.deleteAlbum(id);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();

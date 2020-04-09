@@ -22,16 +22,15 @@
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 			Album album = (Album) request.getAttribute("idAlbum");
 			ArrayList<Genero> generos = (ArrayList<Genero>) request.getAttribute("generos");
-		
+
 			String logout = "Logout";
 			String inicio = "Principal";
-			
-			if(usuario != null){
+
+			if (usuario != null) {
 				out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 				out.print("<p>" + usuario.getNombre() + "</p>");
 				out.print("<a href='" + logout + "'>Logout</a> | <a href='" + inicio + "'>Inicio</a>");
 			}
-			
 		%>
 	</div>
 	<form action="CrearCancion" method="post" enctype="multipart/form-data">
@@ -40,9 +39,9 @@
 		<p>Genero</p>
 		<select name="genero">
 			<%
-			for(Genero g : generos){
-				out.print("<option value='" + g.getId() + "'>" + g.getNombre() + "</option>");
-			}
+				for (Genero g : generos) {
+					out.print("<option value='" + g.getId() + "'>" + g.getNombre() + "</option>");
+				}
 			%>
 		</select>
 		<%

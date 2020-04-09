@@ -20,7 +20,10 @@ import pojo.Artista;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class PaginaArtista
+ * Servlet que se encarga de mostrar la pagina del artista con sus albumes
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/PaginaArtista")
 public class PaginaArtista extends HttpServlet {
@@ -34,7 +37,10 @@ public class PaginaArtista extends HttpServlet {
 
 	@EJB
 	SesionesEJB sesionesEJB;
-	
+
+	/**
+	 * Muestra la pagina del artista
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -47,9 +53,9 @@ public class PaginaArtista extends HttpServlet {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaArtista.jsp");
 
 			Artista artista = artistaEJB.getArtista(idArtista);
-			
+
 			ArrayList<Album> albumes = albumEJB.getAlbumesArtista(artista.getId());
-			
+
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("artista", artista);
 			request.setAttribute("albumes", albumes);

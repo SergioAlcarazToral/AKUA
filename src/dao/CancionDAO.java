@@ -18,6 +18,17 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
+	
+	public Cancion getCancion(int id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
+			return cancionMapper.getCancion(id);
+		} finally{
+			sqlSession.close();
+		}
+	}
+	
 	public ArrayList<Cancion> getCanciones(){
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -68,11 +79,11 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
-	public void deleteCancion(Cancion cancion) {
+	public void deleteCancion(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
-			cancionMapper.deleteCancion(cancion);
+			cancionMapper.deleteCancion(id);
 			sqlSession.commit();
 		} finally{
 			sqlSession.close();

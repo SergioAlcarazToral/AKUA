@@ -24,7 +24,15 @@ import pojo.Cancion;
 import pojo.Genero;
 import pojo.Usuario;
 
+/**
+ * Servlet para poder insertar una cancion en la base de datos
+ * 
+ * @author Sergio
+ *
+ */
 @WebServlet("/CrearCancion")
+@MultipartConfig(maxFileSize = 2048 * 2048 * 5)
+
 public class CrearCancion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "ArchivosMusica";
@@ -41,6 +49,9 @@ public class CrearCancion extends HttpServlet {
 	@EJB
 	GeneroEJB generoEJB;
 
+	/**
+	 * Muestra un formulario con los requisitos para insertar una cancion
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -64,6 +75,10 @@ public class CrearCancion extends HttpServlet {
 		rs.forward(request, response);
 	}
 
+	/**
+	 * Realiza todas las acciones necesarias como guardar la cancion en disco y
+	 * insertar los datos en la base de datos
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -79,15 +94,24 @@ public class CrearCancion extends HttpServlet {
 			uploadDir.mkdir();
 		}
 
+		String archivo = null;
+
 		String titulo = request.getParameter("titulo");
 		String genero = request.getParameter("genero");
 		String artista = request.getParameter("idArtista");
 		String album = request.getParameter("idAlbum");
-		String archivo = request.getParameter("archivo");
+		Part partArchivo = request.getPart("archivo");
 
+		try {
+			String strArchivo = partArchivo.getHeader("content-disposition");
+			strArchivo = strArchivo.substring(strArchivo.lastIndexOf("filename"));
+			archivo = strArchivo.substring(strArchivo.indexOf('=') + 2, strArchivo.lastIndexOf("\""));
+			partArchivo.write(uploadPath + File.separator + archivo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-
-		if (titulo != null) {
+		if (titulo != null){
 			Cancion cancion = new Cancion();
 
 			cancion.setTitulo(titulo);

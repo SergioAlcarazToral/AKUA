@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import ejb.SesionesEJB;
 
 /**
- * Servlet implementation class Logout
+ * Servlet para poder salir de la sesion del usuario
+ * @author Sergio
+ *
  */
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
@@ -22,6 +24,9 @@ public class Logout extends HttpServlet {
 	@EJB
 	SesionesEJB sesionesEJB;
 	
+	/**
+	 * Comprueba que no exista una sesion, si existe la cerrara
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);

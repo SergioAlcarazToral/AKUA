@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,53 +13,56 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import ejb.ArtistaEJB;
+import ejb.AlbumEJB;
 import ejb.SesionesEJB;
-import pojo.Artista;
+import pojo.Album;
 import pojo.Usuario;
 
 /**
- * Servlet para poder insertar un artista en la base de datos
+ * Servlet para poder editar un album de la base de datos
  * 
  * @author Sergio
  *
  */
-@WebServlet("/CrearArtista")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
-
-public class CrearArtista extends HttpServlet {
+@WebServlet("/EditarAlbum")
+public class EditarAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY = "ImgArtistas";
+	private static final String UPLOAD_DIRECTORY = "ImgAlbums";
+
+	@EJB
+	AlbumEJB albumEJB;
 
 	@EJB
 	SesionesEJB sesionesEJB;
 
-	@EJB
-	ArtistaEJB artistaEJB;
-
 	/**
-	 * Muestra un formulario con los requisitos para insertar un artista
+	 * Muestra la pagina para poder editar un album
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession session = request.getSession(false);
 
+		String idAlbum = request.getParameter("id");
+
+		int id = Integer.parseInt(idAlbum);
 		response.setContentType("text/html; charset=UTF-8");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/CrearArtista.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/EditarAlbum.jsp");
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
+		Album album = albumEJB.getAlbum(id);
+		request.setAttribute("album", album);
 		request.setAttribute("usuario", usuario);
 		rs.forward(request, response);
 	}
 
 	/**
-	 * Recoge los parametros y los inserta en la base de datos
+	 * Coge los datos y los edita en la base de datos al album que corresponde
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
 
 		response.setContentType("text/html; charset=UTF-8");
@@ -76,13 +78,12 @@ public class CrearArtista extends HttpServlet {
 
 		// Los parametros necesarios para poder insertar un artista en la base de datos
 		String nombre = request.getParameter("nombre");
-
+		String anyo = request.getParameter("anyo");
 		// En el caso de que el usuario no ponga foto de perfil se le asignara una ya
 		// predefinida por el sistema
 		Part partFoto = request.getPart("foto");
 
 		try {
-
 			String strFoto = partFoto.getHeader("content-disposition");
 			strFoto = strFoto.substring(strFoto.lastIndexOf("filename"));
 			foto = strFoto.substring(strFoto.indexOf('=') + 2, strFoto.lastIndexOf("\""));
@@ -91,13 +92,21 @@ public class CrearArtista extends HttpServlet {
 			foto = "sinImagen.jpg";
 		}
 
-		// Los datos necesarios para poder añadir el artista
-		Artista artista = new Artista();
-		artista.setNombre(nombre);
-		artista.setFoto(foto);
+		try {
+			int anyoAlbum = Integer.parseInt(anyo);
 
-		artistaEJB.insertArtista(artista);
-		response.sendRedirect("Principal");
+			Album album = new Album();
+
+			album.setNombre(nombre);
+			album.setAnyo(anyoAlbum);
+			album.setFoto(foto);
+
+			albumEJB.updateAlbum(album);
+
+			response.sendRedirect("Principal");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
