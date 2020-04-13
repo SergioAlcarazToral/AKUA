@@ -16,7 +16,10 @@ import ejb.UsuarioEJB;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Principal
+ * Servlet que muestra la pagina principal
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/Principal")
 public class Principal extends HttpServlet {
@@ -28,6 +31,9 @@ public class Principal extends HttpServlet {
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+	/**
+	 * Muestra la pagina principal
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

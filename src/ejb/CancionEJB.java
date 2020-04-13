@@ -17,6 +17,11 @@ public class CancionEJB {
 		return cancionDAO.existeCancion(id);
 	}
 
+	public Cancion getCancion(int id) {
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancion(id);
+	}
+	
 	public ArrayList<Cancion> getCanciones(){
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCanciones();
@@ -42,9 +47,9 @@ public class CancionEJB {
 		cancionDAO.updateCancion(cancion);
 	}
 	
-	public void deleteCancion(Cancion cancion) {
+	public void deleteCancion(int id) {
 		CancionDAO cancionDAO = new CancionDAO();
-		cancionDAO.deleteCancion(cancion);
+		cancionDAO.deleteCancion(id);
 	}
 	
 }

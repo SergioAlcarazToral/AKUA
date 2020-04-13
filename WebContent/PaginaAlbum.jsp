@@ -24,19 +24,24 @@
 			String baja = "DarDeBaja";
 			String crearCancion = "CrearCancion";
 			String inicio = "Principal";
+			String editarAlbum = "EditarAlbum";
+			String editarCancion = "EditarCancion";
 			String eliminarArtista = "EliminarArtista";
-
+			String eliminarAlbum = "EliminarAlbum";
+			String eliminarCancion = "EliminarCancion";
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 
 			Album album = (Album) request.getAttribute("album");
 
-			ArrayList<Cancion> canciones= (ArrayList<Cancion>) request.getAttribute("canciones");
+			ArrayList<Cancion> canciones = (ArrayList<Cancion>) request.getAttribute("canciones");
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearCancion + "?id=" + album.getId()
-							+ "'>Crear cancion</a> | <a href='" + inicio + "'>Inicio</a>");
+							+ "'>Crear cancion</a> | <a href='" + editarAlbum + "?id=" + +album.getId()
+							+ "'>Editar album</a> | <a href='" + eliminarAlbum + "?id=" + album.getId()
+							+ "'><Eliminar album</a> | <a href='" + inicio + "'>Inicio</a>");
 				} else {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
@@ -51,8 +56,15 @@
 		%>
 	</div>
 	<%
-		for(Cancion c : canciones){
-			out.println(c.getTitulo());
+		out.println("<h2>" + album.getNombre() + "</h2>");
+		out.println(album.getAnyo());
+		if(usuario.getAdministrador() != 1){
+			
+		}
+		for (Cancion c : canciones) {
+			out.println("<p>" +c.getTitulo() + " | <a href='" + eliminarCancion + "?id=" + c.getId()
+					+ "'>Eliminar Cancion</a> | <a href='" + editarCancion +"?id=" +c.getId() +"'>Editar Cancion</a></p>");
+
 		}
 	%>
 </body>

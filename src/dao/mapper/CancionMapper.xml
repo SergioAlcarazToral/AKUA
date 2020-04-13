@@ -9,12 +9,16 @@
 		SELECT * FROM cancion where id = #{id}
 	</select>
 
+	<select id="getCancion" resultType="pojo.Cancion">
+		Select * from cancion where id = #{id}
+	</select>
+
 	<select id='getCanciones'>
 		SELECT * FROM cancion
 	</select>
 	
 	<select id="getCancionesAlbum" resultType="pojo.Cancion">
-		Select cancion.titulo as titulo, archivo from cancion, album where cancion.idAlbum = #{id}
+		Select cancion.id as id, cancion.titulo as titulo, archivo from cancion, album where cancion.idAlbum = #{id}
 	</select>
 	
 	<select id="getCancionesRecom" resultType='pojo.Cancion'>
@@ -30,10 +34,7 @@
 		UPDATE cancion
 		SET
 		titulo = #{titulo},
-		idGenero = #{genero},
-		idAlbum = #{album},
-		idArtista = #{artista},
-		archivo = #{archivo}
+		idGenero = #{genero}
 		WHERE id = #{id}
 	</update>
 

@@ -2,33 +2,47 @@ package controlador;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ejb.CancionEJB;
+import ejb.SesionesEJB;
+
 /**
- * Pagina que te muestra que el usuario se ha registrado correctamente
+ * Para poder eliminar una cancion de la base de datos
  * 
  * @author Sergio
  *
  */
-@WebServlet("/InfoRegistro")
-public class InfoRegistro extends HttpServlet {
+
+@WebServlet("/EliminarCancion")
+public class EliminarCancion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@EJB
+	SesionesEJB sesionesEJB;
+
+	@EJB
+	CancionEJB cancionEJB;
+
 	/**
-	 * Muestra la pagina de informacion
+	 * Metodo para poder borrar una cancion
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html; charset=UTF-8");
+		String idCancion = request.getParameter("id");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/InfoRegistro.jsp");
+		int id = Integer.parseInt(idCancion);
 
-		rs.forward(request, response);
+		cancionEJB.deleteCancion(id);
+
+		response.sendRedirect("Principal");
+
 	}
+
 }

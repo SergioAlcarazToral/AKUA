@@ -17,10 +17,13 @@ import ejb.UsuarioEJB;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Registrar
+ * Servlet que se encarga de registrar usuarios en la base de datos
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/Registrar")
-@MultipartConfig(maxFileSize = 1024 * 1024* 5)
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 
 public class Registrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,6 +32,9 @@ public class Registrar extends HttpServlet {
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+	/**
+	 * Muestra la pagian de registro
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -39,6 +45,9 @@ public class Registrar extends HttpServlet {
 		rs.forward(request, response);
 	}
 
+	/**
+	 * Inserta el usuario en la base de datos con los datos que ha recogido
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
