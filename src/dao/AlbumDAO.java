@@ -111,12 +111,16 @@ public class AlbumDAO {
 			sqlSession.close();
 		}
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Para poder eliminar un album de la base de datos
 	 * 
 	 * @param id el identificador del album que queremos borrar
 	 */
+=======
+	
+>>>>>>> master
 	public void deleteAlbum(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

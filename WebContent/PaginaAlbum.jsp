@@ -25,7 +25,10 @@
 			String crearCancion = "CrearCancion";
 			String inicio = "Principal";
 			String editarAlbum = "EditarAlbum";
+<<<<<<< HEAD
 			String editarCancion = "EditarCancion";
+=======
+>>>>>>> master
 			String eliminarArtista = "EliminarArtista";
 			String eliminarAlbum = "EliminarAlbum";
 			String eliminarCancion = "EliminarCancion";
@@ -63,7 +66,11 @@
 		}
 		for (Cancion c : canciones) {
 			out.println("<p>" +c.getTitulo() + " | <a href='" + eliminarCancion + "?id=" + c.getId()
+<<<<<<< HEAD
 					+ "'>Eliminar Cancion</a> | <a href='" + editarCancion +"?id=" +c.getId() +"'>Editar Cancion</a></p>");
+=======
+					+ "'>EliminarCancion</a></p>");
+>>>>>>> master
 
 		}
 	%>
