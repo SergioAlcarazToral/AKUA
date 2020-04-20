@@ -39,12 +39,15 @@ public interface CancionMapper {
 	 */
 	public ArrayList<Cancion> getCancionesRecom();
 
+<<<<<<< HEAD
 	/**
 	 * Para poder obtener todas las canciones de un album
 	 * 
 	 * @param id el id del album
 	 * @return todas las canciones del album
 	 */
+=======
+>>>>>>> master
 	public ArrayList<Cancion> getCancionesAlbum(@Param("id") int id);
 
 	/**

@@ -28,6 +28,10 @@
 			Album album = (Album) request.getAttribute("album");
 		%>
 	</div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 	<form action="EditarAlbum" method="post" enctype="multipart/form-data">
 		<%
 			out.print("<p>Nombre del album:</p>");
@@ -43,6 +47,19 @@
 		%>
 
 		<input type="submit" value="Editar album">
+<<<<<<< HEAD
+=======
+=======
+	<form action="EditarCancion" method="post" enctype="multipart/form-data">
+		<p>Nombre del album:</p>
+		<%out.print("<input type='text' name='nombre' value='" +album.getNombre() + "' required>");%>
+		<p>Año del album</p>
+		<%out.print("<input type='number' name='anyo' value='" + album.getAnyo() +"'  required>");%>
+		<p>
+			Foto del album <input type="file" name="foto"> <br> <input
+				type="submit" value="Crear album">
+>>>>>>> master
+>>>>>>> master
 	</form>
 </body>
 </html>

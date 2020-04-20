@@ -29,6 +29,7 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Este metodo es para poder obtener una cancion en especifico gracias a su id
@@ -36,11 +37,15 @@ public class CancionDAO {
 	 * @param id El id de la cancion que queremos
 	 * @return la cancion
 	 */
+=======
+	
+>>>>>>> master
 	public Cancion getCancion(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
 			return cancionMapper.getCancion(id);
+<<<<<<< HEAD
 		} finally {
 			sqlSession.close();
 		}
@@ -52,6 +57,14 @@ public class CancionDAO {
 	 * @return todas las canciones
 	 */
 	public ArrayList<Cancion> getCanciones() {
+=======
+		} finally{
+			sqlSession.close();
+		}
+	}
+	
+	public ArrayList<Cancion> getCanciones(){
+>>>>>>> master
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
@@ -123,12 +136,15 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
+<<<<<<< HEAD
 
 	/**
 	 * Para poder borrar una cancion de la base de datos
 	 * 
 	 * @param id el id de la cancion que queremos borrar
 	 */
+=======
+>>>>>>> master
 	public void deleteCancion(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

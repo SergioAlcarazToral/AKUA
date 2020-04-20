@@ -19,7 +19,15 @@
 		<%
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 			ArrayList<Genero> generos = (ArrayList<Genero>) request.getAttribute("generos");
+<<<<<<< HEAD
 			Cancion cancion = (Cancion) request.getAttribute("cancion");
+=======
+<<<<<<< HEAD
+			Cancion cancion = (Cancion) request.getAttribute("cancion");
+=======
+			Cancion idGenero = (Cancion) request.getAttribute("genero");
+>>>>>>> master
+>>>>>>> master
 			if (usuario != null) {
 				String logout = "Logout";
 
@@ -30,6 +38,10 @@
 			}
 		%>
 	</div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 	<form action="EditarCancion" method="post">
 		<p>Titulo de la cancion</p>
 		<%
@@ -54,6 +66,28 @@
 			out.print("<input type='hidden' value='" + cancion.getId() + "' name='id'>");
 		%>
 		<input type="submit" value="Editar cancion">
+<<<<<<< HEAD
+=======
+=======
+	<form action"EditarCancion" method="post">
+		<p>Titulo de la cancion</p>
+		<input type="text" name="titulo" required>
+		<p>Genero</p>
+		<select nam="genero">
+			<%
+				for(Genero g : generos){
+					if(idGenero.getId() == g.getId()){
+						out.print("<option value='" + g.getId() + "' selected>" + g.getNombre() + "</option>");
+					}else{
+						out.print("<option value='" + g.getId() + "'>" + g.getNombre() + "</option>");
+
+					}
+						
+				}
+			%>
+		</select>
+>>>>>>> master
+>>>>>>> master
 	</form>
 </body>
 </html>
