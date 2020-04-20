@@ -22,7 +22,10 @@ import pojo.Artista;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class CrearAlbum
+ * Servlet para poder crear un album y añadirlo a la base de datos
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/CrearAlbum")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
@@ -40,6 +43,9 @@ public class CrearAlbum extends HttpServlet {
 	@EJB
 	AlbumEJB albumEJB;
 
+	/**
+	 * Para poder mostrar el formulario para poder crear un album
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -62,8 +68,7 @@ public class CrearAlbum extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Insertar el album en la base de datos
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

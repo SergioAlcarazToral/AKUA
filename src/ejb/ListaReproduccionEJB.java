@@ -2,9 +2,14 @@ package ejb;
 
 import java.util.ArrayList;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import dao.ListaReproduccionDAO;
 import pojo.ListaReproduccion;
 
+@Stateless
+@LocalBean
 public class ListaReproduccionEJB {
 
 	public ArrayList<ListaReproduccion> getListasR() {
@@ -12,9 +17,19 @@ public class ListaReproduccionEJB {
 		return listaDAO.getListasR();
 	}
 
+	public ArrayList<ListaReproduccion> getListasUsuario(int id){
+		ListaReproduccionDAO listaDAO = new ListaReproduccionDAO();
+		return listaDAO.getListasUsuario(id);
+	}
+	
 	public void insertListaR(ListaReproduccion listaR) {
 		ListaReproduccionDAO listaDAO = new ListaReproduccionDAO();
 		listaDAO.insertListaR(listaR);
+	}
+	
+	public void insertCancion(ListaReproduccion listaR) {
+		ListaReproduccionDAO listaDAO = new ListaReproduccionDAO();
+		listaDAO.insertCancion(listaR);
 	}
 
 	public void updateListaR(ListaReproduccion listaR) {

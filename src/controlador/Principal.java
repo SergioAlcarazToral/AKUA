@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -11,12 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import ejb.UsuarioEJB;
+import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Principal
+ * Servlet que muestra la pagina principal
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/Principal")
 public class Principal extends HttpServlet {
@@ -28,6 +34,12 @@ public class Principal extends HttpServlet {
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+	@EJB
+	ListaReproduccionEJB listasEJB;
+
+	/**
+	 * Muestra la pagina principal
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -38,6 +50,12 @@ public class Principal extends HttpServlet {
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
+
+		ArrayList<ListaReproduccion> listas;
+		if (usuario != null) {
+			listas = listasEJB.getListasUsuario(usuario.getId());
+			request.setAttribute("listas", listas);
+		}
 
 		request.setAttribute("usuario", usuario);
 		rs.forward(request, response);

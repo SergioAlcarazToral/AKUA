@@ -2,33 +2,44 @@ package controlador;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ejb.AlbumEJB;
+import ejb.SesionesEJB;
+
 /**
- * Pagina que te muestra que el usuario se ha registrado correctamente
+ * Clase para poder borrar un album de la base de datos
  * 
  * @author Sergio
  *
  */
-@WebServlet("/InfoRegistro")
-public class InfoRegistro extends HttpServlet {
+
+@WebServlet("/EliminarAlbum")
+public class EliminarAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@EJB
+	SesionesEJB sesionesEJB;
+
+	@EJB
+	AlbumEJB albumEJB;
+
 	/**
-	 * Muestra la pagina de informacion
+	 * Este metodo es para recoger el id del album para poder borrarlo
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String idAlbum = request.getParameter("id");
 
-		response.setContentType("text/html; charset=UTF-8");
+		int id = Integer.parseInt(idAlbum);
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/InfoRegistro.jsp");
-
-		rs.forward(request, response);
+		albumEJB.deleteAlbum(id);
+		response.sendRedirect("Principal");
 	}
+
 }

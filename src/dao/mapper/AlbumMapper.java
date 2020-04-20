@@ -9,16 +9,34 @@ import pojo.Album;
 public interface AlbumMapper {
 
 	/**
-	 * Obtiene un listado de todas las canciones
+	 * Para obtener todos los posibles resultados de la busqueda
 	 * 
-	 * @return las canciones
+	 * @param nombre lo que quiere buscarse
+	 * @return el resultado de la busqueda
 	 */
 	public ArrayList<Album> getAlbumesBuscados(@Param("nombre") String nombre);
-	
+
+	/**
+	 * Para poder obtener un album en concreto
+	 * 
+	 * @param id el id del album que queremos
+	 * @return el album
+	 */
 	public Album getAlbum(@Param("id") int id);
-	
+
+	/**
+	 * Para obtener todos los albumes de la base de datos
+	 * 
+	 * @return todos los albums
+	 */
 	public ArrayList<Album> getAlbumes();
-	
+
+	/**
+	 * Para obtener todos los albumes de un artista
+	 * 
+	 * @param id el id del artista
+	 * @return los albumes
+	 */
 	public ArrayList<Album> getAlbumesArtista(@Param("id") int id);
 
 	/**
@@ -40,5 +58,5 @@ public interface AlbumMapper {
 	 * 
 	 * @param id El identificador del usuario
 	 */
-	public void deleteAlbum(Album album);
+	public void deleteAlbum(@Param("id") int id);
 }

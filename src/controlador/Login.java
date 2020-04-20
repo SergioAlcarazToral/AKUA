@@ -16,7 +16,10 @@ import ejb.UsuarioEJB;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Login
+ * Servlet que se encaraga de poder iniciar sesion en la aplicacion
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/Login")
 public class Login extends HttpServlet {
@@ -28,6 +31,9 @@ public class Login extends HttpServlet {
 	@EJB
 	SesionesEJB sesionesEJB;
 
+	/**
+	 * Muestra la pagina de login
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -48,8 +54,7 @@ public class Login extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Hace comprovaciones y si el usuario existe crea una sesion con dicho usuario
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

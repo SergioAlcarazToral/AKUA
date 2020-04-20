@@ -20,7 +20,10 @@ import pojo.Cancion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class PaginaAlbum
+ * Servlet que se encarga de mostrar la pagina de un album
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/PaginaAlbum")
 public class PaginaAlbum extends HttpServlet {
@@ -35,6 +38,9 @@ public class PaginaAlbum extends HttpServlet {
 	@EJB
 	CancionEJB cancionEJB;
 
+	/**
+	 * Muestra la pagina del album con sus respectivas canciones
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

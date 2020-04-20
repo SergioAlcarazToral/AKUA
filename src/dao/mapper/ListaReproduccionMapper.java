@@ -2,6 +2,8 @@ package dao.mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import pojo.ListaReproduccion;
 
 public interface ListaReproduccionMapper {
@@ -13,24 +15,33 @@ public interface ListaReproduccionMapper {
 	 */
 	public ArrayList<ListaReproduccion> getListasR();
 
+	public ArrayList<ListaReproduccion> getListasUsuario(@Param("idUsuario") int id);
+	
 	/**
-	 * Este metodo es para poder insertar una cancion en la base de datos
+	 * Para poder insertar una lista en la base de datos
 	 * 
-	 * @param cancion la cancion que queremos insertar
+	 * @param listaReproduccion la lista que queremos insertar
 	 */
 	public void insertListaR(ListaReproduccion listaReproduccion);
 
 	/**
-	 * Para poder actualizar los datos de una cancion
+	 * Para poder insertar una cancion en una lista
 	 * 
-	 * @param cancion la cancion que vamos a actualizar
+	 * @param listaReproduccion la cancion
+	 */
+	public void insertCancion(ListaReproduccion listaReproduccion);
+
+	/**
+	 * Para poder editar una lista en la base de datos
+	 * 
+	 * @param listaReproduccion la lista que queremos editar
 	 */
 	public void updateListaR(ListaReproduccion listaReproduccion);
 
 	/**
-	 * Elimina un usuario en base de datos
+	 * Para eliminar una lista de la base de datos
 	 * 
-	 * @param id El identificador del usuario
+	 * @param listaReproduccion la lista que queremos eliminar
 	 */
 	public void deleteListaR(ListaReproduccion listaReproduccion);
 }
