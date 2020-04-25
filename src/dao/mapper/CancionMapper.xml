@@ -24,14 +24,22 @@
 		and cancion.idGenero = genero.id;
 	</select>
 
+	<select id="getCancion" resultType="pojo.Cancion">
+		Select * from cancion where id = #{id}
+	</select>
+
 	<select id='getCanciones'>
 		SELECT * FROM cancion
 	</select>
 
 	<select id="getCancionesAlbum" resultType="pojo.Cancion">
+<<<<<<< HEAD
 		Select cancion.id as
 		id, cancion.titulo as titulo, archivo from cancion, album where
 		cancion.idAlbum = #{id}
+=======
+		Select cancion.id as id, cancion.titulo as titulo, archivo from cancion, album where cancion.idAlbum = #{id}
+>>>>>>> master
 	</select>
 
 	<select id="getCancionesRecom" resultType='pojo.Cancion'>
@@ -41,9 +49,13 @@
 
 	<insert id='insertCancion' parameterType='pojo.Cancion'
 		useGeneratedKeys='true' keyProperty='id'>
+<<<<<<< HEAD
 		INSERT INTO
 		cancion(titulo,idGenero,idAlbum,archivo)
 		values(#{titulo},#{genero},#{album},#{archivo})
+=======
+		INSERT INTO cancion(titulo,idGenero,idAlbum,archivo) values(#{titulo},#{genero},#{album},#{archivo})
+>>>>>>> master
 	</insert>
 
 	<update id='updateCancion' parameterType='Cancion'>

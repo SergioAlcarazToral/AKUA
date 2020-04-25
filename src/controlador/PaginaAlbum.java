@@ -40,8 +40,11 @@ public class PaginaAlbum extends HttpServlet {
 	@EJB
 	CancionEJB cancionEJB;
 
+<<<<<<< HEAD
 	@EJB
 	ListaReproduccionEJB listaEJB;
+=======
+>>>>>>> master
 	/**
 	 * Muestra la pagina del album con sus respectivas canciones
 	 */

@@ -17,6 +17,7 @@ public class ListaReproduccionEJB {
 		return listaDAO.getListasR();
 	}
 
+<<<<<<< HEAD
 	public ArrayList<ListaReproduccion> getListasUsuario(int id) {
 		ListaReproduccionDAO listaDAO = new ListaReproduccionDAO();
 		return listaDAO.getListasUsuario(id);
@@ -27,9 +28,21 @@ public class ListaReproduccionEJB {
 		return listaDAO.getLista(lista);
 	}
 
+=======
+	public ArrayList<ListaReproduccion> getListasUsuario(int id){
+		ListaReproduccionDAO listaDAO = new ListaReproduccionDAO();
+		return listaDAO.getListasUsuario(id);
+	}
+	
+>>>>>>> master
 	public void insertListaR(ListaReproduccion listaR) {
 		ListaReproduccionDAO listaDAO = new ListaReproduccionDAO();
 		listaDAO.insertListaR(listaR);
+	}
+	
+	public void insertCancion(ListaReproduccion listaR) {
+		ListaReproduccionDAO listaDAO = new ListaReproduccionDAO();
+		listaDAO.insertCancion(listaR);
 	}
 
 	public void insertCancion(ListaReproduccion listaR) {

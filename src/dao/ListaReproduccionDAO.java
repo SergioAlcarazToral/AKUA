@@ -40,6 +40,7 @@ public class ListaReproduccionDAO {
 		}
 	}
 	
+<<<<<<< HEAD
 	public ListaReproduccion getLista(ListaReproduccion lista) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -49,6 +50,8 @@ public class ListaReproduccionDAO {
 			sqlSession.close();
 		}
 	}
+=======
+>>>>>>> master
 	
 	/**
 	 * Para poder crear una lista de reproduccion
@@ -109,6 +112,7 @@ public class ListaReproduccionDAO {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
 			listaReproduccionM.deleteListaR(listaReproduccion);
 			sqlSession.commit();
+<<<<<<< HEAD
 		} finally {
 			sqlSession.close();
 		}
@@ -120,6 +124,8 @@ public class ListaReproduccionDAO {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
 			listaReproduccionM.deleteCancionLista(listaReproduccion);
 			sqlSession.commit();
+=======
+>>>>>>> master
 		} finally {
 			sqlSession.close();
 		}

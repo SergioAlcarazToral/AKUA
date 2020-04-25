@@ -8,11 +8,15 @@
 	</select>
 
 	<select id='getListasUsuario' resultType='pojo.ListaReproduccion'>
+<<<<<<< HEAD
 		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} group by nombre;
 	</select>
 
 	<select id='getLista' resultType='pojo.ListaReproduccion'>
 		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} and nombre = #{nombre};
+=======
+		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario}
+>>>>>>> master
 	</select>
 
 	<insert id='insertListaR' parameterType='ListaReproduccion'>
