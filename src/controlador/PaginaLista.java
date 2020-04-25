@@ -12,62 +12,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejb.AlbumEJB;
 import ejb.CancionEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
-import pojo.Album;
 import pojo.Cancion;
-import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Servlet que se encarga de mostrar la pagina de un album
- * 
- * @author Sergio
- *
+ * Servlet implementation class PaginaLista
  */
-@WebServlet("/PaginaAlbum")
-public class PaginaAlbum extends HttpServlet {
+@WebServlet("/PaginaLista")
+public class PaginaLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	SesionesEJB sesionesEJB;
 
 	@EJB
-	AlbumEJB albumEJB;
+	ListaReproduccionEJB listasEJB;
 
 	@EJB
 	CancionEJB cancionEJB;
-
-	@EJB
-	ListaReproduccionEJB listaEJB;
-	/**
-	 * Muestra la pagina del album con sus respectivas canciones
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		String id = request.getParameter("id");
+		String nombre = request.getParameter("nombre");
+
 		try {
-			int idAlbum = Integer.parseInt(id);
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaAlbum.jsp");
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
 
-			Album album = albumEJB.getAlbum(idAlbum);
-
-			ArrayList<Cancion> canciones = cancionEJB.getCancionesAlbum(idAlbum);
-			ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
+			ArrayList<Cancion> cancionesLista = cancionEJB.getCancionesLista(usuario.getId());
 			
 			request.setAttribute("usuario", usuario);
-			request.setAttribute("album", album);
-			request.setAttribute("listas", listas);
-			request.setAttribute("canciones", canciones);
-			rs.forward(request, response);
+			request.setAttribute("canciones", cancionesLista);
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		}
 
 	}

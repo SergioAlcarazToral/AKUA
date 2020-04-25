@@ -9,16 +9,28 @@ import pojo.Artista;
 public interface ArtistaMapper {
 
 	/**
-	 * Obtiene un listado de todas las canciones
+	 * Para obtener todos los artistas de la base de datos
 	 * 
-	 * @return las canciones
+	 * @return todos los artistas
 	 */
 	public ArrayList<Artista> getArtistas();
 
+	/**
+	 * Para obtener un artista
+	 * 
+	 * @param id el id del artista
+	 * @return el artista
+	 */
 	public Artista getArtista(@Param("id") int id);
-	
+
+	/**
+	 * Para obtener los resultados de la busqueda
+	 * 
+	 * @param nombre lo que se quiere buscar
+	 * @return el resultado de la busqueda
+	 */
 	public ArrayList<Artista> getArtistaBuscado(@Param("nombreArtista") String nombre);
-	
+
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos
 	 * 

@@ -7,9 +7,21 @@
 		SELECT * FROM listaReproduccion
 	</select>
 
-	<insert id='insertListaR' parameterType='ListaReproduccion'
+	<select id='getListasUsuario' resultType='pojo.ListaReproduccion'>
+		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} group by nombre;
+	</select>
+
+	<select id='getLista' resultType='pojo.ListaReproduccion'>
+		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} and nombre = #{nombre};
+	</select>
+
+	<insert id='insertListaR' parameterType='ListaReproduccion'>
+		INSERT INTO listaReproduccion(nombre,idUsuario) values(#{nombre},#{idUsuario})
+	</insert>
+
+	<insert id='insertCancion' parameterType='ListaReproduccion'
 		useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO listaReproduccion(nombre,idUsuario,idCancion) values('#{nombre}',#{idUsuario},#{idCancion})
+		INSERT INTO listaReproduccion(nombre,idUsuario,idCancion) values(#{nombre},#{idUsuario},#{idCancion})
 	</insert>
 
 	<update id='updateListaR' parameterType='ListaReproduccion'>
@@ -21,7 +33,11 @@
 		WHERE idUsuario = #{idUsuario}
 	</update>
 
-	<delete id='deleteGenero' parameterType='Genero'>
+	<delete id='deleteListaR' parameterType='Genero'>
 		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre}
+	</delete>
+	
+	<delete id='deleteCancionLista' parameterType='Genero'>
+		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre} and idCancion = #{idCancion}
 	</delete>
 </mapper>

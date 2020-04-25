@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import ejb.ArtistaEJB;
 import ejb.SesionesEJB;
 
+
 /**
- * Servlet implementation class EliminarArtista
+ * Servlet para poder eliminar un usuario de la base de datos
+ * @author Sergio
+ *
  */
 @WebServlet("/EliminarArtista")
 public class EliminarArtista extends HttpServlet {
@@ -25,6 +28,9 @@ public class EliminarArtista extends HttpServlet {
 	@EJB
 	ArtistaEJB artistaEJB;
 
+	/**
+	 * Metodo que borra el artista de la base de datos
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

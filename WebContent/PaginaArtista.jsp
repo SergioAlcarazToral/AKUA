@@ -54,7 +54,7 @@
 		out.print("<h2>" + artista.getNombre() + "</h2>");
 		out.print("<p>Albumes del artista</p>");
 		for (Album a : albumes) {
-			out.println("<a href='" + paginaAlbum + "?id=" + artista.getId() + "'><img src='ImgAlbumes/"
+			out.println("<a href='" + paginaAlbum + "?id=" + artista.getId() + "'><img src='ImgAlbums/"
 					+ a.getFoto() + "'><p>" + a.getNombre() + "</p></a>");
 		}
 	%>
