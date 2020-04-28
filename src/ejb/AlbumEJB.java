@@ -42,9 +42,9 @@ public class AlbumEJB {
 		albumDAO.updateAlbum(album);
 	}
 	
-	public void deleteAlbum(Album album) {
+	public void deleteAlbum(int id) {
 		AlbumDAO albumDAO = new AlbumDAO();
-		albumDAO.deleteAlbum(album);
+		albumDAO.deleteAlbum(id);
 	}
 	
 }

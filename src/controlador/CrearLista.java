@@ -1,7 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -12,34 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejb.ArtistaEJB;
+import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
-import ejb.UsuarioEJB;
-import pojo.Artista;
+import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Clase para poder hacer una busqueda en la aplicacion
+ * Servlet para poder crear una lista de reproduccion
  * 
  * @author Sergio
  *
  */
-@WebServlet("/Buscar")
-public class Buscar extends HttpServlet {
+@WebServlet("/CrearLista")
+public class CrearLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	SesionesEJB sesionesEJB;
 
 	@EJB
-	UsuarioEJB usuarioEJB;
+	ListaReproduccionEJB listaEJB;
 
-	@EJB
-	ArtistaEJB artistaEJB;
-
-	/**
-	 * Metodo que muestra la pagina de buscar y muestra los resultado
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -47,18 +39,33 @@ public class Buscar extends HttpServlet {
 
 		response.setContentType("text/html; charset=UTF-8");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Buscar.jsp");
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/CrearLista.jsp");
 
-		String artistas = request.getParameter("buscar");
-
-		ArrayList<Artista> artistasBuscados = artistaEJB.getArtistaBuscado(artistas);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		request.setAttribute("artistas", artistasBuscados);
 		request.setAttribute("usuario", usuario);
 		rs.forward(request, response);
-
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String nombreLista = request.getParameter("nombre");
+		String id = request.getParameter("id");
+
+		int idUsuario = Integer.parseInt(id);
+
+		ListaReproduccion lr = new ListaReproduccion();
+		lr.setNombre(nombreLista);
+		lr.setIdUsuario(idUsuario);
+		listaEJB.insertListaR(lr);
+
+		response.sendRedirect("Principal");
+
+	}
 
 }

@@ -16,6 +16,16 @@ public interface CancionMapper {
 	 */
 	public Cancion existeCancion(@Param("id") int id);
 
+	public ArrayList<Cancion> getCancionesLista(@Param("idUsuario") int id);
+	
+	/**
+	 * Para poder obtener una cancion a con un id
+	 * 
+	 * @param id el id por el que filtramos
+	 * @return la cancion
+	 */
+	public Cancion getCancion(@Param("id") int id);
+
 	/**
 	 * Obtiene un listado de todas las canciones
 	 * 
@@ -31,8 +41,14 @@ public interface CancionMapper {
 	 */
 	public ArrayList<Cancion> getCancionesRecom();
 
-	
+	/**
+	 * Para poder obtener todas las canciones de un album
+	 * 
+	 * @param id el id del album
+	 * @return todas las canciones del album
+	 */
 	public ArrayList<Cancion> getCancionesAlbum(@Param("id") int id);
+
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos
 	 * 
@@ -52,5 +68,5 @@ public interface CancionMapper {
 	 * 
 	 * @param id El identificador del usuario
 	 */
-	public void deleteCancion(Cancion cancion);
+	public void deleteCancion(@Param("id") int id);
 }

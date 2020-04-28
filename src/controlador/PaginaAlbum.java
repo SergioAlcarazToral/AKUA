@@ -14,13 +14,18 @@ import javax.servlet.http.HttpSession;
 
 import ejb.AlbumEJB;
 import ejb.CancionEJB;
+import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.Album;
 import pojo.Cancion;
+import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class PaginaAlbum
+ * Servlet que se encarga de mostrar la pagina de un album
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/PaginaAlbum")
 public class PaginaAlbum extends HttpServlet {
@@ -35,6 +40,11 @@ public class PaginaAlbum extends HttpServlet {
 	@EJB
 	CancionEJB cancionEJB;
 
+	@EJB
+	ListaReproduccionEJB listaEJB;
+	/**
+	 * Muestra la pagina del album con sus respectivas canciones
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -49,9 +59,11 @@ public class PaginaAlbum extends HttpServlet {
 			Album album = albumEJB.getAlbum(idAlbum);
 
 			ArrayList<Cancion> canciones = cancionEJB.getCancionesAlbum(idAlbum);
-
+			ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
+			
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("album", album);
+			request.setAttribute("listas", listas);
 			request.setAttribute("canciones", canciones);
 			rs.forward(request, response);
 		} catch (Exception e) {

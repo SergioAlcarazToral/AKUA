@@ -1,10 +1,8 @@
 package controlador;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,33 +10,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejb.ArtistaEJB;
+import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
-import ejb.UsuarioEJB;
-import pojo.Artista;
+import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Clase para poder hacer una busqueda en la aplicacion
+ * Servlet para poder borrar una lista de reproduccion de la base de datos
  * 
  * @author Sergio
  *
  */
-@WebServlet("/Buscar")
-public class Buscar extends HttpServlet {
+@WebServlet("/BorrarLista")
+public class BorrarLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	SesionesEJB sesionesEJB;
-
+	
 	@EJB
-	UsuarioEJB usuarioEJB;
-
-	@EJB
-	ArtistaEJB artistaEJB;
-
+	ListaReproduccionEJB listaEJB;
+	
 	/**
-	 * Metodo que muestra la pagina de buscar y muestra los resultado
+	 * Para poder borrar una lista de reproduccion de la base de datos
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -47,18 +41,27 @@ public class Buscar extends HttpServlet {
 
 		response.setContentType("text/html; charset=UTF-8");
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Buscar.jsp");
-
-		String artistas = request.getParameter("buscar");
-
-		ArrayList<Artista> artistasBuscados = artistaEJB.getArtistaBuscado(artistas);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		request.setAttribute("artistas", artistasBuscados);
-		request.setAttribute("usuario", usuario);
-		rs.forward(request, response);
-
+		//Parametros necesarios 
+		String nombreLista = request.getParameter("nombre");
+		String id = request.getParameter("id");
+		
+		//Transformamos los datos necesarios a int
+		int idUsuario = Integer.parseInt(id);
+		
+		//Creamos un objeto lista
+		ListaReproduccion lr = new ListaReproduccion();
+		
+		//Añadimos los datos
+		lr.setNombre(nombreLista);
+		lr.setIdUsuario(idUsuario);
+		
+		//Borramos la lista
+		listaEJB.deleteListaR(lr);
+	
+		response.sendRedirect("Principal");
+		
 	}
-
 
 }

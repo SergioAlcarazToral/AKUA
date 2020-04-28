@@ -12,53 +12,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ejb.ArtistaEJB;
+import ejb.CancionEJB;
+import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
-import ejb.UsuarioEJB;
-import pojo.Artista;
+import pojo.Cancion;
+import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Clase para poder hacer una busqueda en la aplicacion
- * 
- * @author Sergio
- *
+ * Servlet implementation class PaginaLista
  */
-@WebServlet("/Buscar")
-public class Buscar extends HttpServlet {
+@WebServlet("/PaginaLista")
+public class PaginaLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	SesionesEJB sesionesEJB;
 
 	@EJB
-	UsuarioEJB usuarioEJB;
+	ListaReproduccionEJB listasEJB;
 
 	@EJB
-	ArtistaEJB artistaEJB;
+	CancionEJB cancionEJB;
 
-	/**
-	 * Metodo que muestra la pagina de buscar y muestra los resultado
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-
-		response.setContentType("text/html; charset=UTF-8");
-
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Buscar.jsp");
-
-		String artistas = request.getParameter("buscar");
-
-		ArrayList<Artista> artistasBuscados = artistaEJB.getArtistaBuscado(artistas);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		request.setAttribute("artistas", artistasBuscados);
+		String nombre = request.getParameter("nombre");
+
+		ListaReproduccion lista = listasEJB.getLista(usuario.getId(), nombre);
+
+		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
+
+		ArrayList<Cancion> cancionesLista = cancionEJB.getCancionesLista(usuario.getId());
+
+		request.setAttribute("lista", lista);
 		request.setAttribute("usuario", usuario);
+		request.setAttribute("canciones", cancionesLista);
+		
 		rs.forward(request, response);
-
 	}
-
 
 }

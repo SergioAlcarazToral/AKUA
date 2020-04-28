@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@ page import="pojo.Usuario"%>
-<%@ page import="pojo.Artista"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="pojo.Album"%>
-
+<%@ page import="pojo.Cancion"%>
+<%@ page import="pojo.ListaReproduccion"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Pagina del artista</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<div id="divLogo">
@@ -22,25 +20,28 @@
 			String registrar = "Registrar";
 			String logout = "Logout";
 			String baja = "DarDeBaja";
-			String crearAlbum = "CrearAlbum";
 			String inicio = "Principal";
-			String eliminarArtista = "EliminarArtista";
-			String paginaAlbum = "PaginaAlbum";
-
+			String agregarCancionLista = "AgregarCancionLista";
+			String eliminarCancion = "BorrarCancionLista";
+			String borrarLista = "BorrarLista";
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
-			Artista artista = (Artista) request.getAttribute("artista");
-			ArrayList<Album> albumes = (ArrayList<Album>) request.getAttribute("albumes");
+
+			ArrayList<Cancion> canciones = (ArrayList<Cancion>) request.getAttribute("canciones");
+
+			ListaReproduccion lista = (ListaReproduccion) request.getAttribute("lista");
+
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
-					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearAlbum + "?id=" + artista.getId()
-							+ "'>Añadir album</a> | <a href='" + eliminarArtista + "?id=" + artista.getId()
-							+ "'>Eliminar artista</a> | <a href='" + inicio + "'>Inicio</a>");
+					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + borrarLista + "?id=" + usuario.getId()
+							+ "&nombre=" + lista.getNombre() + "'>Borrar lista</a> | <a href='" + inicio
+							+ "'>Inicio</a>");
 				} else {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
-					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
+					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + borrarLista + "?id=" + usuario.getId()
+					+ "&nombre=" + lista.getNombre() + "'>Borrar lista</a> | <a href='" + baja
 							+ "'>Eliminar cuenta</a> | <a href='" + inicio + "'>Inicio</a>");
 				}
 			} else {
@@ -51,11 +52,11 @@
 		%>
 	</div>
 	<%
-		out.print("<h2>" + artista.getNombre() + "</h2>");
-		out.print("<p>Albumes del artista</p>");
-		for (Album a : albumes) {
-			out.println("<a href='" + paginaAlbum + "?id=" + artista.getId() + "'><img src='ImgAlbums/"
-					+ a.getFoto() + "'><p>" + a.getNombre() + "</p></a>");
+		out.println("<h2>" + lista.getNombre() + "</h2>");
+		for (Cancion c : canciones) {
+			out.println("<p>" + c.getTitulo() + " | <a href='" + eliminarCancion + "?idCancion=" + c.getId()
+					+ "&nombre=" + lista.getNombre() + "&idUsuario=" + usuario.getId()
+					+ "'>Eliminar Cancion</a></p>");
 		}
 	%>
 </body>

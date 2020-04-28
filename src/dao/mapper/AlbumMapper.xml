@@ -4,21 +4,25 @@
 
 <mapper namespace='dao.mapper.AlbumMapper'>
 	<select id='getAlbumesBuscados' resultType="pojo.Album">
-		SELECT * FROM album where
+		SELECT * FROM album
+		where
 		nombre like concat(#{nombre},'%')
 	</select>
 
 	<select id='getAlbumes'>
 		SELECT * FROM album
 	</select>
-	
+
 	<select id="getAlbum" resultType="pojo.Album">
-		Select * from album where id = #{id}
+		Select * from album where id =
+		#{id}
 	</select>
 
 	<select id="getAlbumesArtista" resultType="pojo.Album">
-		select album.nombre as nombre, anyo, artista.nombre
-		as artista, album.foto as foto from artista, album where #{id} =
+		select album.nombre as
+		nombre, anyo, artista.nombre
+		as artista, album.foto as foto from
+		artista, album where #{id} =
 		album.idArtista group by album.nombre
 	</select>
 
@@ -35,7 +39,6 @@
 		nombre =
 		#{nombre},
 		anyo = #{anyo},
-		idArtista = #{artista},
 		foto = #{foto}
 		WHERE id
 		= #{id}
