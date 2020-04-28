@@ -21,8 +21,18 @@ public class CancionEJB {
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCancion(id);
 	}
+<<<<<<< HEAD
 
 	public ArrayList<Cancion> getCanciones() {
+=======
+<<<<<<< HEAD
+
+	public ArrayList<Cancion> getCanciones() {
+=======
+	
+	public ArrayList<Cancion> getCanciones(){
+>>>>>>> master
+>>>>>>> master
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCanciones();
 	}
@@ -51,7 +61,15 @@ public class CancionEJB {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.updateCancion(cancion);
 	}
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+	
+>>>>>>> master
+>>>>>>> master
 	public void deleteCancion(int id) {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.deleteCancion(id);

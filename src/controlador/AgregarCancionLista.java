@@ -14,9 +14,19 @@ import ejb.SesionesEJB;
 import pojo.ListaReproduccion;
 
 /**
+<<<<<<< HEAD
  * Este servlet se encarga de que pueda insertarse una cancion en una lista de reproduccion
  * @author Sergio
  *
+=======
+<<<<<<< HEAD
+ * Este servlet se encarga de que pueda insertarse una cancion en una lista de reproduccion
+ * @author Sergio
+ *
+=======
+ * Servlet implementation class AgregarCancionLista
+>>>>>>> master
+>>>>>>> master
  */
 @WebServlet("/AgregarCancionLista")
 public class AgregarCancionLista extends HttpServlet {
@@ -28,6 +38,10 @@ public class AgregarCancionLista extends HttpServlet {
 	@EJB
 	ListaReproduccionEJB listaEJB;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 	/**
 	 * Para poder insertar canciones en las listas de reproduccion
 	 */
@@ -55,6 +69,28 @@ public class AgregarCancionLista extends HttpServlet {
 		listaEJB.insertCancion(listaR);
 		
 		response.sendRedirect("Principal");
+<<<<<<< HEAD
+=======
+=======
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String idCancion = request.getParameter("idCancion");
+		String idUsuario = request.getParameter("idUsuario");
+		String lista = request.getParameter("lista");
+
+		ListaReproduccion listaR = new ListaReproduccion();
+
+		listaR.setNombre(lista);
+		Integer idSong = Integer.parseInt(idCancion);
+		
+		Integer idUser = Integer.parseInt(idUsuario);
+		listaR.setIdUsuario(idUser);
+		listaR.setIdCancion(idSong);
+
+		listaEJB.insertCancion(listaR);
+>>>>>>> master
+>>>>>>> master
 
 	}
 

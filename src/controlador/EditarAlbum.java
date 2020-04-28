@@ -6,7 +6,22 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+<<<<<<< HEAD
 import javax.servlet.annotation.MultipartConfig;
+=======
+<<<<<<< HEAD
+import javax.servlet.annotation.MultipartConfig;
+=======
+<<<<<<< HEAD
+import javax.servlet.annotation.MultipartConfig;
+=======
+<<<<<<< HEAD
+import javax.servlet.annotation.MultipartConfig;
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +41,26 @@ import pojo.Usuario;
  *
  */
 @WebServlet("/EditarAlbum")
+<<<<<<< HEAD
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 
+=======
+<<<<<<< HEAD
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
+
+=======
+<<<<<<< HEAD
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
+
+=======
+<<<<<<< HEAD
+@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
+
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 public class EditarAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "ImgAlbums";
@@ -80,11 +113,34 @@ public class EditarAlbum extends HttpServlet {
 		String foto = null;
 
 		// Los parametros necesarios para poder insertar un artista en la base de datos
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		String anyo = request.getParameter("anyo");
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+		String nombre = request.getParameter("nombre");
+		String anyo = request.getParameter("anyo");
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 		// En el caso de que el usuario no ponga foto de perfil se le asignara una ya
 		// predefinida por el sistema
 		Part partFoto = request.getPart("foto");
@@ -99,12 +155,42 @@ public class EditarAlbum extends HttpServlet {
 		}
 
 		try {
+<<<<<<< HEAD
 			int idAlbum = Integer.parseInt(id);
+=======
+<<<<<<< HEAD
+			int idAlbum = Integer.parseInt(id);
+=======
+<<<<<<< HEAD
+			int idAlbum = Integer.parseInt(id);
+=======
+<<<<<<< HEAD
+			int idAlbum = Integer.parseInt(id);
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 			int anyoAlbum = Integer.parseInt(anyo);
 
 			Album album = new Album();
 
+<<<<<<< HEAD
 			album.setId(idAlbum);
+=======
+<<<<<<< HEAD
+			album.setId(idAlbum);
+=======
+<<<<<<< HEAD
+			album.setId(idAlbum);
+=======
+<<<<<<< HEAD
+			album.setId(idAlbum);
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 			album.setNombre(nombre);
 			album.setAnyo(anyoAlbum);
 			album.setFoto(foto);

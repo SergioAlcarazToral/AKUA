@@ -8,11 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
+=======
+>>>>>>> master
 
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.ListaReproduccion;
+<<<<<<< HEAD
 import pojo.Usuario;
 
 /**
@@ -20,10 +24,16 @@ import pojo.Usuario;
  * 
  * @author Sergio
  *
+=======
+
+/**
+ * Servlet implementation class BorrarCancionLista
+>>>>>>> master
  */
 @WebServlet("/BorrarCancionLista")
 public class BorrarCancionLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+<<<<<<< HEAD
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -44,10 +54,22 @@ public class BorrarCancionLista extends HttpServlet {
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
 		// Parametros para poder borrar la cancion de una lista
+=======
+       
+	@EJB
+	SesionesEJB sesionesEJB;
+	
+	@EJB
+	ListaReproduccionEJB listaEJB;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+>>>>>>> master
 		String idCancion = request.getParameter("idCancion");
 		String idUsuario = request.getParameter("idUsuario");
 		String lista = request.getParameter("nombre");
 
+<<<<<<< HEAD
 		// Creamos una lista de reproduccion
 		ListaReproduccion listaR = new ListaReproduccion();
 
@@ -65,6 +87,22 @@ public class BorrarCancionLista extends HttpServlet {
 
 		response.sendRedirect("Principal");
 
+=======
+		ListaReproduccion listaR = new ListaReproduccion();
+
+		Integer idSong = Integer.parseInt(idCancion);
+		Integer idUser = Integer.parseInt(idUsuario);
+
+		listaR.setNombre(lista);
+
+		listaR.setIdUsuario(idUser);
+		listaR.setIdCancion(idSong);
+
+		listaEJB.deleteCancionLista(listaR);
+		
+		response.sendRedirect("Principal");
+		
+>>>>>>> master
 	}
 
 }

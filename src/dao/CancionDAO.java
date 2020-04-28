@@ -26,6 +26,7 @@ public class CancionDAO {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
 			return cancionMapper.existeCancion(id);
 		} finally {
+<<<<<<< HEAD
 			sqlSession.close();
 		}
 	}
@@ -62,6 +63,86 @@ public class CancionDAO {
 	 * @return todas las canciones
 	 */
 	public ArrayList<Cancion> getCanciones() {
+=======
+<<<<<<< HEAD
+			sqlSession.close();
+		}
+	}
+
+	public ArrayList<Cancion> getCancionesLista(int id){
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
+			return cancionMapper.getCancionesLista(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	/**
+	 * Este metodo es para poder obtener una cancion en especifico gracias a su id
+	 * 
+	 * @param id El id de la cancion que queremos
+	 * @return la cancion
+	 */
+	public Cancion getCancion(int id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
+			return cancionMapper.getCancion(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	/**
+	 * Para obtener todas las canciones de la base de datos
+	 * 
+	 * @return todas las canciones
+	 */
+	public ArrayList<Cancion> getCanciones() {
+=======
+			sqlSession.close();
+		}
+	}
+<<<<<<< HEAD
+
+	/**
+	 * Este metodo es para poder obtener una cancion en especifico gracias a su id
+	 * 
+	 * @param id El id de la cancion que queremos
+	 * @return la cancion
+	 */
+=======
+	
+>>>>>>> master
+	public Cancion getCancion(int id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
+			return cancionMapper.getCancion(id);
+<<<<<<< HEAD
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	/**
+	 * Para obtener todas las canciones de la base de datos
+	 * 
+	 * @return todas las canciones
+	 */
+	public ArrayList<Cancion> getCanciones() {
+=======
+		} finally{
+			sqlSession.close();
+		}
+	}
+	
+	public ArrayList<Cancion> getCanciones(){
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
@@ -133,12 +214,27 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
+>>>>>>> master
 
 	/**
 	 * Para poder borrar una cancion de la base de datos
 	 * 
 	 * @param id el id de la cancion que queremos borrar
 	 */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 	public void deleteCancion(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

@@ -34,9 +34,24 @@ public class Principal extends HttpServlet {
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+<<<<<<< HEAD
 	@EJB
 	ListaReproduccionEJB listasEJB;
 
+=======
+<<<<<<< HEAD
+	@EJB
+	ListaReproduccionEJB listasEJB;
+
+=======
+<<<<<<< HEAD
+	@EJB
+	ListaReproduccionEJB listasEJB;
+
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 	/**
 	 * Muestra la pagina principal
 	 */

@@ -31,8 +31,11 @@ public class DarDeBaja extends HttpServlet {
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+<<<<<<< HEAD
 	@EJB
 	ListaReproduccionEJB listaEJB;
+=======
+>>>>>>> master
 	/**
 	 * Borra el usuario de la base de datos
 	 */
@@ -46,9 +49,15 @@ public class DarDeBaja extends HttpServlet {
 			usuarioEJB.deleteUsuario(usuario.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
+<<<<<<< HEAD
 		}
 		sesionesEJB.logoutUsuario(session);
 		
+=======
+			// Poner el logger aqui
+		}
+		sesionesEJB.logoutUsuario(session);
+>>>>>>> master
 		response.sendRedirect("Principal");
 
 	}
