@@ -10,20 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class InfoRegistro
+ * Pagina que te muestra que el usuario se ha registrado correctamente
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/InfoRegistro")
 public class InfoRegistro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * Muestra la pagina de informacion
 	 */
-	public InfoRegistro() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

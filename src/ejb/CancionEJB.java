@@ -17,34 +17,49 @@ public class CancionEJB {
 		return cancionDAO.existeCancion(id);
 	}
 
-	public ArrayList<Cancion> getCanciones(){
+	public Cancion getCancion(int id) {
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancion(id);
+	}
+
+	public ArrayList<Cancion> getCanciones() {
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCanciones();
 	}
-	
-	public ArrayList<Cancion> getCancionesRecom(){
+
+	public ArrayList<Cancion> getCancionesRecom() {
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCancionesRecom();
 	}
 
-	public ArrayList<Cancion> getCancionesAlbum(int id){
+	public ArrayList<Cancion> getCancionesAlbum(int id) {
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCancionesAlbum(id);
+	}
+
+	public ArrayList<Cancion> getCancionesLista(int id) {
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancionesLista(id);
+	}
+
+	public ArrayList<Cancion> getCancionesGenero(String nombre){
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancionesGenero(nombre);
 	}
 	
 	public void insertCancion(Cancion cancion) {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.insertCancion(cancion);
 	}
-	
+
 	public void updateCancion(Cancion cancion) {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.updateCancion(cancion);
 	}
-	
-	public void deleteCancion(Cancion cancion) {
+
+	public void deleteCancion(int id) {
 		CancionDAO cancionDAO = new CancionDAO();
-		cancionDAO.deleteCancion(cancion);
+		cancionDAO.deleteCancion(id);
 	}
-	
+
 }

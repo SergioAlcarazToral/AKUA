@@ -4,41 +4,70 @@
 
 <mapper namespace='dao.mapper.CancionMapper'>
 
-	<select id='existeCancion'
-		resultType='pojo.Cancion'>
-		SELECT * FROM cancion where id = #{id}
+	<select id='existeCancion' resultType='pojo.Cancion'>
+		SELECT * FROM cancion
+		where id = #{id}
 	</select>
 
+	<select id="getCancion" resultType="pojo.Cancion">
+		Select * from cancion where
+		id = #{id}
+	</select>
+
+	<select id="getCancionesLista" resultType="pojo.Cancion">
+		select distinct
+		cancion.id as id,
+		titulo, genero.nombre as genero, album.nombre as
+		album
+		from listareproduccion, cancion, genero,album
+		where
+		listareproduccion.idUsuario = #{idUsuario}
+		and idCancion is not null
+		and cancion.idAlbum = album.id
+		and cancion.idGenero = genero.id;
+	</select>
+	<select id="getCancionesGenero" resultType="pojo.Cancion">
+		select
+		cancion.id,titulo,idGenero,idAlbum,archivo from
+		cancion,genero,album,artista where idGenero = genero.id and idAlbum =
+		album.id and album.idArtista = artista.id and genero.nombre =
+		#{nombre} order by rand() limit 20;
+	</select>
 	<select id='getCanciones'>
 		SELECT * FROM cancion
 	</select>
-	
+
 	<select id="getCancionesAlbum" resultType="pojo.Cancion">
-		Select cancion.titulo as titulo, archivo from cancion, album where cancion.idAlbum = #{id}
+		Select distinct
+		cancion.id as
+		id, cancion.titulo as titulo, archivo from cancion, album
+		where
+		cancion.idAlbum = #{id}
 	</select>
-	
+
 	<select id="getCancionesRecom" resultType='pojo.Cancion'>
-		SELECT * FROM cancion ORDER BY RAND() limit 10
+		SELECT * FROM cancion
+		ORDER BY RAND() limit 10
 	</select>
 
 	<insert id='insertCancion' parameterType='pojo.Cancion'
 		useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO cancion(titulo,idGenero,idAlbum,idArtista,archivo) values(#{titulo},#{genero},#{album},#{artista},#{archivo})
+		INSERT INTO
+		cancion(titulo,idGenero,idAlbum,archivo)
+		values(#{titulo},#{genero},#{album},#{archivo})
 	</insert>
 
 	<update id='updateCancion' parameterType='Cancion'>
 		UPDATE cancion
 		SET
 		titulo = #{titulo},
-		idGenero = #{genero},
-		idAlbum = #{album},
-		idArtista = #{artista},
-		archivo = #{archivo}
+		idGenero = #{genero}
 		WHERE id = #{id}
 	</update>
 
 	<delete id='deleteCancion' parameterType='Cancion'>
-		DELETE FROM cancion WHERE id = #{id}
+		DELETE FROM cancion
+		WHERE id = #{id}
 	</delete>
 
 </mapper>

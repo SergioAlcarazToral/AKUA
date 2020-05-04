@@ -19,6 +19,12 @@ import ejb.SesionesEJB;
 import pojo.Artista;
 import pojo.Usuario;
 
+/**
+ * Servlet para poder insertar un artista en la base de datos
+ * 
+ * @author Sergio
+ *
+ */
 @WebServlet("/CrearArtista")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 
@@ -32,6 +38,9 @@ public class CrearArtista extends HttpServlet {
 	@EJB
 	ArtistaEJB artistaEJB;
 
+	/**
+	 * Muestra un formulario con los requisitos para insertar un artista
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -46,6 +55,9 @@ public class CrearArtista extends HttpServlet {
 		rs.forward(request, response);
 	}
 
+	/**
+	 * Recoge los parametros y los inserta en la base de datos
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -79,14 +91,14 @@ public class CrearArtista extends HttpServlet {
 			foto = "sinImagen.jpg";
 		}
 
-		//Los datos necesarios para poder añadir el artista
+		// Los datos necesarios para poder añadir el artista
 		Artista artista = new Artista();
 		artista.setNombre(nombre);
 		artista.setFoto(foto);
-		
+
 		artistaEJB.insertArtista(artista);
 		response.sendRedirect("Principal");
-		
+
 	}
 
 }

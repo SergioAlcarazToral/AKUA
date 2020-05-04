@@ -19,7 +19,10 @@ import pojo.Artista;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Buscar
+ * Clase para poder hacer una busqueda en la aplicacion
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/Buscar")
 public class Buscar extends HttpServlet {
@@ -27,14 +30,18 @@ public class Buscar extends HttpServlet {
 
 	@EJB
 	SesionesEJB sesionesEJB;
-	
+
 	@EJB
 	UsuarioEJB usuarioEJB;
-	
+
 	@EJB
 	ArtistaEJB artistaEJB;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	/**
+	 * Metodo que muestra la pagina de buscar y muestra los resultado
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
 
@@ -43,18 +50,15 @@ public class Buscar extends HttpServlet {
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Buscar.jsp");
 
 		String artistas = request.getParameter("buscar");
-		
+
 		ArrayList<Artista> artistasBuscados = artistaEJB.getArtistaBuscado(artistas);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
 		request.setAttribute("artistas", artistasBuscados);
 		request.setAttribute("usuario", usuario);
 		rs.forward(request, response);
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 
 }

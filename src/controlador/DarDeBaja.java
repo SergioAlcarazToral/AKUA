@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import ejb.UsuarioEJB;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class DarDeBaja
+ * Servlet para poder dar de baja un usuario en la aplicacion
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/DarDeBaja")
 public class DarDeBaja extends HttpServlet {
@@ -23,23 +27,30 @@ public class DarDeBaja extends HttpServlet {
 
 	@EJB
 	SesionesEJB sesionesEJB;
-	
+
 	@EJB
 	UsuarioEJB usuarioEJB;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	@EJB
+	ListaReproduccionEJB listaEJB;
+	/**
+	 * Borra el usuario de la base de datos
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession(false);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		try {
+			listaEJB.deleteListasUsuario(usuario.getId());
 			usuarioEJB.deleteUsuario(usuario.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			//Poner el logger aqui
 		}
 		sesionesEJB.logoutUsuario(session);
-		response.sendRedirect("Principal");
 		
+		response.sendRedirect("Principal");
+
 	}
 
 }

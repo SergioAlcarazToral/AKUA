@@ -16,8 +16,11 @@ import ejb.SesionesEJB;
 import pojo.Genero;
 import pojo.Usuario;
 
+
 /**
- * Servlet implementation class CrearGenero
+ * Servlet para poder insertar un genero en la base de datos
+ * @author Sergio
+ *
  */
 @WebServlet("/CrearGenero")
 public class CrearGenero extends HttpServlet {
@@ -29,6 +32,9 @@ public class CrearGenero extends HttpServlet {
 	@EJB
 	GeneroEJB generoEJB;
 
+	/**
+	 * Este metodo es para poder pintar el formulario para poder crear un genero
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
@@ -52,6 +58,8 @@ public class CrearGenero extends HttpServlet {
 		genero.setNombre(nombre);
 		
 		generoEJB.insertGenero(genero);
+		
+		response.sendRedirect("Principal");
 
 	}
 
