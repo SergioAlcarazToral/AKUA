@@ -12,11 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+<<<<<<< HEAD
 import ejb.GeneroEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import ejb.UsuarioEJB;
 import pojo.Genero;
+=======
+import ejb.ListaReproduccionEJB;
+import ejb.SesionesEJB;
+import ejb.UsuarioEJB;
+>>>>>>> master
 import pojo.ListaReproduccion;
 import pojo.Usuario;
 
@@ -36,12 +42,33 @@ public class Principal extends HttpServlet {
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+<<<<<<< HEAD
 	@EJB
 	ListaReproduccionEJB listasEJB;
 	
 	@EJB
 	GeneroEJB generoEJB;
 
+=======
+<<<<<<< HEAD
+	@EJB
+	ListaReproduccionEJB listasEJB;
+
+=======
+<<<<<<< HEAD
+	@EJB
+	ListaReproduccionEJB listasEJB;
+
+=======
+<<<<<<< HEAD
+	@EJB
+	ListaReproduccionEJB listasEJB;
+
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 	/**
 	 * Muestra la pagina principal
 	 */
@@ -56,6 +83,12 @@ public class Principal extends HttpServlet {
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		ArrayList<Genero> generos = generoEJB.getGeneros();
+		ArrayList<ListaReproduccion> listas;
+		if (usuario != null) {
+			listas = listasEJB.getListasUsuario(usuario.getId());
+			request.setAttribute("listas", listas);
+		}
+
 		ArrayList<ListaReproduccion> listas;
 		if (usuario != null) {
 			listas = listasEJB.getListasUsuario(usuario.getId());

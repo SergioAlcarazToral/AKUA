@@ -17,10 +17,20 @@ import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
  * Servlet para poder crear una lista de reproduccion
  * 
  * @author Sergio
  *
+<<<<<<< HEAD
+=======
+=======
+ * Servlet implementation class CrearLista
+>>>>>>> master
+>>>>>>> master
  */
 @WebServlet("/CrearLista")
 public class CrearLista extends HttpServlet {
@@ -28,15 +38,35 @@ public class CrearLista extends HttpServlet {
 
 	@EJB
 	SesionesEJB sesionesEJB;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 
 	@EJB
 	ListaReproduccionEJB listaEJB;
 
+<<<<<<< HEAD
+=======
+=======
+	
+	@EJB
+	ListaReproduccionEJB listaEJB;
+>>>>>>> master
+>>>>>>> master
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+		
+>>>>>>> master
+>>>>>>> master
 		response.setContentType("text/html; charset=UTF-8");
 
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/CrearLista.jsp");
@@ -53,19 +83,46 @@ public class CrearLista extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 
 		String nombreLista = request.getParameter("nombre");
 		String id = request.getParameter("id");
 
 		int idUsuario = Integer.parseInt(id);
 
+<<<<<<< HEAD
+=======
+=======
+		
+		String nombreLista = request.getParameter("nombre");
+		String id = request.getParameter("id");
+		
+		int idUsuario = Integer.parseInt(id);
+		
+>>>>>>> master
+>>>>>>> master
 		ListaReproduccion lr = new ListaReproduccion();
 		lr.setNombre(nombreLista);
 		lr.setIdUsuario(idUsuario);
 		listaEJB.insertListaR(lr);
+<<<<<<< HEAD
 
 		response.sendRedirect("Principal");
 
+=======
+<<<<<<< HEAD
+
+		response.sendRedirect("Principal");
+
+=======
+	
+		response.sendRedirect("Principal");
+		
+>>>>>>> master
+>>>>>>> master
 	}
 
 }

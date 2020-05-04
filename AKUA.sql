@@ -1,8 +1,13 @@
 Create database AKUA;
 #drop database AKUA;
 use AKUA;
+<<<<<<< HEAD
 #CREATE USER 'pruebaConexion'@'localhost' IDENTIFIED BY '12345678';
 #GRANT SELECT,INSERT,DELETE,UPDATE ON AKUA.* TO 'pruebaConexion'@'localhost';
+=======
+CREATE USER 'pruebaConexion'@'localhost' IDENTIFIED BY '12345678';
+GRANT SELECT,INSERT,DELETE,UPDATE ON AKUA.* TO 'pruebaConexion'@'localhost';
+>>>>>>> master
 flush privileges;
 create table artista(
 	id int auto_increment primary key,
@@ -37,7 +42,11 @@ create table cancion(
 create table usuario(
 	id int auto_increment primary key,
     nombre varchar(100),
+<<<<<<< HEAD
     correo varchar(100) unique,
+=======
+    correo varchar(100),
+>>>>>>> master
     pass varchar(100),
     administrador int,
     foto varchar(255)
@@ -52,6 +61,7 @@ create table listaReproduccion(
     on delete cascade
 );
 
+<<<<<<< HEAD
 INSERT INTO usuario(nombre,correo,pass,administrador,foto) values('admin','admin@admin.com','1234',0,'sinImagen.jpg');
 select *from listareproduccion where idUsuario = 1;
 select * from cancion;
@@ -81,3 +91,7 @@ select distinct cancion.id as id,
  	SELECT * FROM listaReproduccion where idUsuario = 5 group by nombre;
 
 #select cancion.id,titulo,idGenero,idAlbum,archivo from cancion,genero,album,artista  where idGenero = genero.id and idAlbum = album.id and album.idArtista = artista.id and genero.nombre = #{nombre} order by rand() limit 20;
+=======
+INSERT INTO usuario(nombre,correo,pass,administrador,foto) values('admin','admin@admin.com','1234',0,'sinImagen.jpg')
+
+>>>>>>> master

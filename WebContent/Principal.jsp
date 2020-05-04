@@ -3,7 +3,11 @@
 
 <%@ page import="pojo.Usuario"%>
 <%@ page import="pojo.ListaReproduccion"%>
+<<<<<<< HEAD
 <%@ page import="pojo.Genero"%>
+=======
+
+>>>>>>> master
 <%@ page import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
@@ -32,7 +36,10 @@ function playMusic() {
 			String crearArtista = "CrearArtista";
 			String crearGenero = "CrearGenero";
 			String crearLista = "CrearLista";
+<<<<<<< HEAD
 			
+=======
+>>>>>>> master
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 			ArrayList<ListaReproduccion> listas = (ArrayList<ListaReproduccion>) request.getAttribute("listas");
 			if (usuario != null) {
@@ -53,8 +60,18 @@ function playMusic() {
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearLista
 							+ "'>Crear lista</a> | <a href='" + baja + "'>Eliminar cuenta</a>");
 					for (ListaReproduccion lista : listas) {
+<<<<<<< HEAD
 						out.print("<p><a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre=" + lista.getNombre()
 								+ "'>" + lista.getNombre() + "</a></p>");
+=======
+<<<<<<< HEAD
+						out.print("<p><a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre=" + lista.getNombre()
+								+ "'>" + lista.getNombre() + "</a></p>");
+=======
+						out.print("<a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre=" + lista.getNombre()
+								+ "'>" + lista.getNombre() + "</a>");
+>>>>>>> master
+>>>>>>> master
 					}
 				}
 			} else {

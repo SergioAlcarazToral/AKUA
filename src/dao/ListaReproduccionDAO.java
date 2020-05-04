@@ -40,15 +40,38 @@ public class ListaReproduccionDAO {
 		}
 	}
 	
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 	public ListaReproduccion getLista(int idUsuario, String nombre) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
 			return listaReproduccionM.getLista(idUsuario,nombre);
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+	public ListaReproduccion getLista(ListaReproduccion lista) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
+			return listaReproduccionM.getLista(lista);
+>>>>>>> master
+>>>>>>> master
 		} finally {
 			sqlSession.close();
 		}
 	}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 	
 	/**
 	 * Para poder crear una lista de reproduccion
@@ -109,6 +132,10 @@ public class ListaReproduccionDAO {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
 			listaReproduccionM.deleteListaR(listaReproduccion);
 			sqlSession.commit();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 		} finally {
 			sqlSession.close();
 		}
@@ -120,6 +147,12 @@ public class ListaReproduccionDAO {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
 			listaReproduccionM.deleteListasUsuario(idUsuario);
 			sqlSession.commit();
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> master
+>>>>>>> master
 		} finally {
 			sqlSession.close();
 		}
@@ -131,6 +164,14 @@ public class ListaReproduccionDAO {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
 			listaReproduccionM.deleteCancionLista(listaReproduccion);
 			sqlSession.commit();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 		} finally {
 			sqlSession.close();
 		}

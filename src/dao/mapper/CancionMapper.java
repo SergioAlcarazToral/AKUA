@@ -26,6 +26,20 @@ public interface CancionMapper {
 	 */
 	public Cancion getCancion(@Param("id") int id);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+	/**
+	 * Para poder obtener una cancion a con un id
+	 * 
+	 * @param id el id por el que filtramos
+	 * @return la cancion
+	 */
+	public Cancion getCancion(@Param("id") int id);
+
+>>>>>>> master
+>>>>>>> master
 	/**
 	 * Obtiene un listado de todas las canciones
 	 * 
@@ -41,12 +55,33 @@ public interface CancionMapper {
 	 */
 	public ArrayList<Cancion> getCancionesRecom();
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 	/**
 	 * Para poder obtener todas las canciones de un album
 	 * 
 	 * @param id el id del album
 	 * @return todas las canciones del album
 	 */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 	public ArrayList<Cancion> getCancionesAlbum(@Param("id") int id);
 
 	/**

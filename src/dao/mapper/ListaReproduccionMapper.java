@@ -16,9 +16,25 @@ public interface ListaReproduccionMapper {
 	public ArrayList<ListaReproduccion> getListasR();
 
 	public ArrayList<ListaReproduccion> getListasUsuario(@Param("idUsuario") int id);
+<<<<<<< HEAD
 
 	
 	public ListaReproduccion getLista(@Param("idUsuario") int idUsuario, @Param("nombre") String nombre);
+=======
+<<<<<<< HEAD
+
+	
+	public ListaReproduccion getLista(@Param("idUsuario") int idUsuario, @Param("nombre") String nombre);
+=======
+<<<<<<< HEAD
+
+	
+	public ListaReproduccion getLista(ListaReproduccion lista);
+=======
+	
+>>>>>>> master
+>>>>>>> master
+>>>>>>> master
 	/**
 	 * Para poder insertar una lista en la base de datos
 	 * 
@@ -47,7 +63,15 @@ public interface ListaReproduccionMapper {
 	 */
 	public void deleteListaR(ListaReproduccion listaReproduccion);
 
+<<<<<<< HEAD
 	public void deleteListasUsuario (@Param("idUsuario") int idUsuario);
+=======
+<<<<<<< HEAD
+	public void deleteListasUsuario (@Param("idUsuario") int idUsuario);
+=======
+
+>>>>>>> master
+>>>>>>> master
 	/**
 	 * 
 	 * @param listaReproduccion

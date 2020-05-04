@@ -1,13 +1,25 @@
 package controlador;
 
 import java.io.IOException;
+<<<<<<< HEAD
 
 import javax.ejb.EJB;
+=======
+<<<<<<< HEAD
+
+import javax.ejb.EJB;
+=======
+>>>>>>> master
+>>>>>>> master
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 import javax.servlet.http.HttpSession;
 
 import ejb.ListaReproduccionEJB;
@@ -20,10 +32,22 @@ import pojo.Usuario;
  * 
  * @author Sergio
  *
+<<<<<<< HEAD
+=======
+=======
+
+/**
+ * Servlet implementation class BorrarLista
+>>>>>>> master
+>>>>>>> master
  */
 @WebServlet("/BorrarLista")
 public class BorrarLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> master
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -62,6 +86,34 @@ public class BorrarLista extends HttpServlet {
 	
 		response.sendRedirect("Principal");
 		
+<<<<<<< HEAD
+=======
+=======
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public BorrarLista() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+>>>>>>> master
+>>>>>>> master
 	}
 
 }
