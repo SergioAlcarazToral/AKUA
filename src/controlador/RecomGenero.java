@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ejb.AlbumEJB;
 import ejb.CancionEJB;
 import ejb.GeneroEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
-import pojo.Cancion;
+import pojo.CancionCompleta;
 import pojo.Genero;
 import pojo.ListaReproduccion;
 import pojo.Usuario;
@@ -39,6 +40,9 @@ public class RecomGenero extends HttpServlet {
 	
 	@EJB
 	GeneroEJB generoEJB;
+	
+	@EJB
+	AlbumEJB albumEJB;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
@@ -48,10 +52,11 @@ public class RecomGenero extends HttpServlet {
 		try {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/RecomGenero.jsp");
 
-			ArrayList<Cancion> canciones = cancionEJB.getCancionesGenero(nombre);
+			ArrayList<CancionCompleta> canciones = cancionEJB.getCancionesGenero(nombre);
 			
 			Genero genero = new Genero();
 			genero.setNombre(nombre);
+			
 			
 			request.setAttribute("usuario", usuario);
 			if(usuario != null){

@@ -7,6 +7,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="pojo.Album"%>
 <%@ page import="pojo.Cancion"%>
+<%@ page import="pojo.CancionCompleta"%>
 <%@ page import="pojo.Genero"%>
 <%@ page import="pojo.ListaReproduccion"%>
 
@@ -22,15 +23,15 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Canciones recomendadas por genero</title>
 <script type="text/javascript">
-
-function sonar(){
-	audio.stop();
-	audio.play();
-}
-
+	$('div.canvasContainer > canvas').css('-moz-transform',
+			'scale(1) translate(0px, 0px)').css('-webkit-transform',
+			'scale(1) translate(0px, 0px)').css('-o-transform',
+			'scale(1) translate(0px, 0px)').css('transform',
+			'scale(1) translate(0px, 0px)');
 </script>
 </head>
 <body>
+
 	<div id="divLogo">
 		<img id="Logo" src="">
 	</div>
@@ -44,11 +45,10 @@ function sonar(){
 			String agregarCancionLista = "AgregarCancionLista";
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 
-
-			ArrayList<Cancion> canciones = (ArrayList<Cancion>) request.getAttribute("canciones");
+			ArrayList<CancionCompleta> canciones = (ArrayList<CancionCompleta>) request.getAttribute("canciones");
 
 			Genero genero = (Genero) request.getAttribute("genero");
-			
+
 			ArrayList<ListaReproduccion> listas = (ArrayList<ListaReproduccion>) request.getAttribute("listas");
 
 			if (usuario != null) {
@@ -72,9 +72,9 @@ function sonar(){
 	<%
 		out.println("<h2>" + genero.getNombre() + "</h2>");
 
-		for (Cancion c : canciones) {
+		for (CancionCompleta c : canciones) {
 			if (usuario != null) {
-				out.println("<p>" + c.getTitulo() + "</p><audio src='ArchivosMusica/" + c.getArchivo() + "'  preload='metadata' controls></audio>");
+				out.println("<p>" + c.getTitulo() + "</p>");
 				out.print("<div class='dropdown'>"
 						+ "<button class='btn btn-primary dropdown-toggle' type='button' data-toggle='dropdown'>Añadir a lista"
 						+ "<span class='caret'></span></button>" + "<ul class='dropdown-menu'>");
@@ -85,11 +85,108 @@ function sonar(){
 				out.print("</ul></div>");
 
 			} else {
-				out.println("<p>" + c.getTitulo() + "</p><audio src='ArchivosMusica/" + c.getArchivo() + "'  preload='metadata' controls></audio>");
-				out.print("</ul></div>");
+				out.println("<p>" + c.getTitulo() + "</p>");
+				//out.print("</ul></div>");
 			}
 
 		}
 	%>
+	<div class="trackinfo">
+		<p id="titulo"></p>
+		<p id="artista"></p>
+	</div>
+	<div id="controles">
+		<button id="prev" class="controles" onclick="prevTrack()">
+			<img src="icons/prev.png">
+		</button>
+		<button id="play" class="controles" onclick="reproducir()">
+			<img src="icons/play.png">
+		</button>
+		<button id="next" class="controles" onclick="nextTrack()">
+			<img src="icons/next.png">
+		</button>
+		<button id="stop" class="controles" onclick="pausar()">
+			<img src="icons/stop.png">
+		</button>
+		<button id="random" class="controles" onclick="random()">
+			<img src="icons/random.png">
+		</button>
+		<input type="range" min="0" max="100" value="50" class="slider"
+			onchange="volumen(this.value)" onInput="volumen(this.value)"
+			id="volumen">
+		<div id="vol"></div>
+	</div>
+	<script>
+		var play = document.getElementById("play");
+		var next = document.getElementById("next");
+		var prev = document.getElementById("prev");
+		var titulaso = document.getElementById("titulo");
+		var artista = document.getElementById("artista");
+		var current_track = 0;
+
+		var cancion, audio, duracion;
+		var playing = false;
+
+		var songs = [
+	<%for (CancionCompleta c : canciones) {
+				out.println("{title: \"" + c.getTitulo() + "\",artist: '" + c.getArtista() + "',url: 'ArchivosMusica/"
+						+ c.getArchivo() + "',},");
+			}%>
+		];
+		window.addEventListener('load', init(), false);
+
+		function init() {
+			cancion = songs[current_track];
+			audio = new Audio();
+			audio.src = cancion.url;
+		}
+		function nextTrack() {
+			current_track++;
+			current_track = current_track % (songs.length);
+			cancion = songs[current_track];
+			audio.src = cancion.url;
+			reproducir();
+			audio.onloadeddata = function() {
+				updateInfo();
+			}
+		}
+		function prevTrack() {
+			current_track--;
+			current_track = (current_track == -1 ? (songs.length - 1)
+					: current_track);
+			cancion = songs[current_track];
+			audio.src = cancion.url;
+			reproducir();
+			audio.onloadeddata = function() {
+				updateInfo();
+			}
+		}
+		function random() {
+			current_track = Math.floor(Math.random() * songs.length);
+			cancion = songs[current_track];
+			audio.src = cancion.url;
+			reproducir();
+			audio.onloadeddata = function() {
+				updateInfo();
+			}
+		}
+		function reproducir() {
+			audio.play();
+			titulaso.innerHTML = cancion.title;
+			artista.innerHTML = cancion.artist;
+		}
+		function pausar() {
+			audio.pause();
+		}
+		function updateInfo() {
+			titulaso.innerHTML = cancion.title;
+			artista.innerHTML = cancion.artist;
+		}
+		function volumen(volume_value) {
+			document.getElementById("vol").innerHTML = volume_value;
+			audio.volume = volume_value / 100;
+
+		}
+	</script>
 </body>
 </html>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import pojo.Cancion;
+import pojo.CancionCompleta;
 
 public interface CancionMapper {
 
@@ -26,20 +27,6 @@ public interface CancionMapper {
 	 */
 	public Cancion getCancion(@Param("id") int id);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-	/**
-	 * Para poder obtener una cancion a con un id
-	 * 
-	 * @param id el id por el que filtramos
-	 * @return la cancion
-	 */
-	public Cancion getCancion(@Param("id") int id);
-
->>>>>>> master
->>>>>>> master
 	/**
 	 * Obtiene un listado de todas las canciones
 	 * 
@@ -55,33 +42,12 @@ public interface CancionMapper {
 	 */
 	public ArrayList<Cancion> getCancionesRecom();
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	/**
 	 * Para poder obtener todas las canciones de un album
 	 * 
 	 * @param id el id del album
 	 * @return todas las canciones del album
 	 */
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	public ArrayList<Cancion> getCancionesAlbum(@Param("id") int id);
 
 	/**
@@ -91,7 +57,7 @@ public interface CancionMapper {
 	 */
 	public void insertCancion(Cancion cancion);
 
-	public ArrayList<Cancion> getCancionesGenero(@Param("nombre") String nombre);
+	public ArrayList<CancionCompleta> getCancionesGenero(@Param("nombre") String nombre);
 	
 	/**
 	 * Para poder actualizar los datos de una cancion

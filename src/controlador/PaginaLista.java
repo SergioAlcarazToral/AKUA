@@ -16,14 +16,7 @@ import ejb.CancionEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.Cancion;
-<<<<<<< HEAD
 import pojo.ListaReproduccion;
-=======
-<<<<<<< HEAD
-import pojo.ListaReproduccion;
-=======
->>>>>>> master
->>>>>>> master
 import pojo.Usuario;
 
 /**
@@ -41,14 +34,7 @@ public class PaginaLista extends HttpServlet {
 
 	@EJB
 	CancionEJB cancionEJB;
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> master
->>>>>>> master
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -57,10 +43,6 @@ public class PaginaLista extends HttpServlet {
 
 		String nombre = request.getParameter("nombre");
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
 		ListaReproduccion lista = listasEJB.getLista(usuario.getId(), nombre);
 
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
@@ -72,22 +54,6 @@ public class PaginaLista extends HttpServlet {
 		request.setAttribute("canciones", cancionesLista);
 		
 		rs.forward(request, response);
-<<<<<<< HEAD
-=======
-=======
-		try {
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
-
-			ArrayList<Cancion> cancionesLista = cancionEJB.getCancionesLista(usuario.getId());
-			
-			request.setAttribute("usuario", usuario);
-			request.setAttribute("canciones", cancionesLista);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
->>>>>>> master
->>>>>>> master
 	}
 
 }

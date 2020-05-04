@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 
 import dao.CancionDAO;
 import pojo.Cancion;
+import pojo.CancionCompleta;
 
 @Stateless
 @LocalBean
@@ -21,23 +22,8 @@ public class CancionEJB {
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCancion(id);
 	}
-<<<<<<< HEAD
 
 	public ArrayList<Cancion> getCanciones() {
-=======
-<<<<<<< HEAD
-
-	public ArrayList<Cancion> getCanciones() {
-=======
-<<<<<<< HEAD
-
-	public ArrayList<Cancion> getCanciones() {
-=======
-	
-	public ArrayList<Cancion> getCanciones(){
->>>>>>> master
->>>>>>> master
->>>>>>> master
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCanciones();
 	}
@@ -57,14 +43,11 @@ public class CancionEJB {
 		return cancionDAO.getCancionesLista(id);
 	}
 
-<<<<<<< HEAD
-	public ArrayList<Cancion> getCancionesGenero(String nombre){
+	public ArrayList<CancionCompleta> getCancionesGenero(String nombre){
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCancionesGenero(nombre);
 	}
 	
-=======
->>>>>>> master
 	public void insertCancion(Cancion cancion) {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.insertCancion(cancion);
@@ -74,19 +57,7 @@ public class CancionEJB {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.updateCancion(cancion);
 	}
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
-	
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	public void deleteCancion(int id) {
 		CancionDAO cancionDAO = new CancionDAO();
 		cancionDAO.deleteCancion(id);

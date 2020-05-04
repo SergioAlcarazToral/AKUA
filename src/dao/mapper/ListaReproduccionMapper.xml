@@ -8,29 +8,11 @@
 	</select>
 
 	<select id='getListasUsuario' resultType='pojo.ListaReproduccion'>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
->>>>>>> master
 		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} group by nombre;
 	</select>
 
 	<select id='getLista' resultType='pojo.ListaReproduccion'>
-<<<<<<< HEAD
 		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} and nombre = #{nombre} limit 1;
-=======
-<<<<<<< HEAD
-		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} and nombre = #{nombre} limit 1;
-=======
-		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} and nombre = #{nombre};
-=======
-		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario}
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	</select>
 
 	<insert id='insertListaR' parameterType='ListaReproduccion'>
@@ -51,34 +33,16 @@
 		WHERE idUsuario = #{idUsuario}
 	</update>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
 	<delete id='deleteListasUsuario' parameterType='ListaReproduccion'>
 		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre is not null
 	</delete>
 
 
 	<delete id='deleteListaR' parameterType='ListaReproduccion'>
-<<<<<<< HEAD
 		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre}
 	</delete>
 
 	<delete id='deleteCancionLista' parameterType='ListaReproduccion'>
-=======
-		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre}
-	</delete>
-
-	<delete id='deleteCancionLista' parameterType='ListaReproduccion'>
-=======
-	<delete id='deleteListaR' parameterType='Genero'>
-		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre}
-	</delete>
-	
-	<delete id='deleteCancionLista' parameterType='Genero'>
->>>>>>> master
->>>>>>> master
 		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre} and idCancion = #{idCancion}
 	</delete>
 </mapper>

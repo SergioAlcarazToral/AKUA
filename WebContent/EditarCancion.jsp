@@ -19,27 +19,7 @@
 		<%
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 			ArrayList<Genero> generos = (ArrayList<Genero>) request.getAttribute("generos");
-<<<<<<< HEAD
 			Cancion cancion = (Cancion) request.getAttribute("cancion");
-=======
-<<<<<<< HEAD
-			Cancion cancion = (Cancion) request.getAttribute("cancion");
-=======
-<<<<<<< HEAD
-			Cancion cancion = (Cancion) request.getAttribute("cancion");
-=======
-<<<<<<< HEAD
-			Cancion cancion = (Cancion) request.getAttribute("cancion");
-=======
-<<<<<<< HEAD
-			Cancion cancion = (Cancion) request.getAttribute("cancion");
-=======
-			Cancion idGenero = (Cancion) request.getAttribute("genero");
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
 			if (usuario != null) {
 				String logout = "Logout";
 
@@ -50,19 +30,6 @@
 			}
 		%>
 	</div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	<form action="EditarCancion" method="post">
 		<p>Titulo de la cancion</p>
 		<%
@@ -87,37 +54,6 @@
 			out.print("<input type='hidden' value='" + cancion.getId() + "' name='id'>");
 		%>
 		<input type="submit" value="Editar cancion">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-	<form action"EditarCancion" method="post">
-		<p>Titulo de la cancion</p>
-		<input type="text" name="titulo" required>
-		<p>Genero</p>
-		<select nam="genero">
-			<%
-				for(Genero g : generos){
-					if(idGenero.getId() == g.getId()){
-						out.print("<option value='" + g.getId() + "' selected>" + g.getNombre() + "</option>");
-					}else{
-						out.print("<option value='" + g.getId() + "'>" + g.getNombre() + "</option>");
-
-					}
-						
-				}
-			%>
-		</select>
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	</form>
 </body>
 </html>

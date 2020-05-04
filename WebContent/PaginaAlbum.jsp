@@ -34,60 +34,19 @@
 			String crearCancion = "CrearCancion";
 			String inicio = "Principal";
 			String editarAlbum = "EditarAlbum";
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
->>>>>>> master
 			String editarCancion = "EditarCancion";
 			String eliminarArtista = "EliminarArtista";
 			String eliminarAlbum = "EliminarAlbum";
 			String eliminarCancion = "EliminarCancion";
 			String agregarCancionLista = "AgregarCancionLista";
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
-			String editarCancion = "EditarCancion";
-=======
-<<<<<<< HEAD
-			String editarCancion = "EditarCancion";
-=======
->>>>>>> master
->>>>>>> master
-			String eliminarArtista = "EliminarArtista";
-			String eliminarAlbum = "EliminarAlbum";
-			String eliminarCancion = "EliminarCancion";
->>>>>>> master
->>>>>>> master
->>>>>>> master
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 
 			Album album = (Album) request.getAttribute("album");
 
 			ArrayList<Cancion> canciones = (ArrayList<Cancion>) request.getAttribute("canciones");
-<<<<<<< HEAD
 
 			ArrayList<ListaReproduccion> listas = (ArrayList<ListaReproduccion>) request.getAttribute("listas");
 
-=======
-<<<<<<< HEAD
-
-			ArrayList<ListaReproduccion> listas = (ArrayList<ListaReproduccion>) request.getAttribute("listas");
-
-=======
-<<<<<<< HEAD
-
-			ArrayList<ListaReproduccion> listas = (ArrayList<ListaReproduccion>) request.getAttribute("listas");
-
-=======
->>>>>>> master
->>>>>>> master
->>>>>>> master
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
@@ -112,23 +71,12 @@
 	<%
 		out.println("<h2>" + album.getNombre() + "</h2>");
 		out.println(album.getAnyo());
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
->>>>>>> master
 
 		for (Cancion c : canciones) {
 			if (usuario.getAdministrador() != 1) {
 				out.println("<p>" + c.getTitulo() + " | <a href='" + eliminarCancion + "?id=" + c.getId()
 						+ "'>Eliminar Cancion</a> | <a href='" + editarCancion + "?id=" + c.getId()
 						+ "'>Editar Cancion</a></p>");
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
 				out.print("<div class='dropdown'>"
 						+ "<button class='btn btn-primary dropdown-toggle' type='button' data-toggle='dropdown'>Añadir a lista"
 						+ "<span class='caret'></span></button>" + "<ul class='dropdown-menu'>");
@@ -137,11 +85,6 @@
 							+ usuario.getId() + "&idCancion=" + c.getId() + "'>" + l.getNombre() + "</a></li>");
 				}
 				out.print("</ul></div>");
-<<<<<<< HEAD
-=======
-=======
->>>>>>> master
->>>>>>> master
 
 			} else {
 				out.println("<p>" + c.getTitulo() + "</p>");
@@ -154,28 +97,6 @@
 				}
 				out.print("</ul></div>");
 			}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-		if(usuario.getAdministrador() != 1){
-			
-		}
-		for (Cancion c : canciones) {
-			out.println("<p>" +c.getTitulo() + " | <a href='" + eliminarCancion + "?id=" + c.getId()
-<<<<<<< HEAD
-					+ "'>Eliminar Cancion</a> | <a href='" + editarCancion +"?id=" +c.getId() +"'>Editar Cancion</a></p>");
-=======
-<<<<<<< HEAD
-					+ "'>Eliminar Cancion</a> | <a href='" + editarCancion +"?id=" +c.getId() +"'>Editar Cancion</a></p>");
-=======
-					+ "'>EliminarCancion</a></p>");
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
->>>>>>> master
 
 		}
 	%>

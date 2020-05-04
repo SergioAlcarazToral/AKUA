@@ -33,7 +33,7 @@
 			}
 		%>
 	</div>
-	<form action="CrearCancion" method="post">
+	<form action="CrearCancion" method="post" enctype="multipart/form-data">
 		<p>Titulo de la cancion</p>
 		<input type="text" name="titulo">
 		<p>Genero</p>
@@ -48,7 +48,7 @@
 			out.print("<input type='hidden' value='" + album.getId() + "' name='idAlbum'>");
 		%>
 		<p>Archivo de audio</p>
-		<input type="file" name="archivo" required ><br> <input
+		<input type="file" name="archivo" required><br> <input
 			type="submit" value="Insertar cancion">
 	</form>
 </body>

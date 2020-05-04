@@ -12,30 +12,6 @@
 	<select id="getCancion" resultType="pojo.Cancion">
 		Select * from cancion where
 		id = #{id}
-<<<<<<< HEAD
-=======
-	</select>
-
-	<select id="getCancionesLista" resultType="pojo.Cancion">
-<<<<<<< HEAD
-		select distinct cancion.id as id,
-=======
-		select distinct
->>>>>>> master
-		titulo, genero.nombre as genero, album.nombre as album
-		from listareproduccion, cancion, genero,album
-		where listareproduccion.idUsuario = #{idUsuario}
-		and idCancion is not null
-		and cancion.idAlbum = album.id
-		and cancion.idGenero = genero.id;
-<<<<<<< HEAD
-=======
-	</select>
-
-	<select id="getCancion" resultType="pojo.Cancion">
-		Select * from cancion where id = #{id}
->>>>>>> master
->>>>>>> master
 	</select>
 
 	<select id="getCancionesLista" resultType="pojo.Cancion">
@@ -50,39 +26,24 @@
 		and cancion.idAlbum = album.id
 		and cancion.idGenero = genero.id;
 	</select>
-	<select id="getCancionesGenero" resultType="pojo.Cancion">
-		select
-		cancion.id,titulo,idGenero,idAlbum,archivo from
-		cancion,genero,album,artista where idGenero = genero.id and idAlbum =
-		album.id and album.idArtista = artista.id and genero.nombre =
-		#{nombre} order by rand() limit 20;
+	<select id="getCancionesGenero"
+		resultType="pojo.CancionCompleta">
+		select cancion.id as id, titulo, genero.nombre as genero,
+		album.nombre as album, idAlbum, artista.nombre as artista,
+		idArtista,archivo from cancion,album,genero,artista where
+		cancion.idAlbum = album.id and album.idArtista = artista.id and
+		cancion.idGenero = genero.id and genero.nombre = #{nombre} order by rand() limit 20;
 	</select>
 	<select id='getCanciones'>
 		SELECT * FROM cancion
 	</select>
 
 	<select id="getCancionesAlbum" resultType="pojo.Cancion">
-<<<<<<< HEAD
 		Select distinct
 		cancion.id as
 		id, cancion.titulo as titulo, archivo from cancion, album
 		where
 		cancion.idAlbum = #{id}
-=======
-<<<<<<< HEAD
-		Select distinct cancion.id as
-		id, cancion.titulo as titulo, archivo from cancion, album where
-		cancion.idAlbum = #{id}
-=======
-<<<<<<< HEAD
-		Select cancion.id as
-		id, cancion.titulo as titulo, archivo from cancion, album where
-		cancion.idAlbum = #{id}
-=======
-		Select cancion.id as id, cancion.titulo as titulo, archivo from cancion, album where cancion.idAlbum = #{id}
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	</select>
 
 	<select id="getCancionesRecom" resultType='pojo.Cancion'>
@@ -92,25 +53,9 @@
 
 	<insert id='insertCancion' parameterType='pojo.Cancion'
 		useGeneratedKeys='true' keyProperty='id'>
-<<<<<<< HEAD
 		INSERT INTO
 		cancion(titulo,idGenero,idAlbum,archivo)
 		values(#{titulo},#{genero},#{album},#{archivo})
-=======
-<<<<<<< HEAD
-		INSERT INTO
-		cancion(titulo,idGenero,idAlbum,archivo)
-		values(#{titulo},#{genero},#{album},#{archivo})
-=======
-<<<<<<< HEAD
-		INSERT INTO
-		cancion(titulo,idGenero,idAlbum,archivo)
-		values(#{titulo},#{genero},#{album},#{archivo})
-=======
-		INSERT INTO cancion(titulo,idGenero,idAlbum,archivo) values(#{titulo},#{genero},#{album},#{archivo})
->>>>>>> master
->>>>>>> master
->>>>>>> master
 	</insert>
 
 	<update id='updateCancion' parameterType='Cancion'>
