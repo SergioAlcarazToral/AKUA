@@ -43,9 +43,19 @@ public class CancionEJB {
 		return cancionDAO.getCancionesLista(id);
 	}
 
+	public ArrayList<CancionCompleta> getCancionesCompletasLista(int id){
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancionesCompletasLista(id);
+	}
+	
 	public ArrayList<CancionCompleta> getCancionesGenero(String nombre){
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCancionesGenero(nombre);
+	}
+	
+	public ArrayList<CancionCompleta> getCancionesCompletasAlbum(int id){
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancionesCompletasAlbum(id);
 	}
 	
 	public void insertCancion(Cancion cancion) {

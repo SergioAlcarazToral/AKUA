@@ -17,7 +17,7 @@ import ejb.CancionEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.Album;
-import pojo.Cancion;
+import pojo.CancionCompleta;
 import pojo.ListaReproduccion;
 import pojo.Usuario;
 
@@ -42,6 +42,7 @@ public class PaginaAlbum extends HttpServlet {
 
 	@EJB
 	ListaReproduccionEJB listaEJB;
+
 	/**
 	 * Muestra la pagina del album con sus respectivas canciones
 	 */
@@ -58,12 +59,13 @@ public class PaginaAlbum extends HttpServlet {
 
 			Album album = albumEJB.getAlbum(idAlbum);
 
-			ArrayList<Cancion> canciones = cancionEJB.getCancionesAlbum(idAlbum);
-			ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
-			
+			ArrayList<CancionCompleta> canciones = cancionEJB.getCancionesCompletasAlbum(idAlbum);
+			if (usuario != null) {
+				ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
+				request.setAttribute("listas", listas);
+			}
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("album", album);
-			request.setAttribute("listas", listas);
 			request.setAttribute("canciones", canciones);
 			rs.forward(request, response);
 		} catch (Exception e) {

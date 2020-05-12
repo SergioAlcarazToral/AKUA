@@ -17,6 +17,7 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel='stylesheet' type='text/css' href='css.css'>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
@@ -91,30 +92,37 @@
 
 		}
 	%>
-	<div class="trackinfo">
-		<p id="titulo"></p>
-		<p id="artista"></p>
-	</div>
 	<div id="controles">
-		<button id="prev" class="controles" onclick="prevTrack()">
-			<img src="icons/prev.png">
-		</button>
-		<button id="play" class="controles" onclick="reproducir()">
-			<img src="icons/play.png">
-		</button>
-		<button id="next" class="controles" onclick="nextTrack()">
-			<img src="icons/next.png">
-		</button>
-		<button id="stop" class="controles" onclick="pausar()">
-			<img src="icons/stop.png">
-		</button>
-		<button id="random" class="controles" onclick="random()">
-			<img src="icons/random.png">
-		</button>
-		<input type="range" min="0" max="100" value="50" class="slider"
-			onchange="volumen(this.value)" onInput="volumen(this.value)"
-			id="volumen">
-		<div id="vol"></div>
+		<div class="trackinfo">
+			<p id="titulo"></p>
+			<p id="artista"></p>
+		</div>
+		<div id="botones">
+			<button id="prev" class="controles" onclick="prevTrack()">
+				<img src="icons/prev.png">
+			</button>
+			<button id="play" class="controles" onclick="reproducir()">
+				<img src="icons/play.png">
+			</button>
+			<button id="next" class="controles" onclick="nextTrack()">
+				<img src="icons/next.png">
+			</button>
+			<button id="stop" class="controles" onclick="pausar()">
+				<img src="icons/stop.png">
+			</button>
+			<button id="random" class="controles" onclick="random()">
+				<img src="icons/random.png">
+			</button>
+		</div>
+		<div id="sliders">
+			<input type="range" id="durCancion" min="0" value="0"
+				onchange="changeProgressBar()" />
+			<input type="range" min="0" max="100" value="50" class="slider"
+				onchange="volumen(this.value)" onInput="volumen(this.value)"
+				id="volumen">	
+			<div class="currentTime"></div>
+			<div class="durationTime"></div>
+		</div>
 	</div>
 	<script>
 		var play = document.getElementById("play");
@@ -122,6 +130,8 @@
 		var prev = document.getElementById("prev");
 		var titulaso = document.getElementById("titulo");
 		var artista = document.getElementById("artista");
+		var progressBar = document.getElementById("durCancion");
+
 		var current_track = 0;
 
 		var cancion, audio, duracion;
@@ -134,6 +144,8 @@
 			}%>
 		];
 		window.addEventListener('load', init(), false);
+
+		setInterval(updateProgressValue, 500);
 
 		function init() {
 			cancion = songs[current_track];
@@ -150,6 +162,26 @@
 				updateInfo();
 			}
 		}
+		function nextTrackRandom() {
+			current_track = Math.floor(Math.random() * songs.length);
+			cancion = songs[current_track];
+			audio.src = cancion.url;
+			reproducir();
+			audio.onloadeddata = function() {
+				updateInfo();
+			}
+		}
+		function prevTrackRandom(current_track) {
+			cancion = songs[current_track];
+			audio.src = cancion.url;
+			reproducir();
+			audio.onloadeddata = function() {
+				updateInfo();
+			}
+		}
+		function prevTrackcomplete() {
+			prevTrackRandom(current_track);
+		}
 		function prevTrack() {
 			current_track--;
 			current_track = (current_track == -1 ? (songs.length - 1)
@@ -162,31 +194,45 @@
 			}
 		}
 		function random() {
-			current_track = Math.floor(Math.random() * songs.length);
-			cancion = songs[current_track];
-			audio.src = cancion.url;
-			reproducir();
-			audio.onloadeddata = function() {
-				updateInfo();
+			if (next.getAttribute("onclick") == "nextTrack()") {
+				next.setAttribute("onclick", "nextTrackRandom()");
+				prev.setAttribute("onclick", "prevTrackcomplete()");
+			} else {
+				next.setAttribute("onclick", "nextTrack()");
+				prev.setAttribute("onclick", "prevTrack()");
+
 			}
 		}
 		function reproducir() {
 			audio.play();
 			titulaso.innerHTML = cancion.title;
 			artista.innerHTML = cancion.artist;
+			audio.onended = function() {
+				nextTrack();
+				};
 		}
 		function pausar() {
 			audio.pause();
 		}
+		
 		function updateInfo() {
 			titulaso.innerHTML = cancion.title;
 			artista.innerHTML = cancion.artist;
 		}
 		function volumen(volume_value) {
-			document.getElementById("vol").innerHTML = volume_value;
 			audio.volume = volume_value / 100;
 
 		}
+		function updateProgressValue() {
+			progressBar.max = audio.duration;
+			progressBar.value = audio.currentTime;
+			document.querySelector('.currentTime').innerHTML = formatTime(audio.currentTime);
+			formatTime(audio.duration);
+		};
+
+		function changeProgressBar() {
+			audio.currentTime = progressBar.value;
+		};
 	</script>
 </body>
 </html>

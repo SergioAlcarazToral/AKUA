@@ -31,6 +31,15 @@ public class CancionDAO {
 		}
 	}
 
+	public ArrayList<CancionCompleta> getCancionesCompletasLista(int id){
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
+			return cancionMapper.getCancionesCompletasLista(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
 	public ArrayList<Cancion> getCancionesLista(int id){
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -41,6 +50,15 @@ public class CancionDAO {
 		}
 	}
 	
+	public ArrayList<CancionCompleta> getCancionesCompletasAlbum(int id){
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
+			return cancionMapper.getCancionesCompletasAlbum(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
 	/**
 	 * Este metodo es para poder obtener una cancion en especifico gracias a su id
 	 * 

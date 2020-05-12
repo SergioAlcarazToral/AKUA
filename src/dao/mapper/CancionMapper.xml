@@ -26,6 +26,19 @@
 		and cancion.idAlbum = album.id
 		and cancion.idGenero = genero.id;
 	</select>
+	<select id="getCancionesCompletasLista" resultType="pojo.CancionCompleta">
+		select distinct
+		cancion.id as id,
+		titulo, genero.nombre as genero, album.nombre as
+		album, artista.nombre as artista,archivo
+		from listareproduccion, cancion, genero,album,artista
+		where
+		listareproduccion.idUsuario = #{idUsuario}
+		and idCancion is not null
+		and cancion.idAlbum = album.id
+		and cancion.idGenero = genero.id
+        and artista.id = album.idArtista;
+	</select>
 	<select id="getCancionesGenero"
 		resultType="pojo.CancionCompleta">
 		select cancion.id as id, titulo, genero.nombre as genero,
@@ -45,7 +58,16 @@
 		where
 		cancion.idAlbum = #{id}
 	</select>
-
+<select id="getCancionesCompletasAlbum" resultType="pojo.CancionCompleta">
+		Select distinct
+		cancion.id as
+		id, cancion.titulo as titulo, archivo, artista.nombre as artista,genero.nombre as genero from cancion, album,artista,genero
+		where
+        cancion.idAlbum = album.id and
+        cancion.idGenero = genero.id and
+        album.idArtista = artista.id and
+		cancion.idAlbum = #{idAlbum};
+	</select>
 	<select id="getCancionesRecom" resultType='pojo.Cancion'>
 		SELECT * FROM cancion
 		ORDER BY RAND() limit 10

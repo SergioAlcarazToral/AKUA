@@ -18,7 +18,7 @@ public interface CancionMapper {
 	public Cancion existeCancion(@Param("id") int id);
 
 	public ArrayList<Cancion> getCancionesLista(@Param("idUsuario") int id);
-	
+
 	/**
 	 * Para poder obtener una cancion a con un id
 	 * 
@@ -58,7 +58,11 @@ public interface CancionMapper {
 	public void insertCancion(Cancion cancion);
 
 	public ArrayList<CancionCompleta> getCancionesGenero(@Param("nombre") String nombre);
-	
+
+	public ArrayList<CancionCompleta> getCancionesCompletasLista(@Param("idUsuario") int id);
+
+	public ArrayList<CancionCompleta> getCancionesCompletasAlbum(@Param("idAlbum") int id);
+
 	/**
 	 * Para poder actualizar los datos de una cancion
 	 * 

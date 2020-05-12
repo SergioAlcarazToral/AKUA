@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import ejb.CancionEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
-import pojo.Cancion;
+import pojo.CancionCompleta;
 import pojo.ListaReproduccion;
 import pojo.Usuario;
 
@@ -47,7 +47,7 @@ public class PaginaLista extends HttpServlet {
 
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
 
-		ArrayList<Cancion> cancionesLista = cancionEJB.getCancionesLista(usuario.getId());
+		ArrayList<CancionCompleta> cancionesLista = cancionEJB.getCancionesCompletasLista(usuario.getId());
 
 		request.setAttribute("lista", lista);
 		request.setAttribute("usuario", usuario);
