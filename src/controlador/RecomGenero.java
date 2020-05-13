@@ -53,7 +53,7 @@ public class RecomGenero extends HttpServlet {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/RecomGenero.jsp");
 			
 			ArrayList<CancionCompleta> canciones = cancionEJB.getCancionesGenero(nombre);
-			
+						
 			Genero genero = new Genero();
 			genero.setNombre(nombre);
 			

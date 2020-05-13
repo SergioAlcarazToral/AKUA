@@ -57,15 +57,13 @@
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + inicio + "'>Inicio</a> | <a href='"
-							+ inicio + "'>Inicio</a>| <a href='ReproductorAnimadoRecom?nombre=" + genero.getNombre()
-							+ "'>Reproductor animado</a>");
+							+ inicio + "'>Inicio</a>");
 				} else {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
 							+ "'>Eliminar cuenta</a> | <a href='" + inicio
-							+ "'>Inicio</a>| <a href='ReproductorAnimadoRecom?nombre=" + genero.getNombre()
-							+ "'>Reproductor animado</a>");
+							+ "'>Inicio</a>");
 				}
 			} else {
 				out.println("<img src='Imatges/sinImagen.jsp'><br>");
@@ -96,6 +94,9 @@
 
 		}
 	%>
+	<form method="get" action ="ReproductorAnimadoRecom">
+		<%request.setAttribute("canciones", canciones); %>
+	</form>
 	<div id="controles">
 		<div class="trackinfo">
 			<p id="titulo"></p>
