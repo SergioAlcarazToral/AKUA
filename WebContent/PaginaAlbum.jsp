@@ -56,12 +56,16 @@
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearCancion + "?id=" + album.getId()
 							+ "'>Crear cancion</a> | <a href='" + editarAlbum + "?id=" + +album.getId()
 							+ "'>Editar album</a> | <a href='" + eliminarAlbum + "?id=" + album.getId()
-							+ "'><Eliminar album</a> | <a href='" + inicio + "'>Inicio</a>");
+							+ "'><Eliminar album</a> | <a href='" + inicio
+							+ "'>Inicio</a> | <a href='ReprductorAnimadoAlbum?id=" + album.getId()
+							+ "'>Reproductor animado</a>");
 				} else {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
-							+ "'>Eliminar cuenta</a> | <a href='" + inicio + "'>Inicio</a>");
+							+ "'>Eliminar cuenta</a> | <a href='" + inicio
+							+ "'>Inicio</a> | <a href='ReprductorAnimadoAlbum?id=" + album.getId()
+							+ "'>Reproductor animado</a>");
 				}
 			} else {
 				out.println("<img src='Imatges/sinImagen.jsp'><br>");
@@ -151,7 +155,7 @@
 
 		var songs = [
 	<%for (CancionCompleta c : canciones) {
-				out.println("{title: \"" + c.getTitulo() + "\",artista: '" + c.getGenero() + "',url: 'ArchivosMusica/"
+				out.println("{title: \"" + c.getTitulo() + "\",artista: '" + c.getArtista() + "',url: 'ArchivosMusica/"
 						+ c.getArchivo() + "',},");
 			}%>
 		];
@@ -217,8 +221,7 @@
 		}
 		function reproducir() {
 			audio.play();
-			titulaso.innerHTML = cancion.title;
-			artista.innerHTML = cancion.artist;
+			updateInfo();
 			audio.onended = function() {
 				nextTrack();
 			};
@@ -229,7 +232,7 @@
 
 		function updateInfo() {
 			titulaso.innerHTML = cancion.title;
-			artista.innerHTML = cancion.genero;
+			artista.innerHTML = cancion.artista;
 		}
 		function volumen(volume_value) {
 			audio.volume = volume_value / 100;

@@ -14,63 +14,55 @@ import javax.servlet.http.HttpSession;
 
 import ejb.AlbumEJB;
 import ejb.CancionEJB;
-import ejb.GeneroEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
+import pojo.Album;
 import pojo.CancionCompleta;
-import pojo.Genero;
 import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class RecomGenero
+ * Servlet implementation class ReproductorAnimado
  */
-@WebServlet("/RecomGenero")
-public class RecomGenero extends HttpServlet {
+@WebServlet("/ReprductorAnimadoAlbum")
+public class ReproductorAnimadoAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	SesionesEJB sesionesEJB;
+
+	@EJB
+	AlbumEJB albumEJB;
 
 	@EJB
 	CancionEJB cancionEJB;
 
 	@EJB
 	ListaReproduccionEJB listaEJB;
-	
-	@EJB
-	GeneroEJB generoEJB;
-	
-	@EJB
-	AlbumEJB albumEJB;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
-		String nombre = request.getParameter("nombre");
+		String id = request.getParameter("id");
 		try {
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/RecomGenero.jsp");
-			
-			ArrayList<CancionCompleta> canciones = cancionEJB.getCancionesGenero(nombre);
-			
-			Genero genero = new Genero();
-			genero.setNombre(nombre);
-			
-			
+			int idAlbum = Integer.parseInt(id);
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaReproductorAlbum.jsp");
+
+			Album album = albumEJB.getAlbum(idAlbum);
+
+			ArrayList<CancionCompleta> canciones = cancionEJB.getCancionesCompletasAlbum(idAlbum);
+
 			request.setAttribute("usuario", usuario);
-			if(usuario != null){
-				ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
-				request.setAttribute("listas", listas);
-			}
+			request.setAttribute("album", album);
 			request.setAttribute("canciones", canciones);
-			request.setAttribute("genero", genero);
 			rs.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-	}
 
+	}
 
 }

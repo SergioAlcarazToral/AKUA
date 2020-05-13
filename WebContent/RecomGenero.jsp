@@ -56,12 +56,16 @@
 				if (usuario.getAdministrador() != 1) {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
-					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + inicio + "'>Inicio</a>");
+					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + inicio + "'>Inicio</a> | <a href='"
+							+ inicio + "'>Inicio</a>| <a href='ReproductorAnimadoRecom?nombre=" + genero.getNombre()
+							+ "'>Reproductor animado</a>");
 				} else {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
-							+ "'>Eliminar cuenta</a> | <a href='" + inicio + "'>Inicio</a>");
+							+ "'>Eliminar cuenta</a> | <a href='" + inicio
+							+ "'>Inicio</a>| <a href='ReproductorAnimadoRecom?nombre=" + genero.getNombre()
+							+ "'>Reproductor animado</a>");
 				}
 			} else {
 				out.println("<img src='Imatges/sinImagen.jsp'><br>");
@@ -116,10 +120,9 @@
 		</div>
 		<div id="sliders">
 			<input type="range" id="durCancion" min="0" value="0"
-				onchange="changeProgressBar()" />
-			<input type="range" min="0" max="100" value="50" class="slider"
-				onchange="volumen(this.value)" onInput="volumen(this.value)"
-				id="volumen">	
+				onchange="changeProgressBar()" /> <input type="range" min="0"
+				max="100" value="50" class="slider" onchange="volumen(this.value)"
+				onInput="volumen(this.value)" id="volumen">
 			<div class="currentTime"></div>
 			<div class="durationTime"></div>
 		</div>
@@ -200,7 +203,6 @@
 			} else {
 				next.setAttribute("onclick", "nextTrack()");
 				prev.setAttribute("onclick", "prevTrack()");
-
 			}
 		}
 		function reproducir() {
@@ -209,12 +211,12 @@
 			artista.innerHTML = cancion.artist;
 			audio.onended = function() {
 				nextTrack();
-				};
+			};
 		}
 		function pausar() {
 			audio.pause();
 		}
-		
+
 		function updateInfo() {
 			titulaso.innerHTML = cancion.title;
 			artista.innerHTML = cancion.artist;

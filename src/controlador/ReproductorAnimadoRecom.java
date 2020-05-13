@@ -23,12 +23,12 @@ import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class RecomGenero
+ * Servlet implementation class ReproductorAnimadoRecom
  */
-@WebServlet("/RecomGenero")
-public class RecomGenero extends HttpServlet {
+@WebServlet("/ReproductorAnimadoRecom")
+public class ReproductorAnimadoRecom extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	SesionesEJB sesionesEJB;
 
@@ -37,40 +37,39 @@ public class RecomGenero extends HttpServlet {
 
 	@EJB
 	ListaReproduccionEJB listaEJB;
-	
+
 	@EJB
 	GeneroEJB generoEJB;
-	
+
 	@EJB
 	AlbumEJB albumEJB;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 
 		String nombre = request.getParameter("nombre");
 		try {
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/RecomGenero.jsp");
-			
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaReproductorRecom.jsp");
+
 			ArrayList<CancionCompleta> canciones = cancionEJB.getCancionesGenero(nombre);
-			
 			Genero genero = new Genero();
 			genero.setNombre(nombre);
 			
-			
 			request.setAttribute("usuario", usuario);
-			if(usuario != null){
-				ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
-				request.setAttribute("listas", listas);
-			}
+
+			ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
+			request.setAttribute("listas", listas);
+
 			request.setAttribute("canciones", canciones);
 			request.setAttribute("genero", genero);
 			rs.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-	}
 
+	}
 
 }

@@ -9,7 +9,7 @@
 	bottom: 0;
 }
 
-#prev img, #play img, #next img, #stop img, #random img {
+#prev img, #play img, #next img, #stop img, #random img, #repeat img {
 	width: 25px;
 	height: 25px;
 	border: none;

@@ -9,8 +9,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Pagina lista</title>
-<script src="visualizer2.js"></script>
-
+<link rel='stylesheet' type='text/css' href='css.css'>
 </head>
 <body>
 	<div id="divLogo">
@@ -38,13 +37,16 @@
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + borrarLista + "?id=" + usuario.getId()
 							+ "&nombre=" + lista.getNombre() + "'>Borrar lista</a> | <a href='" + inicio
-							+ "'>Inicio</a>");
+							+ "'>Inicio</a> | <a href='ReproductorAnimadoLista?nombre=" + lista.getNombre()
+							+ "'>Reproductor animado</a>");
 				} else {
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + borrarLista + "?id=" + usuario.getId()
 							+ "&nombre=" + lista.getNombre() + "'>Borrar lista</a> | <a href='" + baja
-							+ "'>Eliminar cuenta</a> | <a href='" + inicio + "'>Inicio</a>");
+							+ "'>Eliminar cuenta</a> | <a href='" + inicio
+							+ "'>Inicio</a> | <a href='ReproductorAnimadoLista?nombre=" + lista.getNombre()
+							+ "'>Reproductor animado</a>");
 				}
 			} else {
 				out.println("<img src='Imatges/sinImagen.jsp'><br>");
@@ -61,63 +63,56 @@
 					+ "'>Eliminar Cancion</a></p>");
 		}
 	%>
-
-<body>
 	<div id="controles">
 		<div class="trackinfo">
-			<h3 id="titulo"></h3>
-			<h3 id="artista"></h3>
+			<p id="titulo"></p>
+			<p id="artista"></p>
 		</div>
 		<div id="botones">
-			<button id="random" class="controles">
-				<img src="icons/random.png">
-			</button>
-			<button id="prev" class="controles">
+			<button id="prev" class="controles" onclick="prevTrack()">
 				<img src="icons/prev.png">
 			</button>
-			<button id="play" class="controles">
-				<img id="fotoPlay" src="icons/play.png">
+			<button id="play" class="controles" onclick="reproducir()">
+				<img src="icons/play.png">
 			</button>
-			<button id="next" class="controles">
+			<button id="next" class="controles" onclick="nextTrack()">
 				<img src="icons/next.png">
 			</button>
-			<button id="repeat" class="controles">
-				<img src="icons/repeat.png">
+			<button id="stop" class="controles" onclick="pausar()">
+				<img src="icons/stop.png">
+			</button>
+			<button id="random" class="controles" onclick="random()">
+				<img src="icons/random.png">
 			</button>
 		</div>
 		<div id="sliders">
-			<input type="range" id="durCancion" min="0" value="0" /> <input
-				type="range" min="0" max="100" value="50" class="slider"
-				id="volumen">
+			<input type="range" id="durCancion" min="0" value="0"
+				onchange="changeProgressBar()" /> <input type="range" min="0"
+				max="100" value="50" class="slider" onchange="volumen(this.value)"
+				onInput="volumen(this.value)" id="volumen">
 			<div class="currentTime"></div>
 			<div class="durationTime"></div>
 		</div>
 	</div>
-	<canvas id="canvas"></canvas>
-	<audio id="audio" src=""></audio>
-
 	<script>
 		var play = document.getElementById("play");
 		var next = document.getElementById("next");
 		var prev = document.getElementById("prev");
 		var titulaso = document.getElementById("titulo");
 		var artista = document.getElementById("artista");
-		var progressBar = document.getElementById("progress-bar");
-
+		var progressBar = document.getElementById("durCancion");
 		var current_track = 0;
-
 		var cancion, audio, duracion;
-
+		var playing = false;
 		var songs = [
 	<%for (CancionCompleta c : canciones) {
-				out.println("{title: \"" + c.getTitulo() + "\",artist: '" + c.getArtista() + "',url: 'ArchivosMusica/"
+				out.println("{title: \"" + c.getTitulo() + "\",artista: '" + c.getArtista() + "',url: 'ArchivosMusica/"
 						+ c.getArchivo() + "',},");
 			}%>
 		];
 		window.addEventListener('load', init(), false);
 
 		setInterval(updateProgressValue, 500);
-
 		function init() {
 			cancion = songs[current_track];
 			audio = new Audio();
@@ -171,24 +166,24 @@
 			} else {
 				next.setAttribute("onclick", "nextTrack()");
 				prev.setAttribute("onclick", "prevTrack()");
-
 			}
 		}
 		function reproducir() {
 			audio.play();
-			titulaso.innerHTML = cancion.title;
-			artista.innerHTML = cancion.artist;
+			updateInfo();
+			audio.onended = function() {
+				nextTrack();
+			};
 		}
 		function pausar() {
 			audio.pause();
 		}
 		function updateInfo() {
 			titulaso.innerHTML = cancion.title;
-			artista.innerHTML = cancion.artist;
+			artista.innerHTML = cancion.artista;
 		}
 		function volumen(volume_value) {
 			audio.volume = volume_value / 100;
-
 		}
 		function updateProgressValue() {
 			progressBar.max = audio.duration;
@@ -196,7 +191,6 @@
 			document.querySelector('.currentTime').innerHTML = formatTime(audio.currentTime);
 			formatTime(audio.duration);
 		};
-
 		function changeProgressBar() {
 			audio.currentTime = progressBar.value;
 		};
