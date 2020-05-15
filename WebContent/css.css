@@ -1,5 +1,135 @@
 @charset "UTF-8";
 
+html {
+	background-color: gray;
+}
+
+#akua {
+	color: white;
+	text-align: center;
+	margin-top: 27px;
+	font-size: 90px;
+	font-family: 'Dancing Script', cursive;
+	background: -webkit-linear-gradient(#03D2F9, #E3E3E3, #03D2F9);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover, a:visited:hover {
+	color: #03D2F9;
+	text-decoration: underline;
+}
+
+a:active {
+	color: white;
+}
+
+a:visited {
+	color: white;
+}
+
+#divLogo {
+	width: 100%;
+	height: 175px;
+	background-color: #181818;
+	top: 0;
+	left: 0;
+	position: absolute;
+	margin-bottom: 160px;
+	position: absolute;
+}
+
+#buscar {
+	margin-top: 200px;
+	text-align: center;
+}
+
+#generos {
+	text-align: center;
+}
+
+#generos h2 {
+	display: inline-block;
+	margin-left: 25px;
+	margin-right: 25px;
+	font-size: 30px;
+}
+
+.allGeneros {
+	margin-top: 20px;
+	border: 1px solid #181818;
+	padding: 40px;
+	border-radius: 300px;
+	background-color: #181818;
+}
+
+#buscar h3 {
+	font-family: 'Hind Madurai', sans-serif;
+}
+
+#formLogin {
+	margin-top: 200px;
+	text-align: center;
+}
+
+#formLogin p {
+	font-size: 35px;
+	margin-top: 25px;
+}
+
+#formLogin input[type='email'], #formLogin input[type='password'] {
+	width: 600px;
+	border-radius: 100px;
+	text-align: center;
+	height: 30px;
+}
+
+#formLogin input[type='submit'] {
+	height: 35px;
+	width: 60px;
+	border-radius: 25px;
+}
+
+#buscar input {
+	width: 500px;
+	text-align: center;
+	border-radius: 100px;
+	height: 25px;
+}
+
+#Logo {
+	width: 160px;
+	height: 160px;
+	top: 7px;
+	left: 20px;
+	position: absolute;
+}
+
+#cajaUsuario {
+	position: absolute;
+	top: 20px;
+	right: 25px;
+}
+
+#inicio {
+	position: absolute;
+	top: 125px;
+	right: 50px;
+}
+
+#fotoUser {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 10px;
+	border-radius: 100px;
+
+}
+
 #controles {
 	display: inline-block;
 	text-align: center;
@@ -7,6 +137,7 @@
 	width: 100%;
 	position: absolute;
 	bottom: 0;
+	left: 0;
 }
 
 #prev img, #play img, #next img, #stop img, #random img, #repeat img {
@@ -19,6 +150,7 @@
 	text-align: center;
 	margin: 0 auto;
 	border-radius: 50px;
+	margin-bottom: 15px;
 }
 
 #botones button {
@@ -34,6 +166,24 @@
 	grid-auto-rows: 10px;
 	grid-template-areas: "c a a a a a b b";
 	align-items: center;
+}
+
+#resultBus {
+	margin-top: 200px;
+}
+
+.resultArt {
+	display: inline-block;
+	margin-right: 85px;
+	text-align: center;
+}
+
+.fotoArtista {
+	margin-top: 30px;
+	width: 100px;
+	border-radius:100px;
+	height: 100px;
+	display: inline-block;
 }
 
 #durCancion {
@@ -89,4 +239,11 @@ input[type=range]:hover {
 
 #titulo, #artista {
 	color: white;
+}
+
+footer {
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+	left: 40%;
 }

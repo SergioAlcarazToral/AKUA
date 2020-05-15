@@ -12,8 +12,12 @@
 <link rel='stylesheet' type='text/css' href='css.css'>
 </head>
 <body>
+	<%
+		ListaReproduccion lista = (ListaReproduccion) request.getAttribute("lista");
+	%>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<img id="Logo" src="icons/akua negro.png">
+			<h1 id="akua"><%out.print(lista.getNombre());%></h1>
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -29,18 +33,16 @@
 
 			ArrayList<CancionCompleta> canciones = (ArrayList<CancionCompleta>) request.getAttribute("canciones");
 
-			ListaReproduccion lista = (ListaReproduccion) request.getAttribute("lista");
-
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + borrarLista + "?id=" + usuario.getId()
 							+ "&nombre=" + lista.getNombre() + "'>Borrar lista</a> | <a href='" + inicio
 							+ "'>Inicio</a> | <a href='ReproductorAnimadoLista?nombre=" + lista.getNombre()
 							+ "'>Reproductor animado</a>");
 				} else {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + borrarLista + "?id=" + usuario.getId()
 							+ "&nombre=" + lista.getNombre() + "'>Borrar lista</a> | <a href='" + baja
@@ -49,7 +51,7 @@
 							+ "'>Reproductor animado</a>");
 				}
 			} else {
-				out.println("<img src='Imatges/sinImagen.jsp'><br>");
+				out.println("<img id='fotoUser' src='Imatges/sinImagen.jsp'><br>");
 				out.print("<a href='" + login + "'>Login</a>");
 				out.print("| <a href='" + registrar + "'>Registrar</a> | <a href='" + inicio + "'>Inicio</a>");
 			}

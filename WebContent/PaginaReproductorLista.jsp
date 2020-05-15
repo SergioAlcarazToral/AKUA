@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<img id="Logo" src="icons/akua negro.png">
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -40,8 +40,8 @@
 			ListaReproduccion lista = (ListaReproduccion) request.getAttribute("lista");
 
 			if (usuario != null) {
-				out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
-				out.print("<p>" + usuario.getNombre() + "</p>");
+				out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
+				out.print("<p id='userNombre'>" + usuario.getNombre() + "</p>");
 				out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja + "'>Eliminar cuenta</a> | <a href='"
 						+ inicio + "'>Inicio</a>");
 			}

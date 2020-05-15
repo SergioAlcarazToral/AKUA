@@ -4,10 +4,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
+<link rel='stylesheet' type='text/css' href='css.css'>
+
 </head>
 <body>
-	<form method="post" action="Login">
+<div id="divLogo">
+		<img id="Logo" src="icons/akua negro.png">
+		<h1 id="akua">LOGIN</h1>
+		<a id="inicio" href="Principal">Inicio</a>
+	</div>
+	<form id='formLogin' method="post" action="Login">
 		<p>Email del usuario:</p>
 		<input type="email" name="correo">
 		<p>Password:</p>

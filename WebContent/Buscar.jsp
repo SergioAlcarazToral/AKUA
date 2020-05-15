@@ -10,10 +10,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>AKUA</title>
+<link rel='stylesheet' type='text/css' href='css.css'>
+
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<img id="Logo" src="icons/akua negro.png">
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -26,29 +28,31 @@
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
-					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearArtista + "'>Añadir Artista</a> | <a href='" + inicio +"'>Inicio</a>");
+					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearArtista + "'>Añadir Artista</a>");
 				} else {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
-					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja + "'>Eliminar cuenta</a> | <a href='" + inicio +"'>Inicio</a>");
+					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja + "'>Eliminar cuenta</a>");
 				}
 			} else {
-				out.println("<img src='Imatges/sinImagen.jsp'><br>");
+				out.println("<img id='fotoUser' src='Imatges/sinImagen.jpg'><br>");
 				out.print("<a href='" + login + "'>Login</a>");
-				out.print("| <a href='" + registrar + "'>Registrar</a> | <a href='" + inicio +"'>Inicio</a>");
+				out.print("| <a href='" + registrar + "'>Registrar</a>");
 			}
 		%>
 	</div>
-
+	<h1 id="resultBus">Resultado de la busqueda</h1>
+	<h2>Artistas</h2>
 	<%
 		ArrayList<Artista> artistas = (ArrayList) request.getAttribute("artistas");
 
 		for (Artista a : artistas) {
-			out.print("<a href='PaginaArtista?id=" + a.getId() +"'><img src='ImgArtistas/" + a.getFoto() + "'><p>" + a.getNombre() + "</p></a>");
+			out.print("<a class='resultArt' href='PaginaArtista?id=" + a.getId() +"'><img class='fotoArtista' src='ImgArtistas/" + a.getFoto() + "'><p>" + a.getNombre() + "</p></a>");
 		}
 	%>
+	<h2>Albums</h2>
 	<footer>Web creada por: Sergio Alcaraz Toral copyright:2020</footer>
 </body>
 </html>

@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<img id="Logo" src="icons/akua negro.png">
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -40,9 +40,8 @@
 			ArrayList<CancionCompleta> canciones = (ArrayList<CancionCompleta>) request.getAttribute("canciones");
 
 			if (usuario != null) {
-
-				out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
-				out.print("<p>" + usuario.getNombre() + "</p>");
+				out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
+				out.print("<p id='userNombre'>" + usuario.getNombre() + "</p>");
 				out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja + "'>Eliminar cuenta</a> | <a href='"
 						+ inicio + "'>Inicio</a>");
 			}
@@ -104,8 +103,8 @@
 
 			document.getElementById("play").addEventListener("click",
 					reproducir);
-			document.getElementById("repeat").addEventListener("click",
-					repetir);
+			document.getElementById("repeat")
+					.addEventListener("click", repetir);
 			document.getElementById("next")
 					.addEventListener("click", nextTrack);
 			document.getElementById("prev")
@@ -149,10 +148,10 @@
 			}
 			function repetir() {
 				if (audio.hasAttribute("loop")) {
-					audio.loop =false;
+					audio.loop = false;
 				} else {
-					audio.loop =true;
-					current_track = current_track -1;
+					audio.loop = true;
+					current_track = current_track - 1;
 				}
 
 			}
@@ -263,8 +262,8 @@
 						barHeight = dataArray[i] * 3;
 
 						var r = 0;
-                        var g = 255 * (i / bufferLength);
-                        var b = 255 * (i / bufferLength);
+						var g = 255 * (i / bufferLength);
+						var b = 255 * (i / bufferLength);
 
 						ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
 						ctx

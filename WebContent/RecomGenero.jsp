@@ -34,7 +34,8 @@
 <body>
 
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<img id="Logo" src="icons/akua negro.png">
+		<h1 id="akua">RECOMENDACIONES</h1>
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -62,13 +63,12 @@
 					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
-							+ "'>Eliminar cuenta</a> | <a href='" + inicio
-							+ "'>Inicio</a>");
+							+ "'>Eliminar cuenta</a> | <a href='" + inicio + "'>Inicio</a>");
 				}
 			} else {
-				out.println("<img src='Imatges/sinImagen.jsp'><br>");
-				out.print("<a href='" + login + "'>Login</a>");
-				out.print("| <a href='" + registrar + "'>Registrar</a> | <a href='" + inicio + "'>Inicio</a>");
+				out.println("<img  id='fotoUser' src='Imatges/sinImagen.jpg'><br>");
+				out.print("<a href='" + login + "'>Login</a> | ");
+				out.print("<a href='" + registrar + "'>Registrar</a>");
 			}
 		%>
 	</div>
@@ -94,8 +94,10 @@
 
 		}
 	%>
-	<form method="get" action ="ReproductorAnimadoRecom">
-		<%request.setAttribute("canciones", canciones); %>
+	<form method="get" action="ReproductorAnimadoRecom">
+		<%
+			request.setAttribute("canciones", canciones);
+		%>
 	</form>
 	<div id="controles">
 		<div class="trackinfo">
