@@ -8,10 +8,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Editar un album</title>
+<link rel='stylesheet' type='text/css' href='css.css'>
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 	</div>
 	<div id="cajaUsuario">
 		<%

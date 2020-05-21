@@ -23,18 +23,12 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>Canciones recomendadas por genero</title>
-<script type="text/javascript">
-	$('div.canvasContainer > canvas').css('-moz-transform',
-			'scale(1) translate(0px, 0px)').css('-webkit-transform',
-			'scale(1) translate(0px, 0px)').css('-o-transform',
-			'scale(1) translate(0px, 0px)').css('transform',
-			'scale(1) translate(0px, 0px)');
-</script>
+
 </head>
 <body>
 
 	<div id="divLogo">
-		<img id="Logo" src="icons/akua negro.png">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 		<h1 id="akua">RECOMENDACIONES</h1>
 	</div>
 	<div id="cajaUsuario">
@@ -55,44 +49,50 @@
 
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + inicio + "'>Inicio</a> | <a href='"
 							+ inicio + "'>Inicio</a>");
 				} else {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
 							+ "'>Eliminar cuenta</a> | <a href='" + inicio + "'>Inicio</a>");
 				}
 			} else {
-				out.println("<img  id='fotoUser' src='Imatges/sinImagen.jpg'><br>");
+				out.println("<img id='fotoUser' id='fotoUser' src='Imatges/sinImagen.jpg'><br>");
 				out.print("<a href='" + login + "'>Login</a> | ");
 				out.print("<a href='" + registrar + "'>Registrar</a>");
 			}
 		%>
 	</div>
 	<%
-		out.println("<h2>" + genero.getNombre() + "</h2>");
+		out.println("<h2 id='h2Intro'>" + genero.getNombre() + "</h2>");
+		out.print("<div id='cancionesRecom'>");
+		out.print("<table class='table table-hover'>");
 
 		for (CancionCompleta c : canciones) {
 			if (usuario != null) {
-				out.println("<p>" + c.getTitulo() + "</p>");
-				out.print("<div class='dropdown'>"
+				out.print("<tr><td>" + c.getTitulo() + "</td><td>" + c.getAlbum() + "</td><td>" + c.getArtista()
+						+ "</td>");
+				out.print("<td><div class='btn-group'>"
 						+ "<button class='btn btn-primary dropdown-toggle' type='button' data-toggle='dropdown'>Añadir a lista"
-						+ "<span class='caret'></span></button>" + "<ul class='dropdown-menu'>");
+						+ "<span class='caret'></span><span class='sr-only'>Toggle Dropdown</span></button>"
+						+ "<ul class='dropdown-menu' role='menu'>");
 				for (ListaReproduccion l : listas) {
-					out.print("<li><a href='" + agregarCancionLista + "?nombre=" + l.getNombre() + "&idUsuario="
-							+ usuario.getId() + "&idCancion=" + c.getId() + "'>" + l.getNombre() + "</a></li>");
+					out.print("<li><a href='" + agregarCancionLista + "?nombre=" + l.getNombre() + "&idCancion="
+							+ c.getId() + "'>" + l.getNombre() + "</a></li>");
 				}
-				out.print("</ul></div>");
+				out.print("</ul></div></td><br>");
 
 			} else {
-				out.println("<p>" + c.getTitulo() + "</p>");
-				//out.print("</ul></div>");
+				out.print("<tr><td>" + c.getTitulo() + "</td><td>" + c.getAlbum() + "</td><td>" + c.getArtista()
+						+ "</td></tr>");
 			}
 
 		}
+		out.print("<table>");
+		out.print("</div>");
 	%>
 	<form method="get" action="ReproductorAnimadoRecom">
 		<%
@@ -105,20 +105,20 @@
 			<p id="artista"></p>
 		</div>
 		<div id="botones">
+			<button id="random" class="controles" onclick="random()">
+				<img id='fotoRandom' src="icons/random.png">
+			</button>
 			<button id="prev" class="controles" onclick="prevTrack()">
 				<img src="icons/prev.png">
 			</button>
 			<button id="play" class="controles" onclick="reproducir()">
-				<img src="icons/play.png">
+				<img id="fotoPlay" src="icons/play.png">
 			</button>
 			<button id="next" class="controles" onclick="nextTrack()">
 				<img src="icons/next.png">
 			</button>
-			<button id="stop" class="controles" onclick="pausar()">
-				<img src="icons/stop.png">
-			</button>
-			<button id="random" class="controles" onclick="random()">
-				<img src="icons/random.png">
+			<button id="repeat" class="controles" onclick="repetir()">
+				<img id='fotoRepeat' src="icons/repeat.png">
 			</button>
 		</div>
 		<div id="sliders">
@@ -203,30 +203,54 @@
 			if (next.getAttribute("onclick") == "nextTrack()") {
 				next.setAttribute("onclick", "nextTrackRandom()");
 				prev.setAttribute("onclick", "prevTrackcomplete()");
+				document.getElementById("fotoRandom").setAttribute("src",
+						"icons/randomActive.png");
 			} else {
 				next.setAttribute("onclick", "nextTrack()");
 				prev.setAttribute("onclick", "prevTrack()");
+				document.getElementById("fotoRandom").setAttribute("src",
+						"icons/random.png");
 			}
+		}
+		function repetir() {
+			if (audio.hasAttribute("loop")) {
+				audio.loop = false;
+				document.getElementById("fotoRepeat").setAttribute("src",
+						"icons/repeat.png");
+			} else {
+				audio.loop = true;
+				document.getElementById("fotoRepeat").setAttribute("src", "icons/repeatActive.png");
+				current_track = current_track - 1;
+			}
+
 		}
 		function reproducir() {
 			audio.play();
-			titulaso.innerHTML = cancion.title;
-			artista.innerHTML = cancion.artist;
+			updateInfo();
+			document.getElementById("play").removeEventListener("click",
+					reproducir);
+			document.getElementById("play").addEventListener("click", pausar);
+			document.getElementById("fotoPlay").setAttribute("src",
+					"icons/stop.png");
 			audio.onended = function() {
 				nextTrack();
 			};
 		}
 		function pausar() {
 			audio.pause();
+			document.getElementById("play")
+					.removeEventListener("click", pausar);
+			document.getElementById("play").addEventListener("click",
+					reproducir);
+			document.getElementById("fotoPlay").setAttribute("src",
+					"icons/play.png");
 		}
-
 		function updateInfo() {
 			titulaso.innerHTML = cancion.title;
 			artista.innerHTML = cancion.artist;
 		}
 		function volumen(volume_value) {
 			audio.volume = volume_value / 100;
-
 		}
 		function updateProgressValue() {
 			progressBar.max = audio.duration;
@@ -234,7 +258,6 @@
 			document.querySelector('.currentTime').innerHTML = formatTime(audio.currentTime);
 			formatTime(audio.duration);
 		};
-
 		function changeProgressBar() {
 			audio.currentTime = progressBar.value;
 		};

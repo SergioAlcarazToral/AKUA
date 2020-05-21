@@ -10,9 +10,8 @@
 </head>
 <body>
 <div id="divLogo">
-		<img id="Logo" src="icons/akua negro.png">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 		<h1 id="akua">LOGIN</h1>
-		<a id="inicio" href="Principal">Inicio</a>
 	</div>
 	<form id='formLogin' method="post" action="Login">
 		<p>Email del usuario:</p>

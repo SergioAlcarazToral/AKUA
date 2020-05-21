@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.AlbumEJB;
 import ejb.ArtistaEJB;
 import ejb.SesionesEJB;
@@ -33,6 +36,7 @@ import pojo.Usuario;
 public class CrearAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "ImgAlbums";
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -117,7 +121,8 @@ public class CrearAlbum extends HttpServlet {
 
 			response.sendRedirect("Principal");
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerERROR.error("Error al crear el album para el artista deseado");
+			response.sendRedirect("CrearAlbum?id=" + idArtista);
 		}
 
 	}

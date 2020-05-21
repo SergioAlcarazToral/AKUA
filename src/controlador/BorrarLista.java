@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.ListaReproduccion;
@@ -24,6 +27,7 @@ import pojo.Usuario;
 @WebServlet("/BorrarLista")
 public class BorrarLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -42,25 +46,28 @@ public class BorrarLista extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
-
-		//Parametros necesarios 
-		String nombreLista = request.getParameter("nombre");
-		String id = request.getParameter("id");
+		try {
+			//Parametros necesarios 
+			String nombreLista = request.getParameter("nombre");
+			
+			//Transformamos los datos necesarios a int
+			
+			//Creamos un objeto lista
+			ListaReproduccion lr = new ListaReproduccion();
+			
+			//Añadimos los datos
+			lr.setNombre(nombreLista);
+			lr.setIdUsuario(usuario.getId());
+			
+			//Borramos la lista
+			listaEJB.deleteListaR(lr);
 		
-		//Transformamos los datos necesarios a int
-		int idUsuario = Integer.parseInt(id);
+			response.sendRedirect("Principal");
+		} catch (Exception e) {
+			loggerERROR.error("No se ha podido eliminar una lista de un usuario");
+			response.sendRedirect("Error");
+		}
 		
-		//Creamos un objeto lista
-		ListaReproduccion lr = new ListaReproduccion();
-		
-		//Añadimos los datos
-		lr.setNombre(nombreLista);
-		lr.setIdUsuario(idUsuario);
-		
-		//Borramos la lista
-		listaEJB.deleteListaR(lr);
-	
-		response.sendRedirect("Principal");
 		
 	}
 

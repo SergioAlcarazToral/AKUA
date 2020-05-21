@@ -31,13 +31,14 @@
 		cancion.id as id,
 		titulo, genero.nombre as genero, album.nombre as
 		album, artista.nombre as artista,archivo
-		from listareproduccion, cancion, genero,album,artista
+		from listaReproduccion, cancion, genero,album,artista
 		where
-		listareproduccion.idUsuario = #{idUsuario}
+		listareproduccion.idUsuario = 2
 		and idCancion is not null
 		and cancion.idAlbum = album.id
 		and cancion.idGenero = genero.id
-        and artista.id = album.idArtista;
+        and artista.id = album.idArtista
+        and listaReproduccion.idCancion = cancion.id;
 	</select>
 	<select id="getCancionesGenero"
 		resultType="pojo.CancionCompleta">

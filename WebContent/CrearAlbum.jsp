@@ -9,10 +9,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Crear un album</title>
+<link rel='stylesheet' type='text/css' href='css.css'>
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -33,9 +34,9 @@
 		<p>Nombre del album:</p>
 		<input type="text" name="nombre" required>
 		<p>Año del album</p>
-		<input type="number" name="anyo" required> 
+		<input type="number" name="anyo" required>
 		<%
-			out.print("<input type='hidden'value=" +idArtista.getId() + " name='idArtista'>");
+			out.print("<input type='hidden'value=" + idArtista.getId() + " name='idArtista'>");
 		%>
 		<p>
 			Foto del album <input type="file" name="foto"> <br> <input

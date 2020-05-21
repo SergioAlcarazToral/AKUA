@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="icons/akua negro.png">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 		<h1 id="akua">AKUA</h1>
 	</div>
 	<div id="cajaUsuario">
@@ -45,8 +45,8 @@
 							+ "'>Añadir Artista</a> | <a href='" + crearLista + "'>Crear lista</a> | <a href='"
 							+ crearGenero + "'>Crear genero</a>");
 					for (ListaReproduccion lista : listas) {
-						out.print("<p><a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre="
-								+ lista.getNombre() + "'>" + lista.getNombre() + "</a></p>");
+						out.print("<div id='lRepro'><p><a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre="
+								+ lista.getNombre() + "'>" + lista.getNombre() + "</a></p></div>");
 					}
 
 				} else {
@@ -54,10 +54,6 @@
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearLista
 							+ "'>Crear lista</a> | <a href='" + baja + "'>Eliminar cuenta</a>");
-					for (ListaReproduccion lista : listas) {
-						out.print("<p><a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre="
-								+ lista.getNombre() + "'>" + lista.getNombre() + "</a></p>");
-					}
 				}
 			} else {
 				out.println("<img  id='fotoUser' src='Imatges/sinImagen.jpg'><br>");
@@ -66,11 +62,21 @@
 			}
 		%>
 	</div>
+	<%
+		if(usuario != null){
+			out.print("<div id='lRepro'><h2 id='h2Intro'>Listas</h2>");
+			for (ListaReproduccion lista : listas) {
+				out.print("<p><a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre="
+						+ lista.getNombre() + "'>" + lista.getNombre() + "</a></p>");
+			}
+			out.print("</div>");
+		}
+	%>
 	<form id="buscar" method="get" action="Buscar">
 		<h3>Busca tus canciones y artistas favoritos</h3>
 		<input type="text" name="buscar">
 	</form>
-	<h2 id="recomCancion">Canciones recomendadas por genero</h2>
+	<h2 id="recomCancion">Canciones recomendadas por genero</h2><br/><br/>
 	<%
 		ArrayList<Genero> generos = (ArrayList<Genero>) request.getAttribute("generos");
 		out.print("<div id='generos'>");

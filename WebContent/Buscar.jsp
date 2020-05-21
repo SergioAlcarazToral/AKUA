@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="icons/akua negro.png">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 	</div>
 	<div id="cajaUsuario">
 		<%

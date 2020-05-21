@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.ListaReproduccion;
+import pojo.Usuario;
 
 /**
  * Este servlet se encarga de que pueda insertarse una cancion en una lista de reproduccion
@@ -34,9 +36,14 @@ public class AgregarCancionLista extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session = request.getSession(false);
+
+		response.setContentType("text/html; charset=UTF-8");
+
+		Usuario usuario = sesionesEJB.usuarioLogeado(session);
+
 		//Parametros para insertar
 		String idCancion = request.getParameter("idCancion");
-		String idUsuario = request.getParameter("idUsuario");
 		String lista = request.getParameter("nombre");
 
 		//Creamos una lista con los datos
@@ -44,11 +51,10 @@ public class AgregarCancionLista extends HttpServlet {
 
 		//Transformamos los id en int
 		Integer idSong = Integer.parseInt(idCancion);
-		Integer idUser = Integer.parseInt(idUsuario);
 
 		//Añadimos los datos
 		listaR.setNombre(lista);
-		listaR.setIdUsuario(idUser);
+		listaR.setIdUsuario(usuario.getId());
 		listaR.setIdCancion(idSong);
 		
 		//Insertamos en la base de datos

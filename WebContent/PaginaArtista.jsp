@@ -11,10 +11,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Pagina del artista</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel='stylesheet' type='text/css' href='css.css'>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -32,29 +40,29 @@
 			ArrayList<Album> albumes = (ArrayList<Album>) request.getAttribute("albumes");
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearAlbum + "?id=" + artista.getId()
 							+ "'>Añadir album</a> | <a href='" + eliminarArtista + "?id=" + artista.getId()
 							+ "'>Eliminar artista</a> | <a href='" + inicio + "'>Inicio</a>");
 				} else {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
 							+ "'>Eliminar cuenta</a> | <a href='" + inicio + "'>Inicio</a>");
 				}
 			} else {
-				out.println("<img src='Imatges/sinImagen.jsp'><br>");
+				out.println("<img id='fotoUser' src='Imatges/sinImagen.jsp'><br>");
 				out.print("<a href='" + login + "'>Login</a>");
-				out.print("| <a href='" + registrar + "'>Registrar</a> | <a href='" + inicio + "'>Inicio</a>");
+				out.print(" | <a href='" + registrar + "'>Registrar</a> | <a href='" + inicio + "'>Inicio</a>");
 			}
 		%>
 	</div>
 	<%
-		out.print("<h2>" + artista.getNombre() + "</h2>");
-		out.print("<p>Albumes del artista</p>");
+		out.print("<h2 id='h2Intro'>" + artista.getNombre() + "</h2>");
+		out.print("<h3>Albumes del artista</h3>");
 		for (Album a : albumes) {
-			out.println("<a href='" + paginaAlbum + "?id=" + artista.getId() + "'><img src='ImgAlbums/"
+			out.println("<a class='resultAlbum' href='" + paginaAlbum + "?id=" + artista.getId() + "'><img class='fotoAlbum' src='ImgAlbums/"
 					+ a.getFoto() + "'><p>" + a.getNombre() + "</p></a>");
 		}
 	%>

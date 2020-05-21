@@ -24,7 +24,7 @@
 </head>
 <body>
 	<div id="divLogo">
-		<img id="Logo" src="">
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -51,7 +51,7 @@
 
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearCancion + "?id=" + album.getId()
 							+ "'>Crear cancion</a> | <a href='" + editarAlbum + "?id=" + +album.getId()
@@ -60,7 +60,7 @@
 							+ "'>Inicio</a> | <a href='ReprductorAnimadoAlbum?id=" + album.getId()
 							+ "'>Reproductor animado</a>");
 				} else {
-					out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
 					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
 							+ "'>Eliminar cuenta</a> | <a href='" + inicio
@@ -68,30 +68,31 @@
 							+ "'>Reproductor animado</a>");
 				}
 			} else {
-				out.println("<img src='Imatges/sinImagen.jsp'><br>");
+				out.println("<img id='fotoUser' src='Imatges/sinImagen.jsp'><br>");
 				out.print("<a href='" + login + "'>Login</a>");
 				out.print("| <a href='" + registrar + "'>Registrar</a> | <a href='" + inicio + "'>Inicio</a>");
 			}
 		%>
 	</div>
 	<%
-		out.println("<h2>" + album.getNombre() + "</h2>");
+		out.println("<h2 id='h2Intro'>" + album.getNombre() + "</h2>");
 		out.println(album.getAnyo());
-
+		out.print("<table class='table table-hover'>");
 		for (CancionCompleta c : canciones) {
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.println("<p>" + c.getTitulo() + " | <a href='" + eliminarCancion + "?id=" + c.getId()
-							+ "'>Eliminar Cancion</a> | <a href='" + editarCancion + "?id=" + c.getId()
-							+ "'>Editar Cancion</a></p>");
-					out.print("<div class='dropdown'>"
+					out.println("<tr><td>" + c.getTitulo() + "</td> | <td><a href='" + eliminarCancion + "?id="
+							+ c.getId() + "'>Eliminar Cancion</a></td> | </td><a href='" + editarCancion + "?id="
+							+ c.getId() + "'>Editar Cancion</a></td>");
+					out.print("<td><div class='btn-group'>"
 							+ "<button class='btn btn-primary dropdown-toggle' type='button' data-toggle='dropdown'>Añadir a lista"
-							+ "<span class='caret'></span></button>" + "<ul class='dropdown-menu'>");
+							+ "<span class='caret'></span><span class='sr-only'>Toggle Dropdown</span></button>"
+							+ "<ul class='dropdown-menu' role='menu'>");
 					for (ListaReproduccion l : listas) {
 						out.print("<li><a href='" + agregarCancionLista + "?nombre=" + l.getNombre() + "&idUsuario="
 								+ usuario.getId() + "&idCancion=" + c.getId() + "'>" + l.getNombre() + "</a></li>");
 					}
-					out.print("</ul></div>");
+					out.print("</ul></div></td><br>");
 
 				} else {
 					out.println("<p>" + c.getTitulo() + "</p>");
@@ -105,7 +106,7 @@
 					out.print("</ul></div>");
 				}
 			} else {
-				out.println("<p>" + c.getTitulo() + "</p>");
+				out.print("<tr><td>" + c.getTitulo() + "</td>><td>" + c.getArtista() + "</td></tr>");
 			}
 		}
 	%>
@@ -115,20 +116,20 @@
 			<p id="artista"></p>
 		</div>
 		<div id="botones">
+			<button id="random" class="controles" onclick="random()">
+				<img id='fotoRandom' src="icons/random.png">
+			</button>
 			<button id="prev" class="controles" onclick="prevTrack()">
 				<img src="icons/prev.png">
 			</button>
 			<button id="play" class="controles" onclick="reproducir()">
-				<img src="icons/play.png">
+				<img id="fotoPlay" src="icons/play.png">
 			</button>
 			<button id="next" class="controles" onclick="nextTrack()">
 				<img src="icons/next.png">
 			</button>
-			<button id="stop" class="controles" onclick="pausar()">
-				<img src="icons/stop.png">
-			</button>
-			<button id="random" class="controles" onclick="random()">
-				<img src="icons/random.png">
+			<button id="repeat" class="controles" onclick="repetir()">
+				<img id='fotoRepeat' src="icons/repeat.png">
 			</button>
 		</div>
 		<div id="sliders">
@@ -159,6 +160,7 @@
 						+ c.getArchivo() + "',},");
 			}%>
 		];
+
 		window.addEventListener('load', init(), false);
 
 		setInterval(updateProgressValue, 500);
@@ -213,30 +215,54 @@
 			if (next.getAttribute("onclick") == "nextTrack()") {
 				next.setAttribute("onclick", "nextTrackRandom()");
 				prev.setAttribute("onclick", "prevTrackcomplete()");
+				document.getElementById("fotoRandom").setAttribute("src",
+						"icons/randomActive.png");
 			} else {
 				next.setAttribute("onclick", "nextTrack()");
 				prev.setAttribute("onclick", "prevTrack()");
-
+				document.getElementById("fotoRandom").setAttribute("src",
+						"icons/random.png");
 			}
+		}
+		function repetir() {
+			if (audio.hasAttribute("loop")) {
+				audio.loop = false;
+				document.getElementById("fotoRepeat").setAttribute("src",
+						"icons/repeat.png");
+			} else {
+				audio.loop = true;
+				document.getElementById("fotoRepeat").setAttribute("src", "icons/repeatActive.png");
+				current_track = current_track - 1;
+			}
+
 		}
 		function reproducir() {
 			audio.play();
 			updateInfo();
+			document.getElementById("play").removeEventListener("click",
+					reproducir);
+			document.getElementById("play").addEventListener("click", pausar);
+			document.getElementById("fotoPlay").setAttribute("src",
+					"icons/stop.png");
 			audio.onended = function() {
 				nextTrack();
 			};
 		}
 		function pausar() {
 			audio.pause();
+			document.getElementById("play")
+					.removeEventListener("click", pausar);
+			document.getElementById("play").addEventListener("click",
+					reproducir);
+			document.getElementById("fotoPlay").setAttribute("src",
+					"icons/play.png");
 		}
-
 		function updateInfo() {
 			titulaso.innerHTML = cancion.title;
 			artista.innerHTML = cancion.artista;
 		}
 		function volumen(volume_value) {
 			audio.volume = volume_value / 100;
-
 		}
 		function updateProgressValue() {
 			progressBar.max = audio.duration;
@@ -244,7 +270,6 @@
 			document.querySelector('.currentTime').innerHTML = formatTime(audio.currentTime);
 			formatTime(audio.duration);
 		};
-
 		function changeProgressBar() {
 			audio.currentTime = progressBar.value;
 		};

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.SesionesEJB;
 import ejb.UsuarioEJB;
 import pojo.Usuario;
@@ -24,6 +27,7 @@ import pojo.Usuario;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	UsuarioEJB usuarioEJB;
@@ -77,8 +81,8 @@ public class Login extends HttpServlet {
 			} catch (Exception e) {
 				response.getWriter().append("Error al iniciar sesion");
 				// Aqui va el loger
+				loggerERROR.error("Errores para iniciar sesion debido a que los datos son incorrectos");
 			}
-
 			response.sendRedirect("Principal");
 		} else {
 
@@ -87,10 +91,10 @@ public class Login extends HttpServlet {
 			if (usuario == null) {
 				// No hemos encontrado al usuario, informamos que hay un error
 				response.sendRedirect("Login?error=hay");
+				loggerERROR.error("Errores a la hora de hacer login debido a que el usuario no existe o los parametros son incorrectos");
 			} else {
 				session = request.getSession(true);
 				sesionesEJB.loginUsuario(session, usuario);
-
 				// Lo redirigimos a la pagina principal
 				response.sendRedirect("Principal");
 			}

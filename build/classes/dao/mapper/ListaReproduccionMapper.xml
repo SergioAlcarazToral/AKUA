@@ -15,16 +15,16 @@
 		SELECT * FROM listaReproduccion where idUsuario = #{idUsuario} and nombre = #{nombre} limit 1;
 	</select>
 
-	<insert id='insertListaR' parameterType='ListaReproduccion'>
+	<insert id='insertListaR' parameterType='pojo.ListaReproduccion'>
 		INSERT INTO listaReproduccion(nombre,idUsuario) values(#{nombre},#{idUsuario})
 	</insert>
 
-	<insert id='insertCancion' parameterType='ListaReproduccion'
+	<insert id='insertCancion' parameterType='pojo.ListaReproduccion'
 		useGeneratedKeys='true' keyProperty='id'>
 		INSERT INTO listaReproduccion(nombre,idUsuario,idCancion) values(#{nombre},#{idUsuario},#{idCancion})
 	</insert>
 
-	<update id='updateListaR' parameterType='ListaReproduccion'>
+	<update id='updateListaR' parameterType='pojo.ListaReproduccion'>
 		UPDATE listaReproduccion
 		SET
 		nombre = #{nombre},
@@ -33,16 +33,16 @@
 		WHERE idUsuario = #{idUsuario}
 	</update>
 
-	<delete id='deleteListasUsuario' parameterType='ListaReproduccion'>
+	<delete id='deleteListasUsuario' parameterType='pojo.ListaReproduccion'>
 		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre is not null
 	</delete>
 
 
-	<delete id='deleteListaR' parameterType='ListaReproduccion'>
+	<delete id='deleteListaR' parameterType='pojo.ListaReproduccion'>
 		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre}
 	</delete>
 
-	<delete id='deleteCancionLista' parameterType='ListaReproduccion'>
+	<delete id='deleteCancionLista' parameterType='pojo.ListaReproduccion'>
 		DELETE FROM listaReproduccion WHERE idUsuario = #{idUsuario} and nombre = #{nombre} and idCancion = #{idCancion}
 	</delete>
 </mapper>

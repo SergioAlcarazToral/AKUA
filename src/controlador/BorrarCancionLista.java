@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.ListaReproduccion;
@@ -24,6 +27,7 @@ import pojo.Usuario;
 @WebServlet("/BorrarCancionLista")
 public class BorrarCancionLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -42,28 +46,30 @@ public class BorrarCancionLista extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
+		try {
+			// Parametros para poder borrar la cancion de una lista
+			String idCancion = request.getParameter("idCancion");
+			String nombre = request.getParameter("nombre");
 
-		// Parametros para poder borrar la cancion de una lista
-		String idCancion = request.getParameter("idCancion");
-		String idUsuario = request.getParameter("idUsuario");
-		String lista = request.getParameter("nombre");
+			// Creamos una lista de reproduccion
+			ListaReproduccion listaR = new ListaReproduccion();
 
-		// Creamos una lista de reproduccion
-		ListaReproduccion listaR = new ListaReproduccion();
+			// Transformamos los parametros necesarios en int
+			Integer idSong = Integer.parseInt(idCancion);
 
-		// Transformamos los parametros necesarios en int
-		Integer idSong = Integer.parseInt(idCancion);
-		Integer idUser = Integer.parseInt(idUsuario);
+			// Añadimos los datos
+			listaR.setNombre(nombre);
+			listaR.setIdUsuario(usuario.getId());
+			listaR.setIdCancion(idSong);
 
-		// Añadimos los datos
-		listaR.setNombre(lista);
-		listaR.setIdUsuario(idUser);
-		listaR.setIdCancion(idSong);
+			// Borramos las cancion de la lista
+			listaEJB.deleteCancionLista(listaR);
 
-		// Borramos las cancion de la lista
-		listaEJB.deleteCancionLista(listaR);
-
-		response.sendRedirect("Principal");
+			response.sendRedirect("Principal");
+		} catch (Exception e) {
+			response.sendRedirect("Error");
+			loggerERROR.error("Errores para poder borrar una cancion de la lista");
+		}
 
 	}
 

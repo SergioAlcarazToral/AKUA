@@ -4,6 +4,10 @@ html {
 	background-color: gray;
 }
 
+body {
+	background-color: gray;
+}
+
 #akua {
 	color: white;
 	text-align: center;
@@ -42,6 +46,10 @@ a:visited {
 	position: absolute;
 	margin-bottom: 160px;
 	position: absolute;
+}
+
+#divLogo img {
+	z-index: 2;
 }
 
 #buscar {
@@ -95,6 +103,55 @@ a:visited {
 	border-radius: 25px;
 }
 
+#formRegistrar {
+	margin-top: 200px;
+	text-align: center;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+#lRepro {
+	position: absolute;
+	width: 175px;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background: #181818;
+	z-index: 1;
+}
+
+#lRepro h2 {
+	background: #181818;
+	color:white;
+}
+
+#lRepro p{
+	margin-left: 25px;
+}
+
+#formRegistrar a {
+	font-size: 35px;
+	margin-top: 25px;
+}
+
+#formRegistrar input[type='text'], input[type='email'], #formRegistrar input[type='password']
+	{
+	width: 600px;
+	border-radius: 100px;
+	text-align: center;
+	height: 30px;
+}
+
+#formRegistrar input[type='submit'] {
+	height: 35px;
+	width: 100px;
+	border-radius: 25px;
+}
+
 #buscar input {
 	width: 500px;
 	text-align: center;
@@ -127,7 +184,6 @@ a:visited {
 	height: 100px;
 	margin-bottom: 10px;
 	border-radius: 100px;
-
 }
 
 #controles {
@@ -138,6 +194,45 @@ a:visited {
 	position: absolute;
 	bottom: 0;
 	left: 0;
+}
+
+#h2Intro {
+	margin-top: 200px;
+	background-color: gray;
+	margin-bottom: 0;
+	text-align: center;
+	font-size: 50px;
+}
+
+#cancionesRecom {
+	background-color: gray;
+	padding-top: 50px;
+}
+
+#recomCancion {
+	margin-left: 190px;
+}
+
+#albumRecom {
+	text-align: left;
+	margin-left: 20%;
+}
+
+#artistaRecom {
+	text-align: left;
+	margin-left: 20%;
+}
+
+.dropdown {
+	position: absolute;
+	right: 30px;
+}
+
+#cancionesRecom p, .dropdown {
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+	color
 }
 
 #prev img, #play img, #next img, #stop img, #random img, #repeat img {
@@ -176,14 +271,32 @@ a:visited {
 	display: inline-block;
 	margin-right: 85px;
 	text-align: center;
+	background-color: gray;
+}
+
+.resultAlbum {
+	display: inline-block;
+	margin-right: 85px;
+	text-align: center;
+	background-color: gray;
+}
+
+.fotoAlbum {
+	margin-top: 30px;
+	width: 100px;
+	border-radius: 100px;
+	height: 100px;
+	display: inline-block;
+	background-color: gray;
 }
 
 .fotoArtista {
 	margin-top: 30px;
 	width: 100px;
-	border-radius:100px;
+	border-radius: 100px;
 	height: 100px;
 	display: inline-block;
+	background-color: gray;
 }
 
 #durCancion {

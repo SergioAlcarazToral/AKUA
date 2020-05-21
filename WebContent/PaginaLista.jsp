@@ -16,8 +16,12 @@
 		ListaReproduccion lista = (ListaReproduccion) request.getAttribute("lista");
 	%>
 	<div id="divLogo">
-		<img id="Logo" src="icons/akua negro.png">
-			<h1 id="akua"><%out.print(lista.getNombre());%></h1>
+		<a href="Principal"><img id="Logo" src="icons/akua negro.png"></a>
+		<h1 id="akua">
+			<%
+				out.print(lista.getNombre());
+			%>
+		</h1>
 	</div>
 	<div id="cajaUsuario">
 		<%
@@ -57,11 +61,12 @@
 			}
 		%>
 	</div>
+	
 	<%
-		out.println("<h2>" + lista.getNombre() + "</h2>");
+		out.println("<h2 id='h2Intro'>" + lista.getNombre() + "</h2>");
 		for (CancionCompleta c : canciones) {
 			out.println("<p>" + c.getTitulo() + " | <a href='" + eliminarCancion + "?idCancion=" + c.getId()
-					+ "&nombre=" + lista.getNombre() + "&idUsuario=" + usuario.getId()
+					+ "&nombre=" + lista.getNombre()
 					+ "'>Eliminar Cancion</a></p>");
 		}
 	%>
@@ -71,20 +76,20 @@
 			<p id="artista"></p>
 		</div>
 		<div id="botones">
+			<button id="random" class="controles" onclick="random()">
+				<img src="icons/random.png">
+			</button>
 			<button id="prev" class="controles" onclick="prevTrack()">
 				<img src="icons/prev.png">
 			</button>
 			<button id="play" class="controles" onclick="reproducir()">
-				<img src="icons/play.png">
+				<img id="fotoPlay" src="icons/play.png">
 			</button>
 			<button id="next" class="controles" onclick="nextTrack()">
 				<img src="icons/next.png">
 			</button>
-			<button id="stop" class="controles" onclick="pausar()">
-				<img src="icons/stop.png">
-			</button>
-			<button id="random" class="controles" onclick="random()">
-				<img src="icons/random.png">
+			<button id="repeat" class="controles" onclick="repetir()">
+				<img src="icons/repeat.png">
 			</button>
 		</div>
 		<div id="sliders">
@@ -103,8 +108,11 @@
 		var titulaso = document.getElementById("titulo");
 		var artista = document.getElementById("artista");
 		var progressBar = document.getElementById("durCancion");
+		
 		var current_track = 0;
+		
 		var cancion, audio, duracion;
+		
 		var playing = false;
 		var songs = [
 	<%for (CancionCompleta c : canciones) {
@@ -112,9 +120,11 @@
 						+ c.getArchivo() + "',},");
 			}%>
 		];
+		
 		window.addEventListener('load', init(), false);
 
 		setInterval(updateProgressValue, 500);
+		
 		function init() {
 			cancion = songs[current_track];
 			audio = new Audio();
@@ -173,12 +183,24 @@
 		function reproducir() {
 			audio.play();
 			updateInfo();
+			document.getElementById("play").removeEventListener("click",
+					reproducir);
+			document.getElementById("play").addEventListener("click",
+					pausar);
+			document.getElementById("fotoPlay").setAttribute("src",
+					"icons/stop.png");
 			audio.onended = function() {
 				nextTrack();
 			};
 		}
 		function pausar() {
 			audio.pause();
+			document.getElementById("play").removeEventListener("click",
+					pausar);
+			document.getElementById("play").addEventListener("click",
+					reproducir);
+			document.getElementById("fotoPlay").setAttribute("src",
+					"icons/play.png");
 		}
 		function updateInfo() {
 			titulaso.innerHTML = cancion.title;
