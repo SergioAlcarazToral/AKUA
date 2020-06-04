@@ -12,11 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.AlbumEJB;
 import ejb.ArtistaEJB;
+import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.Album;
 import pojo.Artista;
+import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
@@ -28,6 +33,7 @@ import pojo.Usuario;
 @WebServlet("/PaginaArtista")
 public class PaginaArtista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	ArtistaEJB artistaEJB;
@@ -37,6 +43,9 @@ public class PaginaArtista extends HttpServlet {
 
 	@EJB
 	SesionesEJB sesionesEJB;
+
+	@EJB
+	ListaReproduccionEJB listasEJB;
 
 	/**
 	 * Muestra la pagina del artista
@@ -56,11 +65,19 @@ public class PaginaArtista extends HttpServlet {
 
 			ArrayList<Album> albumes = albumEJB.getAlbumesArtista(artista.getId());
 
+			ArrayList<ListaReproduccion> listas;
+
+			if (usuario != null) {
+				listas = listasEJB.getListasUsuario(usuario.getId());
+
+				request.setAttribute("listas", listas);
+			}
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("artista", artista);
 			request.setAttribute("albumes", albumes);
 			rs.forward(request, response);
 		} catch (Exception e) {
+			loggerERROR.error("No se pudo mostrar la pagina del artista");
 			response.sendRedirect("Principal");
 		}
 

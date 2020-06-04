@@ -28,6 +28,24 @@
 	z-index: 100;
 }
 
+.currentTime {
+	position: absolute;
+	left: 185px;
+	bottom: 13px;
+	font-size: 20px; color : white;
+	z-index: 100;
+	color: white;
+}
+
+.durationTime {
+	position: absolute;
+	right: 219px;
+	bottom: 13px;
+	font-size: 20px;
+	color: white;
+	z-index: 100;
+}
+
 #canvas {
 	position: fixed;
 	left: 0;
@@ -39,8 +57,8 @@
 
 .trackinfo {
 	position: fixed;
-	left: 2%;
-	bottom: 1%;
+	left: 1%;
+	bottom: 5%;
 	z-index: 120;
 }
 
@@ -72,7 +90,7 @@ audio {
 	width: 100%;
 	position: absolute;
 	bottom: 0;
-	left:0;
+	left: 0;
 }
 
 #prev img, #play img, #next img, #stop img, #random img, #repeat img {
@@ -92,7 +110,11 @@ audio {
 #botones button {
 	position: fixed;
 	border-radius: 50px;
+	width: 45px;
+	height: 45px;
 	text-align: center;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #sliders {
@@ -157,6 +179,7 @@ input[type=range]:hover {
 
 #titulo, #artista {
 	color: white;
+	font-size: 18px;
 }
 
 #divLogo {
@@ -186,6 +209,24 @@ input[type=range]:hover {
 	position: fixed;
 	top: 25px;
 	right: 25px;
+	z-index: 100;
+}
+
+#fotoAltavoz {
+	position: absolute;
+	bottom: 36px;
+	width: 47px;
+	height: 40px;
+	right: 139px;
+	z-index: 100;
+}
+
+#fotoVolumen {
+	position: absolute;
+	bottom: 36px;
+	width: 70px;
+	height: 50px;
+	right: 85px;
 	z-index: 100;
 }
 

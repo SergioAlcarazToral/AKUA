@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.CancionEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
@@ -25,6 +28,7 @@ import pojo.Usuario;
 @WebServlet("/ReproductorAnimadoLista")
 public class ReproductorAnimadoLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -43,17 +47,22 @@ public class ReproductorAnimadoLista extends HttpServlet {
 
 		String nombre = request.getParameter("nombre");
 
-		ListaReproduccion lista = listasEJB.getLista(usuario.getId(), nombre);
+		try {
+			ListaReproduccion lista = listasEJB.getLista(usuario.getId(), nombre);
 
-		RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaReproductorLista.jsp");
+			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaReproductorLista.jsp");
 
-		ArrayList<CancionCompleta> cancionesLista = cancionEJB.getCancionesCompletasLista(usuario.getId());
+			ArrayList<CancionCompleta> cancionesLista = cancionEJB.getCancionesCompletasLista(usuario.getId());
 
-		request.setAttribute("lista", lista);
-		request.setAttribute("usuario", usuario);
-		request.setAttribute("canciones", cancionesLista);
+			request.setAttribute("lista", lista);
+			request.setAttribute("usuario", usuario);
+			request.setAttribute("canciones", cancionesLista);
 
-		rs.forward(request, response);
+			rs.forward(request, response);
+		} catch (Exception e) {
+			loggerERROR.error("No se pudo cargar el reproductor");
+			response.sendRedirect("Error");
+		}
 
 	}
 

@@ -14,31 +14,42 @@
 		id = #{id}
 	</select>
 
+	<select id="getCancionesBuscadas"
+		resultType="pojo.CancionCompleta">
+		select cancion.id as id, titulo, album.foto as album, album.id as idAlbum
+		from cancion, album where titulo like concat(#{titulo},'%') and
+		cancion.idAlbum = album.id
+	</select>
+
 	<select id="getCancionesLista" resultType="pojo.Cancion">
 		select distinct
 		cancion.id as id,
 		titulo, genero.nombre as genero, album.nombre as
 		album
-		from listareproduccion, cancion, genero,album
+		from listaReproduccion, cancion, genero,album
 		where
-		listareproduccion.idUsuario = #{idUsuario}
+		listaReproduccion.idUsuario = #{idUsuario}
 		and idCancion is not null
 		and cancion.idAlbum = album.id
 		and cancion.idGenero = genero.id;
 	</select>
-	<select id="getCancionesCompletasLista" resultType="pojo.CancionCompleta">
+	<select id="getCancionesCompletasLista"
+		resultType="pojo.CancionCompleta">
 		select distinct
 		cancion.id as id,
-		titulo, genero.nombre as genero, album.nombre as
-		album, artista.nombre as artista,archivo
-		from listaReproduccion, cancion, genero,album,artista
+		titulo, genero.nombre as
+		genero, album.nombre as
+		album, artista.nombre as artista,archivo, artista.id as idArtista,album.id as idAlbum
+		from
+		listaReproduccion, cancion, genero,album,artista
 		where
-		listareproduccion.idUsuario = 2
+		listaReproduccion.idUsuario = #{idUsuario}
 		and idCancion is not null
-		and cancion.idAlbum = album.id
+		and
+		cancion.idAlbum = album.id
 		and cancion.idGenero = genero.id
-        and artista.id = album.idArtista
-        and listaReproduccion.idCancion = cancion.id;
+		and artista.id = album.idArtista
+		and listaReproduccion.idCancion = cancion.id;
 	</select>
 	<select id="getCancionesGenero"
 		resultType="pojo.CancionCompleta">
@@ -46,7 +57,8 @@
 		album.nombre as album, idAlbum, artista.nombre as artista,
 		idArtista,archivo from cancion,album,genero,artista where
 		cancion.idAlbum = album.id and album.idArtista = artista.id and
-		cancion.idGenero = genero.id and genero.nombre = #{nombre} order by rand() limit 20;
+		cancion.idGenero = genero.id and genero.nombre = #{nombre} order by
+		rand() limit 20;
 	</select>
 	<select id='getCanciones'>
 		SELECT * FROM cancion
@@ -59,14 +71,17 @@
 		where
 		cancion.idAlbum = #{id}
 	</select>
-<select id="getCancionesCompletasAlbum" resultType="pojo.CancionCompleta">
+	<select id="getCancionesCompletasAlbum"
+		resultType="pojo.CancionCompleta">
 		Select distinct
 		cancion.id as
-		id, cancion.titulo as titulo, archivo, artista.nombre as artista,genero.nombre as genero from cancion, album,artista,genero
+		id, cancion.titulo as titulo,
+		archivo, artista.nombre as artista,genero.nombre as genero from
+		cancion, album,artista,genero
 		where
-        cancion.idAlbum = album.id and
-        cancion.idGenero = genero.id and
-        album.idArtista = artista.id and
+		cancion.idAlbum = album.id and
+		cancion.idGenero = genero.id and
+		album.idArtista = artista.id and
 		cancion.idAlbum = #{idAlbum};
 	</select>
 	<select id="getCancionesRecom" resultType='pojo.Cancion'>

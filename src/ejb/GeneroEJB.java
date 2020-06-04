@@ -17,6 +17,11 @@ public class GeneroEJB {
 		return generoDAO.getGeneros();
 	}
 
+	public ArrayList<Genero> getGenerosRandom() {
+		GeneroDAO generoDAO = new GeneroDAO();
+		return generoDAO.getGenerosRandom();
+	}
+	
 	public void insertGenero(Genero genero) {
 		GeneroDAO generoDAO = new GeneroDAO();
 		generoDAO.insertGenero(genero);

@@ -19,16 +19,19 @@
 			String logout = "Logout";
 			String inicio = "Principal";
 			if (usuario != null) {
-				out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+				out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 				out.print("<p>" + usuario.getNombre() + "</p>");
 				out.print("<a href='" + logout + "'>Logout</a> | <a href='" + inicio + "'>Inicio</a>");
 			}
 		%>
 	</div>
-	<form method="post" action="CrearGenero">
+	<form id="formGenero" method="post" action="CrearGenero">
 		<p>Nombre del genero que se quiere crear</p>
-		<input type="text" name="nombre" required>
+		<input type="text" name="nombre" required> <br> <br>
 		<input type="submit" value="Crear genero">
 	</form>
+	<footer>Web creada por: Sergio Alcaraz Toral copyright:2020 |
+		Contacto: akuaProyect@gmail.com</footer>
+
 </body>
 </html>

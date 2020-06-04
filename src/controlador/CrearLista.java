@@ -32,6 +32,10 @@ public class CrearLista extends HttpServlet {
 	@EJB
 	ListaReproduccionEJB listaEJB;
 
+	/**
+	 * Para poder mostrar la pagina para crear una lista de reproduccion para un
+	 * usuario
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -48,8 +52,7 @@ public class CrearLista extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Insertamos la cancion deseada en la base de datos
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

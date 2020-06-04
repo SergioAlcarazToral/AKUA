@@ -12,13 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.AlbumEJB;
 import ejb.CancionEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import pojo.Album;
 import pojo.CancionCompleta;
-import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
@@ -27,6 +29,7 @@ import pojo.Usuario;
 @WebServlet("/ReprductorAnimadoAlbum")
 public class ReproductorAnimadoAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -60,7 +63,8 @@ public class ReproductorAnimadoAlbum extends HttpServlet {
 			request.setAttribute("canciones", canciones);
 			rs.forward(request, response);
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerERROR.error("No se pudo cargar el reproductor");
+			response.sendRedirect("Error");
 		}
 
 	}

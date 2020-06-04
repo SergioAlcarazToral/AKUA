@@ -21,7 +21,7 @@
 			if (usuario != null) {
 				String logout = "Logout";
 
-				out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+				out.print("<img id='fotoUser'src='Imatges/" + usuario.getFoto() + "'><br>");
 				out.print("<p>" + usuario.getNombre() + "</p>");
 				out.print("<a href='" + logout + "'>Logout</a>");
 
@@ -29,7 +29,8 @@
 			Album album = (Album) request.getAttribute("album");
 		%>
 	</div>
-	<form action="EditarAlbum" method="post" enctype="multipart/form-data">
+	<form id='formAlbum' action="EditarAlbum" method="post"
+		enctype="multipart/form-data">
 		<%
 			out.print("<p>Nombre del album:</p>");
 			out.print("<input type='text' name='nombre' value='" + album.getNombre() + "' required>");
@@ -39,11 +40,12 @@
 
 			out.print("<p>Foto del album</p>");
 			out.print("<input type='file' name='foto'>");
-			
+
 			out.print("<input type='hidden' name='id' value='" + album.getId() + "'>");
 		%>
 
 		<input type="submit" value="Editar album">
 	</form>
+	<footer>Web creada por: Sergio Alcaraz Toral copyright:2020 | Contacto: akuaProyect@gmail.com</footer>
 </body>
 </html>

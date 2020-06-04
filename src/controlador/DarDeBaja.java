@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import ejb.UsuarioEJB;
@@ -24,6 +27,7 @@ import pojo.Usuario;
 @WebServlet("/DarDeBaja")
 public class DarDeBaja extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -33,6 +37,7 @@ public class DarDeBaja extends HttpServlet {
 
 	@EJB
 	ListaReproduccionEJB listaEJB;
+
 	/**
 	 * Borra el usuario de la base de datos
 	 */
@@ -45,10 +50,11 @@ public class DarDeBaja extends HttpServlet {
 			listaEJB.deleteListasUsuario(usuario.getId());
 			usuarioEJB.deleteUsuario(usuario.getId());
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerERROR.error("No se ha podido borrar la cuenta de un usuario");
+			response.sendRedirect("Error");
 		}
 		sesionesEJB.logoutUsuario(session);
-		
+
 		response.sendRedirect("Principal");
 
 	}

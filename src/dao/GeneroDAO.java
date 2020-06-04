@@ -30,6 +30,16 @@ public class GeneroDAO {
 		}
 	}
 
+	public ArrayList<Genero> getGenerosRandom() {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			GeneroMapper generoMapper = sqlSession.getMapper(GeneroMapper.class);
+			return generoMapper.getGenerosRandom();
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	/**
 	 * Para poder insertar un genero en la base de datos
 	 * 

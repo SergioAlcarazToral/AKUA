@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.UsuarioEJB;
 import pojo.Usuario;
 
@@ -28,6 +31,7 @@ import pojo.Usuario;
 public class Registrar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "Imatges";
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	UsuarioEJB usuarioEJB;
@@ -91,11 +95,16 @@ public class Registrar extends HttpServlet {
 		usuario.setCorreo(correo);
 		usuario.setPass(pass);
 		usuario.setFoto(foto);
-
 		// Registramos el usuario en la base de datos
-		usuarioEJB.insertUsuario(usuario);
-
-		response.sendRedirect("Principal");
+		try {
+			usuarioEJB.insertUsuario(usuario);
+			response.sendRedirect("InfoRegistro");
+		} catch (Exception e) {
+			loggerERROR.error("Los datos introducidos ya existen");
+			response.sendRedirect("Registrar");
+		}
+		
+		
 	}
 
 }

@@ -27,6 +27,8 @@ public interface CancionMapper {
 	 */
 	public Cancion getCancion(@Param("id") int id);
 
+	public ArrayList<CancionCompleta> getCancionesBuscadas(@Param("titulo") String titulo);
+	
 	/**
 	 * Obtiene un listado de todas las canciones
 	 * 

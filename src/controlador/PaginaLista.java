@@ -49,6 +49,8 @@ public class PaginaLista extends HttpServlet {
 
 		ArrayList<CancionCompleta> cancionesLista = cancionEJB.getCancionesCompletasLista(usuario.getId());
 
+		ArrayList<ListaReproduccion> listas = listasEJB.getListasUsuario(usuario.getId());
+		request.setAttribute("listas", listas);
 		request.setAttribute("lista", lista);
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("canciones", cancionesLista);

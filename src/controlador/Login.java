@@ -83,7 +83,7 @@ public class Login extends HttpServlet {
 				// Aqui va el loger
 				loggerERROR.error("Errores para iniciar sesion debido a que los datos son incorrectos");
 			}
-			response.sendRedirect("Principal");
+			response.sendRedirect("Login?error=hay");
 		} else {
 
 			Usuario usuario = usuarioEJB.existeUsuario(correo, pass);

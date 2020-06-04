@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.AlbumEJB;
 import ejb.SesionesEJB;
 import pojo.Album;
@@ -31,6 +34,7 @@ import pojo.Usuario;
 public class EditarAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "ImgAlbums";
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	AlbumEJB albumEJB;
@@ -113,7 +117,8 @@ public class EditarAlbum extends HttpServlet {
 
 			response.sendRedirect("Principal");
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerERROR.error("No se pudo editar el album por razones desconocidas");
+			response.sendRedirect("Error");
 		}
 
 	}

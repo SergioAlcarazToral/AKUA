@@ -7,7 +7,9 @@
 	<select id='getArtistas'>
 		SELECT * FROM artista
 	</select>
-
+	<select id='getArtistasRandom' resultType="pojo.Artista">
+		SELECT * FROM artista order by rand() limit 5
+	</select>
 	<select id="getArtista" resultType="pojo.Artista">
 		Select * from artista where
 		id = #{id}

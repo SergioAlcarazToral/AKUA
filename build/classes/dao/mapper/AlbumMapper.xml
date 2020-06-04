@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="getAlbumesArtista" resultType="pojo.Album">
-		select album.nombre as
+		select album.id as id,album.nombre as
 		nombre, anyo, artista.nombre
 		as artista, album.foto as foto from
 		artista, album where #{id} =

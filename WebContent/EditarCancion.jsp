@@ -25,14 +25,14 @@
 			if (usuario != null) {
 				String logout = "Logout";
 
-				out.print("<img src='Imatges/" + usuario.getFoto() + "'><br>");
+				out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 				out.print("<p>" + usuario.getNombre() + "</p>");
 				out.print("<a href='" + logout + "'>Logout</a>");
 
 			}
 		%>
 	</div>
-	<form action="EditarCancion" method="post">
+	<form id='formCancion' action="EditarCancion" method="post">
 		<p>Titulo de la cancion</p>
 		<%
 			out.print("<input type='text' name='titulo' value='" + cancion.getTitulo() + "' required>");
@@ -55,7 +55,10 @@
 		<%
 			out.print("<input type='hidden' value='" + cancion.getId() + "' name='id'>");
 		%>
-		<input type="submit" value="Editar cancion">
+		<br /> <br /> <input type="submit" value="Editar cancion">
 	</form>
+	<footer>Web creada por: Sergio Alcaraz Toral copyright:2020 |
+		Contacto: akuaProyect@gmail.com</footer>
+
 </body>
 </html>

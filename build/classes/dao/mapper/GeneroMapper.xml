@@ -7,6 +7,11 @@
 		SELECT * FROM genero
 	</select>
 
+	<select id='getGenerosRandom' resultType="pojo.Genero">
+		SELECT * FROM genero order by rand() limit 5
+	</select>
+
+
 	<insert id='insertGenero' parameterType='Genero'
 		useGeneratedKeys='true' keyProperty='id'>
 		INSERT INTO genero(nombre) values(#{nombre})

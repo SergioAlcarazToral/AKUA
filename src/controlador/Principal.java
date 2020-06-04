@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ejb.ArtistaEJB;
 import ejb.GeneroEJB;
 import ejb.ListaReproduccionEJB;
 import ejb.SesionesEJB;
 import ejb.UsuarioEJB;
+import pojo.Artista;
 import pojo.Genero;
 import pojo.ListaReproduccion;
 import pojo.Usuario;
@@ -41,6 +43,9 @@ public class Principal extends HttpServlet {
 	
 	@EJB
 	GeneroEJB generoEJB;
+	
+	@EJB
+	ArtistaEJB artistaEJB;
 
 	/**
 	 * Muestra la pagina principal
@@ -55,11 +60,14 @@ public class Principal extends HttpServlet {
 		RequestDispatcher rs = getServletContext().getRequestDispatcher("/Principal.jsp");
 
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
-		ArrayList<Genero> generos = generoEJB.getGeneros();
+		ArrayList<Genero> generos = generoEJB.getGenerosRandom();
 		ArrayList<ListaReproduccion> listas;
 		if (usuario != null) {
 			listas = listasEJB.getListasUsuario(usuario.getId());
+			ArrayList<Artista> artistas = artistaEJB.getArtistasRandom();
+
 			request.setAttribute("listas", listas);
+			request.setAttribute("artistas", artistas);
 		}
 
 		request.setAttribute("usuario", usuario);

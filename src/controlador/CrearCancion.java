@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.AlbumEJB;
 import ejb.CancionEJB;
 import ejb.GeneroEJB;
@@ -36,6 +39,7 @@ import pojo.Usuario;
 public class CrearCancion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "ArchivosMusica";
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -105,7 +109,8 @@ public class CrearCancion extends HttpServlet {
 			archivo = strArchivo.substring(strArchivo.indexOf('=') + 2, strArchivo.lastIndexOf("\""));
 			partArchivo.write(uploadPath + File.separator + archivo);
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerERROR.error("No se ha podido insertar la cancion en la base de datos");
+			response.sendRedirect("Error");
 		}
 
 		if (titulo != null){

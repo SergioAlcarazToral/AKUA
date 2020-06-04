@@ -28,6 +28,11 @@ public class CancionEJB {
 		return cancionDAO.getCanciones();
 	}
 
+	public ArrayList<CancionCompleta> getCancionesBuscadas(String titulo){
+		CancionDAO cancionDAO = new CancionDAO();
+		return cancionDAO.getCancionesBuscadas(titulo);
+	}
+	
 	public ArrayList<Cancion> getCancionesRecom() {
 		CancionDAO cancionDAO = new CancionDAO();
 		return cancionDAO.getCancionesRecom();

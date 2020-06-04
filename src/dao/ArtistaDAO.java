@@ -31,6 +31,16 @@ public class ArtistaDAO {
 		}
 	}
 
+	public ArrayList<Artista> getArtistasRandom() {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ArtistaMapper artistaMapper = sqlSession.getMapper(ArtistaMapper.class);
+			return artistaMapper.getArtistasRandom();
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	/**
 	 * Para poder obtener un artista de la base de datos con un identificador
 	 * 

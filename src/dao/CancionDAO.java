@@ -40,6 +40,17 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
+	
+	public ArrayList<CancionCompleta> getCancionesBuscadas(String titulo){
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
+			return cancionMapper.getCancionesBuscadas(titulo);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	public ArrayList<Cancion> getCancionesLista(int id){
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

@@ -13,6 +13,8 @@ public interface GeneroMapper {
 	 */
 	public ArrayList<Genero> getGeneros();
 
+	public ArrayList<Genero> getGenerosRandom();
+
 	/**
 	 * Este metodo es para poder insertar una cancion en la base de datos
 	 * 

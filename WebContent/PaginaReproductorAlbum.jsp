@@ -19,7 +19,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>Reproductor animado de album</title>
 </head>
 <body>
 	<div id="divLogo">
@@ -49,11 +49,12 @@
 		<div id="controles">
 			<div class="trackinfo">
 				<h3 id="titulo"></h3>
-				<h3 id="artista"></h3>
+				<h3>
+					<a id="artista" href=""></a></h3>
 			</div>
 			<div id="botones">
 				<button id="random" class="controles">
-					<img src="icons/random.png">
+					<img id='fotoRandom' src="icons/random.png">
 				</button>
 				<button id="prev" class="controles">
 					<img src="icons/prev.png">
@@ -65,9 +66,11 @@
 					<img src="icons/next.png">
 				</button>
 				<button id="repeat" class="controles">
-					<img src="icons/repeat.png">
+					<img id='fotoRepeat' src="icons/repeat.png">
 				</button>
 			</div>
+			<img id="fotoAltavoz" src="icons/mute.png"> <img
+				id="fotoVolumen" src="icons/50.png">
 			<div id="sliders">
 				<input type="range" id="durCancion" min="0" value="0" /> <input
 					type="range" min="0" max="100" value="50" class="slider"
@@ -90,8 +93,8 @@
 
 			var songs = [
 		<%for (CancionCompleta c : canciones) {
-				out.println("{title: \"" + c.getTitulo() + "\",artist: '" + c.getArtista() + "',url: 'ArchivosMusica/"
-						+ c.getArchivo() + "',},");
+				out.println("{id:'PaginaArtista?id=" + c.getId() + "' ,title: \"" + c.getTitulo() + "\",artist: '"
+						+ c.getArtista() + "',url: 'ArchivosMusica/" + c.getArchivo() + "',},");
 			}%>
 			];
 
@@ -109,6 +112,7 @@
 					.addEventListener("click", nextTrack);
 			document.getElementById("prev")
 					.addEventListener("click", prevTrack);
+			document.getElementById("random").addEventListener("click",random);
 			progressBar.addEventListener("change", changeProgressBar);
 
 			document.getElementById("volumen").addEventListener("input",
@@ -134,6 +138,7 @@
 				};
 			}
 			function updateInfo() {
+				artista.href= cancion.id;
 				titulaso.innerHTML = cancion.title;
 				artista.innerHTML = cancion.artist;
 			}
@@ -146,15 +151,7 @@
 				document.getElementById("fotoPlay").setAttribute("src",
 						"icons/play.png");
 			}
-			function repetir() {
-				if (audio.hasAttribute("loop")) {
-					audio.loop = false;
-				} else {
-					audio.loop = true;
-					current_track = current_track - 1;
-				}
 
-			}
 			function nextTrack() {
 				current_track++;
 				current_track = current_track % (songs.length);
@@ -189,6 +186,21 @@
 					updateInfo();
 				}
 			}
+			
+			function repetir() {
+				if (audio.hasAttribute("loop")) {
+					audio.loop = false;
+					document.getElementById("fotoRepeat").setAttribute("src",
+							"icons/repeat.png");
+				} else {
+					audio.loop = true;
+					document.getElementById("fotoRepeat").setAttribute("src",
+							"icons/repeatActive.png");
+					current_track = current_track - 1;
+				}
+
+			}
+			
 			function prevTrackcomplete() {
 				prevTrackRandom(current_track);
 			}
@@ -196,19 +208,47 @@
 				if (next.getAttribute("onclick") == "nextTrack()") {
 					next.setAttribute("onclick", "nextTrackRandom()");
 					prev.setAttribute("onclick", "prevTrackcomplete()");
+					document.getElementById("fotoRandom").setAttribute("src",
+							"icons/randomActive.png");
 				} else {
 					next.setAttribute("onclick", "nextTrack()");
 					prev.setAttribute("onclick", "prevTrack()");
+					document.getElementById("fotoRandom").setAttribute("src",
+							"icons/random.png");
 				}
 			}
 			function volumen(volume_value) {
 				audio.volume = volume_value / 100;
 
+				if (audio.volume == 0) {
+					document.getElementById("fotoVolumen").src = "icons/0.png";
+				} else if ( audio.volume <= 0.25 && audio.volume >0) {
+					document.getElementById("fotoVolumen").src = "icons/25.png";
+				} else if (audio.volume <= 0.50 && audio.volume >= 0.25) {
+					document.getElementById("fotoVolumen").src = "icons/50.png";
+				} else if(audio.volume <= 0.75 && audio.volume > 0.50){
+					document.getElementById("fotoVolumen").src = "icons/75.png";
+				}else if(audio.volume = 1){
+					document.getElementById("fotoVolumen").src = "icons/100.png";
+				}
+
 			}
 			function updateProgressValue() {
+				var minutes = parseInt(audio.duration / 60, 10);
+				var seconds = parseInt(audio.duration % 60);
+
+				var realMinutes = parseInt(audio.currentTime / 60, 10);
+				var realSeconds = parseInt(audio.currentTime % 60);
+
 				progressBar.max = audio.duration;
 				progressBar.value = audio.currentTime;
-				document.querySelector('.currentTime').innerHTML = formatTime(audio.currentTime);
+				if(realSeconds < 10){
+					document.querySelector('.currentTime').innerHTML = realMinutes + ":0" + realSeconds;
+				}else{
+					document.querySelector('.currentTime').innerHTML = realMinutes + ":" + realSeconds;
+				}
+				document.querySelector('.durationTime').innerHTML = minutes + ":"
+						+ seconds;
 				formatTime(audio.duration);
 			};
 
@@ -241,7 +281,7 @@
 				var HEIGHT = canvas.height;
 
 				//Grosor de las barras
-				var barWidth = (WIDTH / bufferLength) * 1.1;
+				var barWidth = (WIDTH / bufferLength) * 1;
 				var barHeight;
 				var x = 0;
 
@@ -256,15 +296,16 @@
 					ctx.fillStyle = "#000";
 					ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
+				
+						
 					for (var i = 0; i < bufferLength; i++) {
 
 						//Aumentar la altura de las barras
-						barHeight = dataArray[i] * 3;
+						barHeight = dataArray[i] * 3.7;
 
-						var r = 0;
-						var g = 255 * (i / bufferLength);
-						var b = 255 * (i / bufferLength);
-
+						var r = barHeight + (25 *(i / bufferLength));
+						var g =0;
+						var b = barHeight * (i / bufferLength);
 						ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
 						ctx
 								.fillRect(x, HEIGHT - barHeight, barWidth,

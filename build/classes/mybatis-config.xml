@@ -29,6 +29,5 @@
 		<mapper resource='dao/mapper/GeneroMapper.xml' />
 		<mapper resource='dao/mapper/ListaReproduccionMapper.xml' />
 		<mapper resource='dao/mapper/UsuarioMapper.xml' />
-
 	</mappers>
 </configuration>

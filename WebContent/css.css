@@ -11,12 +11,17 @@ body {
 #akua {
 	color: white;
 	text-align: center;
-	margin-top: 27px;
 	font-size: 90px;
 	font-family: 'Dancing Script', cursive;
 	background: -webkit-linear-gradient(#03D2F9, #E3E3E3, #03D2F9);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+	margin-top: 27px;
+}
+
+.trackinfo p {
+	display: inline-block;
+	padding-left: 52px;
 }
 
 a {
@@ -25,6 +30,11 @@ a {
 }
 
 a:hover, a:visited:hover {
+	color: #03D2F9;
+	text-decoration: underline;
+}
+
+paginaArtista p:hover, paginaArtista p:visited:hover {
 	color: #03D2F9;
 	text-decoration: underline;
 }
@@ -61,27 +71,45 @@ a:visited {
 	text-align: center;
 }
 
+#artistas {
+	text-align: center;
+}
+
 #generos h2 {
 	display: inline-block;
 	margin-left: 25px;
 	margin-right: 25px;
 	font-size: 30px;
+	margin-top:50px;
+	margin-bottom: 40px;
 }
 
 .allGeneros {
 	margin-top: 20px;
+	margin-bottom: 20px;
 	border: 1px solid #181818;
 	padding: 40px;
 	border-radius: 300px;
 	background-color: #181818;
 }
 
+#artistas h2 {
+	display: inline-block;
+	margin-left: 25px;
+	margin-right: 25px;
+	font-size: 30px;
+}
+
 #buscar h3 {
 	font-family: 'Hind Madurai', sans-serif;
 }
 
+h3 {
+	text-align: center;
+}
+
 #formLogin {
-	margin-top: 200px;
+	margin-top: 300px;
 	text-align: center;
 }
 
@@ -103,14 +131,55 @@ a:visited {
 	border-radius: 25px;
 }
 
-#formRegistrar {
-	margin-top: 200px;
+#formGenero {
+	margin-top: 300px;
 	text-align: center;
+}
+
+#formGenero p {
+	font-size: 35px;
+	margin-top: 25px;
+}
+
+#formGenero input[type="text"] {
+	width: 600px;
+	border-radius: 100px;
+	text-align: center;
+	height: 30px;
+}
+
+#formGenero input[type="submit"] {
+	height: 35px;
+	width: 150px;
+	border-radius: 25px;
+}
+
+#formRegistrar {
+	margin-top: 150px;
+	text-align: center;
+}
+
+#formRegistrar p {
+	font-size: 35px;
+	margin-top: 25px;
+}
+
+#formRegistrar input[type="file"] {
+	margin-left: 760px;
 }
 
 table {
 	font-family: arial, sans-serif;
 	border-collapse: collapse;
+	text-align: center;
+	width: 500px;
+}
+
+thead {
+	text-align: center;
+}
+
+#artistasAlbum {
 	text-align: center;
 }
 
@@ -119,17 +188,19 @@ table {
 	width: 175px;
 	top: 0;
 	left: 0;
-	height: 100%;
+	height: ;
 	background: #181818;
 	z-index: 1;
+	height: 100%
 }
 
 #lRepro h2 {
 	background: #181818;
-	color:white;
+	color: white;
+	 
 }
 
-#lRepro p{
+#lRepro p {
 	margin-left: 25px;
 }
 
@@ -138,8 +209,8 @@ table {
 	margin-top: 25px;
 }
 
-#formRegistrar input[type='text'], input[type='email'], #formRegistrar input[type='password']
-	{
+#formRegistrar input[type='text'], input[type='email'], #formRegistrar input[type='password'],
+	#formRegistrar input[type='number'] {
 	width: 600px;
 	border-radius: 100px;
 	text-align: center;
@@ -150,6 +221,101 @@ table {
 	height: 35px;
 	width: 100px;
 	border-radius: 25px;
+}
+
+#formAlbum input[type='text'], #formAlbum input[type='number'], ¡ {
+	width: 600px;
+	border-radius: 100px;
+	text-align: center;
+	height: 50px;
+}
+
+#formAlbum input[type='file'] {
+	margin-left: 760px;
+}
+
+#formAlbum {
+	margin-top: 200px;
+	text-align: center;
+}
+
+#formAlbum p {
+	font-size: 35px;
+	margin-top: 25px;
+}
+
+#formAlbum input[type='submit'] {
+	text-align: center;
+	height: 50px;
+	width: 120px;
+	border-radius: 25px;
+	height: 50px;
+}
+
+#formCancion {
+	margin-top: 200px;
+	text-align: center;
+}
+
+#formCancion p {
+	font-size: 35px;
+	margin-top: 25px;
+}
+
+#formCancion input[type='file'] {
+	margin-left: 760px;
+}
+
+#formCancion input[type='text'], #formCancion input[type='number'] {
+	width: 600px;
+	border-radius: 100px;
+	text-align: center;
+	height: 50px;
+}
+
+#formCancion select {
+	width: 300px;
+	border-radius: 100px;
+	text-align: center;
+	height: 50px;
+	font-size: 30px;
+}
+
+#formCancion input[type='submit'] {
+	text-align: center;
+	height: 50px;
+	width: 120px;
+	border-radius: 25px;
+	height: 30px;
+}
+
+#formArtista {
+	margin-top: 200px;
+	text-align: center;
+}
+
+#formArtista p {
+	font-size: 35px;
+	margin-top: 25px;
+}
+
+#formArtista input[type='file'] {
+	margin-left: 760px;
+}
+
+#formArtista input[type='text'] {
+	width: 600px;
+	border-radius: 100px;
+	text-align: center;
+	height: 50px;
+}
+
+#formArtista input[type='submit'] {
+	text-align: center;
+	height: 50px;
+	width: 120px;
+	border-radius: 25px;
+	height: 50px;
 }
 
 #buscar input {
@@ -171,6 +337,11 @@ table {
 	position: absolute;
 	top: 20px;
 	right: 25px;
+	text-align: center;
+}
+
+#cajaUsuario p {
+	color: white;
 }
 
 #inicio {
@@ -188,12 +359,20 @@ table {
 
 #controles {
 	display: inline-block;
-	text-align: center;
 	background-color: black;
 	width: 100%;
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	z-index: 20;
+	height: 110px;
+}
+
+.trackinfo {
+	width: 400px;
+	left: 70px;
+	bottom: 45px;
+	position: absolute;
 }
 
 #h2Intro {
@@ -204,13 +383,27 @@ table {
 	font-size: 50px;
 }
 
-#cancionesRecom {
+#h2Error {
+	margin-top: 350px;
 	background-color: gray;
-	padding-top: 50px;
+	margin-bottom: 0;
+	text-align: center;
+	font-size: 50px;
 }
 
-#recomCancion {
-	margin-left: 190px;
+#enlaceError {
+	text-align: center;
+}
+
+#cancionesRecom {
+	background-color: gray;
+	margin-top: 25px;
+}
+
+
+
+#divrecomArtistas {
+	text-align: center;
 }
 
 #albumRecom {
@@ -246,11 +439,16 @@ table {
 	margin: 0 auto;
 	border-radius: 50px;
 	margin-bottom: 15px;
+	margin-top: 20px;
 }
 
 #botones button {
 	border-radius: 50px;
 	text-align: center;
+	width: 45px;
+	height: 45px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #sliders {
@@ -259,7 +457,7 @@ table {
 	grid-template-columns: repeat(1fr, 1fr);
 	grid-gap: 10px;
 	grid-auto-rows: 10px;
-	grid-template-areas: "c a a a a a b b";
+	grid-template-areas: "c c a a a a b b";
 	align-items: center;
 }
 
@@ -272,6 +470,11 @@ table {
 	margin-right: 85px;
 	text-align: center;
 	background-color: gray;
+}
+
+.resultArt p{
+	font-size: 20px;
+	margin-bottom: 70px;
 }
 
 .resultAlbum {
@@ -292,9 +495,9 @@ table {
 
 .fotoArtista {
 	margin-top: 30px;
-	width: 100px;
+	width: 120px;
 	border-radius: 100px;
-	height: 100px;
+	height: 120px;
 	display: inline-block;
 	background-color: gray;
 }
@@ -322,6 +525,20 @@ input[type=range]::-webkit-slider-thumb {
 	cursor: pointer;
 }
 
+.currentTime {
+	position: absolute;
+	left: 33px;
+	color: white;
+	font-size: 20px;
+}
+
+.durationTime {
+	position: absolute;
+	right: 350px;
+	color: white;
+	font-size: 20px;
+}
+
 input[type=range]::-moz-range-thumb {
 	width: 25px;
 	grid-area: a;
@@ -329,6 +546,15 @@ input[type=range]::-moz-range-thumb {
 	border-radius: 50%;
 	background: #00ffff;
 	cursor: pointer;
+}
+
+#fotoVolumen {
+	position: absolute;
+	bottom: 50px;
+	width: 50px;
+	height: 50px;
+	right: 30px;
+	z-index: 100;
 }
 
 input[type=range]:hover {
@@ -344,6 +570,7 @@ input[type=range]:hover {
 	border-radius: 10px;
 	opacity: 0.7;
 	transition: opacity .2s;
+	outline: none;
 }
 
 #volumen:hover {
@@ -355,8 +582,14 @@ input[type=range]:hover {
 }
 
 footer {
-	position: absolute;
-	bottom: 10px;
+	position: fixed;
+	bottom: 0px;
 	text-align: center;
-	left: 40%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	left: 0;
+	color: white;
+	background-color: black;
+	width: 100%;
+	height: 50px;
 }

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ejb.AlbumEJB;
 import ejb.CancionEJB;
 import ejb.ListaReproduccionEJB;
@@ -30,6 +33,7 @@ import pojo.Usuario;
 @WebServlet("/PaginaAlbum")
 public class PaginaAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Logger loggerERROR = LoggerFactory.getLogger("ERROR");
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -69,7 +73,8 @@ public class PaginaAlbum extends HttpServlet {
 			request.setAttribute("canciones", canciones);
 			rs.forward(request, response);
 		} catch (Exception e) {
-			e.printStackTrace();
+			loggerERROR.error("No se ha podido mostrar la pagina del album");
+			response.sendRedirect("Principal");
 		}
 
 	}

@@ -15,6 +15,9 @@ public interface ArtistaMapper {
 	 */
 	public ArrayList<Artista> getArtistas();
 
+	
+	public ArrayList<Artista> getArtistasRandom();
+
 	/**
 	 * Para obtener un artista
 	 * 

@@ -17,6 +17,11 @@ public class ArtistaEJB {
 		return artistaDAO.getArtistas();
 	}
 	
+	public ArrayList<Artista> getArtistasRandom(){
+		ArtistaDAO artistaDAO = new ArtistaDAO();
+		return artistaDAO.getArtistasRandom();
+	}
+	
 	public Artista getArtista(int id) {
 		ArtistaDAO artistaDAO = new ArtistaDAO();
 		return artistaDAO.getArtista(id);

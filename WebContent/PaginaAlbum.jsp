@@ -20,7 +20,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>Pagina de album</title>
 </head>
 <body>
 	<div id="divLogo">
@@ -32,8 +32,10 @@
 			String registrar = "Registrar";
 			String logout = "Logout";
 			String baja = "DarDeBaja";
+			String paginaArtistaEnlace = "PaginaArtista";
 			String crearCancion = "CrearCancion";
 			String inicio = "Principal";
+			String crearLista="CrearLista";
 			String editarAlbum = "EditarAlbum";
 			String editarCancion = "EditarCancion";
 			String eliminarArtista = "EliminarArtista";
@@ -53,37 +55,57 @@
 				if (usuario.getAdministrador() != 1) {
 					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
-					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + crearCancion + "?id=" + album.getId()
-							+ "'>Crear cancion</a> | <a href='" + editarAlbum + "?id=" + +album.getId()
-							+ "'>Editar album</a> | <a href='" + eliminarAlbum + "?id=" + album.getId()
-							+ "'><Eliminar album</a> | <a href='" + inicio
-							+ "'>Inicio</a> | <a href='ReprductorAnimadoAlbum?id=" + album.getId()
-							+ "'>Reproductor animado</a>");
+					out.print("<a href='" + logout + "'>Logout</a>");
 				} else {
 					out.print("<img id='fotoUser' src='Imatges/" + usuario.getFoto() + "'><br>");
 					out.print("<p>" + usuario.getNombre() + "</p>");
-					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja
-							+ "'>Eliminar cuenta</a> | <a href='" + inicio
-							+ "'>Inicio</a> | <a href='ReprductorAnimadoAlbum?id=" + album.getId()
-							+ "'>Reproductor animado</a>");
+					out.print("<a href='" + logout + "'>Logout</a> | <a href='" + baja + "'>Eliminar cuenta</a>");
 				}
 			} else {
-				out.println("<img id='fotoUser' src='Imatges/sinImagen.jsp'><br>");
+				out.println("<img id='fotoUser' src='Imatges/sinImagen.jpg'><br>");
 				out.print("<a href='" + login + "'>Login</a>");
-				out.print("| <a href='" + registrar + "'>Registrar</a> | <a href='" + inicio + "'>Inicio</a>");
+				out.print(" | <a href='" + registrar + "'>Registrar</a>");
 			}
 		%>
 	</div>
 	<%
+		if (usuario != null) {
+			out.print("<div id='lRepro'><h2 id='h2Intro'>Listas</h2>");
+			out.print("<p><a href='" + crearLista + "'>Crear lista</a></p>");
+			out.print("<p><a href='ReprductorAnimadoAlbum?id=" + album.getId() + "'>Reproductor animado</a></p>");
+			out.print("<hr>");
+			for (ListaReproduccion lista : listas) {
+				out.print("<p><a href='PaginaLista?idUsuario=" + usuario.getId() + "&nombre=" + lista.getNombre()
+						+ "'>" + lista.getNombre() + "</a></p>");
+			}
+			out.print("</div>");
+		}
+	%>
+	<%
 		out.println("<h2 id='h2Intro'>" + album.getNombre() + "</h2>");
-		out.println(album.getAnyo());
-		out.print("<table class='table table-hover'>");
+		out.println("<h3>" + album.getAnyo() + "</h3>");
+		if (usuario != null) {
+			if (usuario.getAdministrador() != 1) {
+				out.print(
+						"<h3><a href='" + crearCancion + "?id=" + album.getId() + "'>Crear cancion</a> | <a href='"
+								+ editarAlbum + "?id=" + +album.getId() + "'>Editar album</a> | <a href='"
+								+ eliminarAlbum + "?id=" + album.getId() + "'>Eliminar album</a></h3>");
+			}
+		}
+
+		out.print("<div class='container'><table class='table table-hover'>");
+		out.print("<thead>");
+		if (usuario != null) {
+			out.print("<tr><th>Titulo</th><th>Artista</th><th>Listas</th></tr>");
+		} else {
+			out.print("<tr><th>Titulo</th><th>Artista</th></tr></thead>");
+
+		}
+		out.print("</thead>");
 		for (CancionCompleta c : canciones) {
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.println("<tr><td>" + c.getTitulo() + "</td> | <td><a href='" + eliminarCancion + "?id="
-							+ c.getId() + "'>Eliminar Cancion</a></td> | </td><a href='" + editarCancion + "?id="
-							+ c.getId() + "'>Editar Cancion</a></td>");
+					out.println("<tr><td>" + c.getTitulo() + "</td><td>" + c.getArtista() + "</td>");
 					out.print("<td><div class='btn-group'>"
 							+ "<button class='btn btn-primary dropdown-toggle' type='button' data-toggle='dropdown'>Añadir a lista"
 							+ "<span class='caret'></span><span class='sr-only'>Toggle Dropdown</span></button>"
@@ -92,28 +114,37 @@
 						out.print("<li><a href='" + agregarCancionLista + "?nombre=" + l.getNombre() + "&idUsuario="
 								+ usuario.getId() + "&idCancion=" + c.getId() + "'>" + l.getNombre() + "</a></li>");
 					}
+					out.print("<td><a href='" + eliminarCancion + "?id="
+							+ c.getId() + "'>Eliminar Cancion</a></td><td><a href='" + editarCancion + "?id="
+							+ c.getId() + "'>Editar Cancion</a></td>");
 					out.print("</ul></div></td><br>");
 
 				} else {
-					out.println("<p>" + c.getTitulo() + "</p>");
-					out.print("<div class='dropdown'>"
+					out.print("<tr><td>" + c.getTitulo() + "</td><td>" + c.getArtista() + "</td>");
+					out.print("<td><div class='btn-group'>"
 							+ "<button class='btn btn-primary dropdown-toggle' type='button' data-toggle='dropdown'>Añadir a lista"
-							+ "<span class='caret'></span></button>" + "<ul class='dropdown-menu'>");
+							+ "<span class='caret'></span><span class='sr-only'>Toggle Dropdown</span></button>"
+							+ "<ul class='dropdown-menu' role='menu'>");
 					for (ListaReproduccion l : listas) {
-						out.print("<li><a href='" + agregarCancionLista + "?nombre=" + l.getNombre() + "&idUsuario="
-								+ usuario.getId() + "&idCancion=" + c.getId() + "'>" + l.getNombre() + "</a></li>");
+						out.print("<li><a href='" + agregarCancionLista + "?nombre=" + l.getNombre() + "&idCancion="
+								+ c.getId() + "'>" + l.getNombre() + "</a></li>");
 					}
-					out.print("</ul></div>");
+					out.print("</ul></div></td><br>");
+
 				}
 			} else {
-				out.print("<tr><td>" + c.getTitulo() + "</td>><td>" + c.getArtista() + "</td></tr>");
+				out.print("<tr><td>" + c.getTitulo() + "</td><td>" + c.getArtista() + "</td></tr>");
 			}
 		}
+		out.print("<table>");
+		out.print("</div>");
 	%>
 	<div id="controles">
 		<div class="trackinfo">
 			<p id="titulo"></p>
-			<p id="artista"></p>
+			<p>
+				<a id="artista" href="PaginaArtista"></a>
+			</p>
 		</div>
 		<div id="botones">
 			<button id="random" class="controles" onclick="random()">
@@ -156,8 +187,8 @@
 
 		var songs = [
 	<%for (CancionCompleta c : canciones) {
-				out.println("{title: \"" + c.getTitulo() + "\",artista: '" + c.getArtista() + "',url: 'ArchivosMusica/"
-						+ c.getArchivo() + "',},");
+				out.println("{id: '" + paginaArtistaEnlace + "?id=" + c.getId() + "',title: \"" + c.getTitulo()
+						+ "\",artist: '" + c.getArtista() + "',url: 'ArchivosMusica/" + c.getArchivo() + "',},");
 			}%>
 		];
 
@@ -231,7 +262,8 @@
 						"icons/repeat.png");
 			} else {
 				audio.loop = true;
-				document.getElementById("fotoRepeat").setAttribute("src", "icons/repeatActive.png");
+				document.getElementById("fotoRepeat").setAttribute("src",
+						"icons/repeatActive.png");
 				current_track = current_track - 1;
 			}
 
@@ -258,16 +290,29 @@
 					"icons/play.png");
 		}
 		function updateInfo() {
+			artista.href = cancion.id;
 			titulaso.innerHTML = cancion.title;
-			artista.innerHTML = cancion.artista;
+			artista.innerHTML = cancion.artist;
 		}
 		function volumen(volume_value) {
 			audio.volume = volume_value / 100;
-		}
+		};
 		function updateProgressValue() {
+			var minutes = parseInt(audio.duration / 60, 10);
+			var seconds = parseInt(audio.duration % 60);
+
+			var realMinutes = parseInt(audio.currentTime / 60, 10);
+			var realSeconds = parseInt(audio.currentTime % 60);
+
 			progressBar.max = audio.duration;
 			progressBar.value = audio.currentTime;
-			document.querySelector('.currentTime').innerHTML = formatTime(audio.currentTime);
+			if(realSeconds < 10){
+				document.querySelector('.currentTime').innerHTML = realMinutes + ":0" + realSeconds;
+			}else{
+				document.querySelector('.currentTime').innerHTML = realMinutes + ":" + realSeconds;
+			}
+			document.querySelector('.durationTime').innerHTML = minutes + ":"
+					+ seconds;
 			formatTime(audio.duration);
 		};
 		function changeProgressBar() {
