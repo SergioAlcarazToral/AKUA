@@ -9,6 +9,8 @@ import pojo.Cancion;
 import pojo.CancionCompleta;
 
 /**
+ * Clase que consiste en tener todas las operaciones que esten relacionadas con
+ * las canciones
  * 
  * @author Sergio
  *
@@ -31,7 +33,13 @@ public class CancionDAO {
 		}
 	}
 
-	public ArrayList<CancionCompleta> getCancionesCompletasLista(int id){
+	/**
+	 * Obtener las canciones de una lista pero con todos los datos
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public ArrayList<CancionCompleta> getCancionesCompletasLista(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
@@ -40,8 +48,14 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
-	
-	public ArrayList<CancionCompleta> getCancionesBuscadas(String titulo){
+
+	/**
+	 * Obtiene las canciones que se parecen al parametro buscado
+	 * 
+	 * @param titulo parametro buscado
+	 * @return
+	 */
+	public ArrayList<CancionCompleta> getCancionesBuscadas(String titulo) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
@@ -50,8 +64,14 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
-	
-	public ArrayList<Cancion> getCancionesLista(int id){
+
+	/**
+	 * Obtener todas las canciones de una lista
+	 * 
+	 * @param id id del usuario
+	 * @return canciones
+	 */
+	public ArrayList<Cancion> getCancionesLista(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
@@ -60,8 +80,14 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
-	
-	public ArrayList<CancionCompleta> getCancionesCompletasAlbum(int id){
+
+	/**
+	 * Obtener las canciones de los album con todos los datos
+	 * 
+	 * @param id id del album
+	 * @return canciones
+	 */
+	public ArrayList<CancionCompleta> getCancionesCompletasAlbum(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
@@ -70,6 +96,7 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
+
 	/**
 	 * Este metodo es para poder obtener una cancion en especifico gracias a su id
 	 * 
@@ -101,7 +128,13 @@ public class CancionDAO {
 		}
 	}
 
-	public ArrayList<CancionCompleta> getCancionesGenero(String nombre){
+	/**
+	 * Obtener las canciones por genero
+	 * 
+	 * @param nombre el genero de las canciones
+	 * @return canciones
+	 */
+	public ArrayList<CancionCompleta> getCancionesGenero(String nombre) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			CancionMapper cancionMapper = sqlSession.getMapper(CancionMapper.class);
@@ -110,7 +143,7 @@ public class CancionDAO {
 			sqlSession.close();
 		}
 	}
-	
+
 	/**
 	 * Para obtener canciones recomendadas
 	 * 

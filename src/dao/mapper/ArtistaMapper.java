@@ -6,6 +6,12 @@ import org.apache.ibatis.annotations.Param;
 
 import pojo.Artista;
 
+/**
+ * Mapper con todas las operaciones relacionadas con los artistas
+ * 
+ * @author Sergio
+ *
+ */
 public interface ArtistaMapper {
 
 	/**
@@ -15,7 +21,11 @@ public interface ArtistaMapper {
 	 */
 	public ArrayList<Artista> getArtistas();
 
-	
+	/**
+	 * Obtener artistas aleatorios
+	 * 
+	 * @return artistas
+	 */
 	public ArrayList<Artista> getArtistasRandom();
 
 	/**
@@ -35,23 +45,23 @@ public interface ArtistaMapper {
 	public ArrayList<Artista> getArtistaBuscado(@Param("nombreArtista") String nombre);
 
 	/**
-	 * Este metodo es para poder insertar una cancion en la base de datos
+	 * Este metodo es para poder insertar un artista en la base de datos
 	 * 
 	 * @param cancion la cancion que queremos insertar
 	 */
 	public void insertArtista(Artista artista);
 
 	/**
-	 * Para poder actualizar los datos de una cancion
+	 * Para poder actualizar los datos de un artista
 	 * 
-	 * @param cancion la cancion que vamos a actualizar
+	 * @param cancion el artista que vamos a actualizar
 	 */
 	public void updateArtista(Artista artista);
 
 	/**
-	 * Elimina un usuario en base de datos
+	 * Elimina un artista en base de datos
 	 * 
-	 * @param id El identificador del usuario
+	 * @param id El identificador del artista
 	 */
 	public void deleteArtista(@Param("idArtista") int id);
 }

@@ -39,6 +39,7 @@
 			String crearLista = "CrearLista";
 			String inicio = "Principal";
 			String eliminarArtista = "EliminarArtista";
+			String editarArtista="EditarArtista";
 			String paginaAlbum = "PaginaAlbum";
 
 			Usuario usuario = (Usuario) request.getAttribute("usuario");
@@ -82,7 +83,7 @@
 			out.print("<div id='artistasAlbum'>");
 			if (usuario != null) {
 				if (usuario.getAdministrador() != 1) {
-					out.print("<h3><a href='" + crearAlbum + "?id=" + artista.getId() + "'>Añadir album</a> | <a href='"
+					out.print("<h3><a href='" + crearAlbum + "?id=" + artista.getId() + "'>Añadir album</a> | <a href='" + editarArtista + "?id=" + artista.getId() + "'>Editar artista</a>| <a href='"
 							+ eliminarArtista + "?id=" + artista.getId() + "'>Eliminar artista</a></h3><br><br>");
 				}
 			}

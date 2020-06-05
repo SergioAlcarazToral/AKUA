@@ -6,6 +6,12 @@ import org.apache.ibatis.annotations.Param;
 
 import pojo.Album;
 
+/**
+ * Mapper con todas las operaciones relacionadas con los albums
+ * 
+ * @author Sergio
+ *
+ */
 public interface AlbumMapper {
 
 	/**
@@ -47,14 +53,14 @@ public interface AlbumMapper {
 	public void insertAlbum(Album album);
 
 	/**
-	 * Para poder actualizar los datos de una cancion
+	 * Para poder actualizar los datos de un album
 	 * 
 	 * @param cancion la cancion que vamos a actualizar
 	 */
 	public void updateAlbum(Album album);
 
 	/**
-	 * Elimina un usuario en base de datos
+	 * Elimina un album en base de datos
 	 * 
 	 * @param id El identificador del usuario
 	 */

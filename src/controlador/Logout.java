@@ -14,23 +14,25 @@ import ejb.SesionesEJB;
 
 /**
  * Servlet para poder salir de la sesion del usuario
+ * 
  * @author Sergio
  *
  */
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	@EJB
 	SesionesEJB sesionesEJB;
-	
+
 	/**
 	 * Comprueba que no exista una sesion, si existe la cerrara
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		if(session != null) {
+		if (session != null) {
 			sesionesEJB.logoutUsuario(session);
 		}
 		response.sendRedirect("Principal");

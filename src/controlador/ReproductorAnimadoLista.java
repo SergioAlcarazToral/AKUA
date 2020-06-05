@@ -22,8 +22,12 @@ import pojo.CancionCompleta;
 import pojo.ListaReproduccion;
 import pojo.Usuario;
 
+
 /**
- * Servlet implementation class ReproductorAnimadoLista
+ * Pagina que muestra un reproductor animado
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/ReproductorAnimadoLista")
 public class ReproductorAnimadoLista extends HttpServlet {
@@ -39,6 +43,9 @@ public class ReproductorAnimadoLista extends HttpServlet {
 	@EJB
 	CancionEJB cancionEJB;
 
+	/**
+	 * Mostrar el reproductor animado
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

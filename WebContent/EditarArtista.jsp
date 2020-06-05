@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="pojo.Usuario"%>
-<%@ page import="pojo.Album"%>
+<%@ page import="pojo.Artista"%>
 
 <!DOCTYPE html>
 <html>
@@ -36,25 +36,23 @@
 				out.print("<a href='" + logout + "'>Logout</a>");
 
 			}
-			Album album = (Album) request.getAttribute("album");
+			Artista artista = (Artista) request.getAttribute("artista");
 		%>
 	</div>
-	<form id='formAlbum' action="EditarAlbum" method="post"
+	<form id='formArtista' action="EditarArtista" method="post"
 		enctype="multipart/form-data">
 		<%
-			out.print("<p>Nombre del album:</p>");
-			out.print("<input type='text' name='nombre' value='" + album.getNombre() + "' required>");
+			out.print("<p>Nombre del artista:</p>");
+			out.print("<input type='text' name='nombre' value='" + artista.getNombre() + "' required>");
 
-			out.print("	<p>Año del album</p>");
-			out.print("<input type='number' name='anyo' value='" + album.getAnyo() + "'  required>");
-
-			out.print("<p>Foto del album</p>");
+			out.print("<p>Foto del artista</p>");
 			out.print("<input type='file' name='foto'>");
 
-			out.print("<input type='hidden' name='id' value='" + album.getId() + "'>");
+			out.print("<input type='hidden' name='id' value='" + artista.getId() + "'>");
 		%>
-
-		<input type="submit" value="Editar album">
+		<br/>
+		<br/>
+		<input type="submit" value="Editar artista">
 	</form>
 	<footer>Web creada por: Sergio Alcaraz Toral copyright:2020 | Contacto: akuaProyect@gmail.com</footer>
 </body>

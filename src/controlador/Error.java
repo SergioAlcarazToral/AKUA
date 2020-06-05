@@ -16,7 +16,10 @@ import ejb.UsuarioEJB;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class Error
+ * Servlet que se mostrara cuando ocurra un error
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/Error")
 public class Error extends HttpServlet {
@@ -28,6 +31,9 @@ public class Error extends HttpServlet {
 	@EJB
 	UsuarioEJB usuarioEJB;
 
+	/**
+	 * Muestra la pagina de error
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);

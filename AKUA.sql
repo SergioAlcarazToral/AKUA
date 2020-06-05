@@ -52,6 +52,6 @@ create table listaReproduccion(
 );
 
 INSERT INTO usuario(nombre,correo,pass,administrador,foto) values('admin','admin@admin.com','1234',0,'sinImagen.jpg');
-select * from listareproduccion;
+select * from usuario;
 
 

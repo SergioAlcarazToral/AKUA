@@ -4,35 +4,33 @@ import java.util.ArrayList;
 
 import pojo.Genero;
 
+/**
+ * Todas las operaciones necesarias con generos
+ * 
+ * @author Sergio
+ *
+ */
 public interface GeneroMapper {
 
 	/**
-	 * Obtiene un listado de todas las canciones
+	 * Obtiene un listado de todos los generos
 	 * 
-	 * @return las canciones
+	 * @return generos
 	 */
 	public ArrayList<Genero> getGeneros();
 
+	/**
+	 * Obtener generos aleatorios
+	 * 
+	 * @return generos
+	 */
 	public ArrayList<Genero> getGenerosRandom();
 
 	/**
-	 * Este metodo es para poder insertar una cancion en la base de datos
+	 * Este metodo es para poder insertar un genero en la base de datos
 	 * 
-	 * @param cancion la cancion que queremos insertar
+	 * @param genero el genero que queremos insertar
 	 */
 	public void insertGenero(Genero genero);
 
-	/**
-	 * Para poder actualizar los datos de una cancion
-	 * 
-	 * @param cancion la cancion que vamos a actualizar
-	 */
-	public void updateGenero(Genero genero);
-
-	/**
-	 * Elimina un usuario en base de datos
-	 * 
-	 * @param id El identificador del usuario
-	 */
-	public void deleteGenero(Genero genero);
 }

@@ -31,7 +31,7 @@ import pojo.Usuario;
  *
  */
 @WebServlet("/CrearAlbum")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 5)
+@MultipartConfig(maxFileSize = 2048 * 2048 * 5)
 
 public class CrearAlbum extends HttpServlet {
 	private static final long serialVersionUID = 1L;

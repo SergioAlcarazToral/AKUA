@@ -23,7 +23,10 @@ import pojo.Genero;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class EditarCancion
+ * Servlet para editar una cancion
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/EditarCancion")
 public class EditarCancion extends HttpServlet {
@@ -39,6 +42,9 @@ public class EditarCancion extends HttpServlet {
 	@EJB
 	GeneroEJB generoEJB;
 
+	/**
+	 * Pintar un formulario para editar los datos
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -64,6 +70,9 @@ public class EditarCancion extends HttpServlet {
 		rs.forward(request, response);
 	}
 
+	/**
+	 * Edita los datos de la cancion
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

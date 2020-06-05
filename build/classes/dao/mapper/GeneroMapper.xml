@@ -8,23 +8,14 @@
 	</select>
 
 	<select id='getGenerosRandom' resultType="pojo.Genero">
-		SELECT * FROM genero order by rand() limit 5
+		SELECT * FROM genero
+		order by rand() limit 5
 	</select>
 
 
 	<insert id='insertGenero' parameterType='Genero'
 		useGeneratedKeys='true' keyProperty='id'>
-		INSERT INTO genero(nombre) values(#{nombre})
+		INSERT INTO genero(nombre)
+		values(#{nombre})
 	</insert>
-
-	<update id='updateGenero' parameterType='Genero'>
-		UPDATE genero
-		SET
-		nombre = #{nombre}
-		WHERE id = #{id}
-	</update>
-
-	<delete id='deleteGenero' parameterType='Genero'>
-		DELETE FROM genero WHERE id = #{id}
-	</delete>
 </mapper>

@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import ejb.ArtistaEJB;
 import ejb.SesionesEJB;
 
-
 /**
  * Servlet para poder eliminar un usuario de la base de datos
+ * 
  * @author Sergio
  *
  */

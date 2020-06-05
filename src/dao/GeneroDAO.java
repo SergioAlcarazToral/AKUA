@@ -30,6 +30,11 @@ public class GeneroDAO {
 		}
 	}
 
+	/**
+	 * Obtener generos aleatorios
+	 * 
+	 * @return generos
+	 */
 	public ArrayList<Genero> getGenerosRandom() {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -39,7 +44,7 @@ public class GeneroDAO {
 			sqlSession.close();
 		}
 	}
-	
+
 	/**
 	 * Para poder insertar un genero en la base de datos
 	 * 
@@ -50,38 +55,6 @@ public class GeneroDAO {
 		try {
 			GeneroMapper generoMapper = sqlSession.getMapper(GeneroMapper.class);
 			generoMapper.insertGenero(genero);
-			sqlSession.commit();
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	/**
-	 * Para poder editar un genero en la base de datos
-	 * 
-	 * @param genero el genero que queremos editar
-	 */
-	public void updateGenero(Genero genero) {
-		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
-		try {
-			GeneroMapper generoMapper = sqlSession.getMapper(GeneroMapper.class);
-			generoMapper.updateGenero(genero);
-			sqlSession.commit();
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	/**
-	 * Para poder eliminar un genero de la base de datos
-	 * 
-	 * @param genero el generoq que queremos borrar
-	 */
-	public void deleteGenero(Genero genero) {
-		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
-		try {
-			GeneroMapper generoMapper = sqlSession.getMapper(GeneroMapper.class);
-			generoMapper.deleteGenero(genero);
 			sqlSession.commit();
 		} finally {
 			sqlSession.close();

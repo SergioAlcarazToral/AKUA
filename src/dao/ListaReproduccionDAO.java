@@ -30,7 +30,13 @@ public class ListaReproduccionDAO {
 		}
 	}
 
-	public ArrayList<ListaReproduccion> getListasUsuario(int id){
+	/**
+	 * Obtiene todas las listas de un usuario
+	 * 
+	 * @param id Id del usuario
+	 * @return
+	 */
+	public ArrayList<ListaReproduccion> getListasUsuario(int id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
@@ -39,17 +45,24 @@ public class ListaReproduccionDAO {
 			sqlSession.close();
 		}
 	}
-	
+
+	/**
+	 * Obtiene una lista en particular
+	 * 
+	 * @param idUsuario El id del usuario
+	 * @param nombre    nombre de la lista
+	 * @return
+	 */
 	public ListaReproduccion getLista(int idUsuario, String nombre) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ListaReproduccionMapper listaReproduccionM = sqlSession.getMapper(ListaReproduccionMapper.class);
-			return listaReproduccionM.getLista(idUsuario,nombre);
+			return listaReproduccionM.getLista(idUsuario, nombre);
 		} finally {
 			sqlSession.close();
 		}
 	}
-	
+
 	/**
 	 * Para poder crear una lista de reproduccion
 	 * 
@@ -113,7 +126,12 @@ public class ListaReproduccionDAO {
 			sqlSession.close();
 		}
 	}
-	
+
+	/**
+	 * Elimina todas las listas de un usuario
+	 * 
+	 * @param idUsuario Id del usuario
+	 */
 	public void deleteListasUsuario(int idUsuario) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -124,7 +142,12 @@ public class ListaReproduccionDAO {
 			sqlSession.close();
 		}
 	}
-	
+
+	/**
+	 * Elimina una cancion de una lista de reproduccion
+	 * 
+	 * @param listaReproduccion todos los datos para eliminar una cancion
+	 */
 	public void deleteCancionLista(ListaReproduccion listaReproduccion) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

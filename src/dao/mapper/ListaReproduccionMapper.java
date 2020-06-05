@@ -6,19 +6,38 @@ import org.apache.ibatis.annotations.Param;
 
 import pojo.ListaReproduccion;
 
+/**
+ * Mapper en el cual estan todas las operaciones relacionadas con las listas
+ * 
+ * @author Sergio
+ *
+ */
 public interface ListaReproduccionMapper {
 
 	/**
-	 * Obtiene un listado de todas las canciones
+	 * Obtiene un listado de todas las listas
 	 * 
 	 * @return las canciones
 	 */
 	public ArrayList<ListaReproduccion> getListasR();
 
+	/**
+	 * Para poder obtener todas las listas de un usuario
+	 * 
+	 * @param id id del usuario
+	 * @return las listas
+	 */
 	public ArrayList<ListaReproduccion> getListasUsuario(@Param("idUsuario") int id);
 
-	
+	/**
+	 * Obtener una lista en concreto
+	 * 
+	 * @param idUsuario Id del usuario
+	 * @param nombre    nombre de la lista
+	 * @return la lista
+	 */
 	public ListaReproduccion getLista(@Param("idUsuario") int idUsuario, @Param("nombre") String nombre);
+
 	/**
 	 * Para poder insertar una lista en la base de datos
 	 * 
@@ -47,12 +66,18 @@ public interface ListaReproduccionMapper {
 	 */
 	public void deleteListaR(ListaReproduccion listaReproduccion);
 
-	public void deleteListasUsuario (@Param("idUsuario") int idUsuario);
 	/**
+	 * Para poder eliminar todas las listas de un usuario
 	 * 
-	 * @param listaReproduccion
+	 * @param idUsuario id del usuario
+	 */
+	public void deleteListasUsuario(@Param("idUsuario") int idUsuario);
+
+	/**
+	 * Borrar una cancion de una lista
+	 * 
+	 * @param listaReproduccion lista
 	 */
 	public void deleteCancionLista(ListaReproduccion listaReproduccion);
-	
-}
 
+}

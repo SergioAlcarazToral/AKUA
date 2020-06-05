@@ -8,6 +8,12 @@ import javax.ejb.Stateless;
 import dao.UsuarioDAO;
 import pojo.Usuario;
 
+/**
+ * EJB con todas las operaciones de los usuarios
+ * 
+ * @author Sergio
+ *
+ */
 @Stateless
 @LocalBean
 public class UsuarioEJB {
@@ -20,24 +26,34 @@ public class UsuarioEJB {
 	 */
 	public Usuario existeUsuario(String correo, String pass) {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		return usuarioDAO.existeUsuario(correo,pass);
+		return usuarioDAO.existeUsuario(correo, pass);
 	}
 
+	/**
+	 * Obtenemos todos los usuarios
+	 * 
+	 * @return usuarios
+	 */
 	public ArrayList<Usuario> getUsuarios() {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		return usuarioDAO.getUsuarios();
 	}
 
+	/**
+	 * Creamos un usuario
+	 * 
+	 * @param usuario El usuario que queremos crear
+	 */
 	public void insertUsuario(Usuario usuario) {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.insertUsuario(usuario);
 	}
 
-	public void updateUsuario(Usuario usuario) {
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		usuarioDAO.updateUsuario(usuario);
-	}
-
+	/**
+	 * Borrar un usuario
+	 * 
+	 * @param id El id del usuario que queremos borrar
+	 */
 	public void deleteUsuario(int id) {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.deleteUsuario(id);

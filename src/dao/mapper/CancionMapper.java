@@ -7,6 +7,12 @@ import org.apache.ibatis.annotations.Param;
 import pojo.Cancion;
 import pojo.CancionCompleta;
 
+/**
+ * Todas las operaciones relacionadas con las canciones
+ * 
+ * @author Sergio
+ *
+ */
 public interface CancionMapper {
 
 	/**
@@ -17,6 +23,12 @@ public interface CancionMapper {
 	 */
 	public Cancion existeCancion(@Param("id") int id);
 
+	/**
+	 * Obtener las canciones de una lista
+	 * 
+	 * @param id Id del usuario
+	 * @return canciones
+	 */
 	public ArrayList<Cancion> getCancionesLista(@Param("idUsuario") int id);
 
 	/**
@@ -27,8 +39,14 @@ public interface CancionMapper {
 	 */
 	public Cancion getCancion(@Param("id") int id);
 
+	/**
+	 * Obtener las canciones buscadas
+	 * 
+	 * @param titulo parametro de busqueda
+	 * @return canciones
+	 */
 	public ArrayList<CancionCompleta> getCancionesBuscadas(@Param("titulo") String titulo);
-	
+
 	/**
 	 * Obtiene un listado de todas las canciones
 	 * 
@@ -59,10 +77,28 @@ public interface CancionMapper {
 	 */
 	public void insertCancion(Cancion cancion);
 
+	/**
+	 * Obtener canciones por genero
+	 * 
+	 * @param nombre nombre del Genero
+	 * @return canciones
+	 */
 	public ArrayList<CancionCompleta> getCancionesGenero(@Param("nombre") String nombre);
 
+	/**
+	 * Obtener canciones con todos los datos de listas
+	 * 
+	 * @param id id del usuario
+	 * @return canciones
+	 */
 	public ArrayList<CancionCompleta> getCancionesCompletasLista(@Param("idUsuario") int id);
 
+	/**
+	 * Obtener canciones con todos los datos de un album
+	 * 
+	 * @param id Id del album
+	 * @return canciones
+	 */
 	public ArrayList<CancionCompleta> getCancionesCompletasAlbum(@Param("idAlbum") int id);
 
 	/**

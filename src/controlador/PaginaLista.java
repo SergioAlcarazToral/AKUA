@@ -20,7 +20,10 @@ import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class PaginaLista
+ * Para poder mostrar la pagina de una lista que ha creado un usuario
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/PaginaLista")
 public class PaginaLista extends HttpServlet {
@@ -35,6 +38,9 @@ public class PaginaLista extends HttpServlet {
 	@EJB
 	CancionEJB cancionEJB;
 
+	/**
+	 * Muestra la pagian de una lista
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -54,7 +60,7 @@ public class PaginaLista extends HttpServlet {
 		request.setAttribute("lista", lista);
 		request.setAttribute("usuario", usuario);
 		request.setAttribute("canciones", cancionesLista);
-		
+
 		rs.forward(request, response);
 	}
 

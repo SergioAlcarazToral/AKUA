@@ -64,22 +64,6 @@ public class UsuarioDAO {
 	}
 
 	/**
-	 * Para poder editar un usuario de la base de datos
-	 * 
-	 * @param usuario el usuarioq que queremos borrar
-	 */
-	public void updateUsuario(Usuario usuario) {
-		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
-		try {
-			UsuarioMapper usuarioMapper = sqlSession.getMapper(UsuarioMapper.class);
-			usuarioMapper.updateUsuario(usuario);
-			sqlSession.commit();
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	/**
 	 * Para poder borrar un usuario de la base de datos
 	 * 
 	 * @param id el id del usuario

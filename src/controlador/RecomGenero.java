@@ -26,7 +26,10 @@ import pojo.ListaReproduccion;
 import pojo.Usuario;
 
 /**
- * Servlet implementation class RecomGenero
+ * Pagina que muestra canciones recomendadas de manera aleatoria
+ * 
+ * @author Sergio
+ *
  */
 @WebServlet("/RecomGenero")
 public class RecomGenero extends HttpServlet {
@@ -41,13 +44,18 @@ public class RecomGenero extends HttpServlet {
 
 	@EJB
 	ListaReproduccionEJB listaEJB;
-	
+
 	@EJB
 	GeneroEJB generoEJB;
-	
+
 	@EJB
 	AlbumEJB albumEJB;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	/**
+	 * Muestra las canciones recomendadas
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
@@ -55,15 +63,14 @@ public class RecomGenero extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		try {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/RecomGenero.jsp");
-			
+
 			ArrayList<CancionCompleta> canciones = cancionEJB.getCancionesGenero(nombre);
-						
+
 			Genero genero = new Genero();
 			genero.setNombre(nombre);
-			
-			
+
 			request.setAttribute("usuario", usuario);
-			if(usuario != null){
+			if (usuario != null) {
 				ArrayList<ListaReproduccion> listas = listaEJB.getListasUsuario(usuario.getId());
 				request.setAttribute("listas", listas);
 			}
@@ -74,8 +81,7 @@ public class RecomGenero extends HttpServlet {
 			loggerERROR.error("No se pudo mostrar la pagina de recomendacion de genero");
 			response.sendRedirect("Error");
 		}
-	
-	}
 
+	}
 
 }

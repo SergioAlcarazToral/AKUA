@@ -31,6 +31,10 @@ public class ArtistaDAO {
 		}
 	}
 
+	/**
+	 * Obtener artistas random
+	 * @return artistas
+	 */
 	public ArrayList<Artista> getArtistasRandom() {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

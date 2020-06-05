@@ -10,8 +10,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Editar cancion</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Hind+Madurai:wght@300&display=swap"
+	rel="stylesheet">
+</head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel='stylesheet' type='text/css' href='css.css'>
-
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel='stylesheet' type='text/css' href='css.css'>
 </head>
 <body>
 	<div id="divLogo">
